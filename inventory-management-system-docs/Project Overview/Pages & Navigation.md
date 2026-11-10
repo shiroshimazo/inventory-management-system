@@ -22,30 +22,37 @@
 
 The sidebar is defined in `src/configs/navConfig.tsx` and grouped as follows:
 
+Planned modules appear as disabled items with a `Planned` badge and no link until their routes exist.
+The data table, form, and authentication demo routes remain available by URL but are not shown in the sidebar.
+
 ### Overview
 
 - Dashboard → `/dashboard/orders`
-- Data Table → `/datatable`
 
-### Forms
+### Inventory
 
-- Form Layouts
-  - Vertical Layout → `/forms/form-layouts/vertical`
-  - Horizontal Layout → `/forms/form-layouts/horizontal`
-- Form Validation → `/forms/form-validation`
+- Products (planned)
+- Categories (planned)
+
+### Sales
+
+- Sales / Stock-Out (planned)
+
+### Purchasing
+
+- Suppliers (planned)
+- Purchase Orders (planned)
+
+### Reports
+
+- Reports (planned)
 
 ### Account
 
 - User Settings
   - General → `/pages/user-settings?setting=general`
   - Workspace → `/pages/user-settings?setting=workspace`
-- Authentication
-  - Login → `/pages/auth/login`
-  - Register → `/pages/auth/register`
-  - Forgot Password → `/pages/auth/forgot-password`
-  - Verify Email → `/pages/auth/verify-email`
-  - Reset Password → `/pages/auth/reset-password`
-  - Two Steps → `/pages/auth/two-steps`
+- User Management (planned)
 
 ## Header
 

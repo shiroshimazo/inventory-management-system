@@ -1,11 +1,18 @@
 // Third-party Imports
 import {
   BadgeCheckIcon,
+  ChartHistogramIcon,
+  ClipboardIcon,
   LayoutDashboardIcon,
   LayoutTemplateIcon,
   LockKeyholeIcon,
+  PackageIcon,
+  ShoppingCart01Icon,
   TableIcon,
-  UserCogIcon
+  Tag01Icon,
+  TruckIcon,
+  UserCogIcon,
+  UserGroupIcon
 } from '@hugeicons/core-free-icons'
 
 // Icon data consumed by `<HugeiconsIcon icon={...} />`.
@@ -16,7 +23,14 @@ export const navIcons = {
   formLayout: LayoutTemplateIcon,
   formValidation: BadgeCheckIcon,
   userSettings: UserCogIcon,
-  authentication: LockKeyholeIcon
+  authentication: LockKeyholeIcon,
+  products: PackageIcon,
+  categories: Tag01Icon,
+  sales: ShoppingCart01Icon,
+  suppliers: TruckIcon,
+  purchaseOrders: ClipboardIcon,
+  reports: ChartHistogramIcon,
+  userManagement: UserGroupIcon
 } as const
 
 export type NavIconName = keyof typeof navIcons

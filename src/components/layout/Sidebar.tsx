@@ -86,7 +86,8 @@ export default function SidebarLayout() {
               <AnimatedSidebarMenu>
                 {group.items.map(item => {
                   const key = `${group.groupLabel ?? index}::${item.label}`
-                  const active = item.childItems ? item.childItems.some(isChildActive) : isActive(item)
+                  const active =
+                    !item.disabled && (item.childItems ? item.childItems.some(isChildActive) : isActive(item))
                   const open = openItems[key] ?? active
                   return (
                     <AnimatedSidebarMenuItem key={key}>
@@ -95,6 +96,7 @@ export default function SidebarLayout() {
                         href={item.href}
                         target={'target' in item ? item.target : undefined}
                         badge={item.badge}
+                        disabled={item.disabled}
                         isActive={active}
                         ariaExpanded={item.childItems ? open : undefined}
                         onSelect={item.childItems ? () => toggle(key, open) : undefined}

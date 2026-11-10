@@ -26,6 +26,7 @@ export type MenuItem = {
       badge?: string
       badgeClassName?: string
       childItems?: never
+      disabled?: false
       target?: '_blank' | '_self' | '_parent' | '_top'
     }
   | {
@@ -33,6 +34,13 @@ export type MenuItem = {
       badge?: string
       badgeClassName?: string
       childItems: MenuSubItem[]
+      disabled?: false
+    }
+  | {
+      href?: never
+      childItems?: never
+      disabled: true
+      badge: 'Planned'
     }
 )
 
@@ -53,6 +61,28 @@ export const navItems: NavItem[] = [
     ]
   },
   {
+    groupLabel: 'Inventory',
+    items: [
+      { icon: 'products', label: 'Products', disabled: true, badge: 'Planned' },
+      { icon: 'categories', label: 'Categories', disabled: true, badge: 'Planned' }
+    ]
+  },
+  {
+    groupLabel: 'Sales',
+    items: [{ icon: 'sales', label: 'Sales / Stock-Out', disabled: true, badge: 'Planned' }]
+  },
+  {
+    groupLabel: 'Purchasing',
+    items: [
+      { icon: 'suppliers', label: 'Suppliers', disabled: true, badge: 'Planned' },
+      { icon: 'purchaseOrders', label: 'Purchase Orders', disabled: true, badge: 'Planned' }
+    ]
+  },
+  {
+    groupLabel: 'Reports',
+    items: [{ icon: 'reports', label: 'Reports', disabled: true, badge: 'Planned' }]
+  },
+  {
     groupLabel: 'Account',
     items: [
       {
@@ -68,7 +98,8 @@ export const navItems: NavItem[] = [
             href: '/pages/user-settings?setting=workspace'
           }
         ]
-      }
+      },
+      { icon: 'userManagement', label: 'User Management', disabled: true, badge: 'Planned' }
     ]
   }
 ]
