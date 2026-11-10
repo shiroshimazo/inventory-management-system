@@ -74,11 +74,11 @@ src/
 
 | Command                       | Action                                 |
 | ----------------------------- | -------------------------------------- |
-| `pnpm dev`                    | Start the Vite dev server on port 3000 |
-| `pnpm build`                  | `vite build` plus TypeScript checks    |
-| `pnpm lint` / `pnpm lint:fix` | ESLint checks                          |
-| `pnpm format`                 | Prettier formatting                    |
-| `pnpm check-types`            | TypeScript type checking               |
+| `npm run dev`                       | Start the Vite dev server on port 3000 |
+| `npm run build`                     | `vite build` plus TypeScript checks    |
+| `npm run lint` / `npm run lint:fix` | ESLint checks                          |
+| `npm run format`                    | Prettier formatting                    |
+| `npm run check-types`               | TypeScript type checking               |
 
 - Path alias: `@/*` maps to `src/*`.
 - Production hosting must serve `index.html` for unknown application paths so direct links and refreshes work (SPA fallback).

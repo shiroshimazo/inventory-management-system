@@ -38,7 +38,7 @@ const formSchema = z.object({
     message: 'Kindly select a priority.'
   }),
   selectedOption: z.enum(['replace', 'refund', 'support'], {
-    required_error: 'Selection of an option is required.'
+    error: issue => issue.input === undefined ? 'Selection of an option is required.' : undefined
   }),
   message: z.string().min(50, 'Describe your issue using at least 50 characters.')
 })

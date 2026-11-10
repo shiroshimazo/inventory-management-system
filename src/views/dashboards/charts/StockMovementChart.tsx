@@ -23,21 +23,21 @@ export default function StockMovementChart({ movements, dates }: { movements: St
   const hasMovements = chartData.some(day => day.stockIn > 0 || day.stockOut > 0)
 
   return (
-    <Card className='min-w-0 shadow-none'>
+    <Card className='h-full min-w-0 shadow-none'>
       <CardHeader>
         <h2 className='text-base font-semibold'>Stock movement</h2>
         <CardDescription>Stock-in vs stock-out · Units per day</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className='flex flex-1 flex-col'>
         {!hasMovements ? (
-          <p className='text-muted-foreground flex h-72 items-center justify-center'>
+          <p className='text-muted-foreground flex min-h-72 flex-1 items-center justify-center'>
             No stock movements in this period.
           </p>
         ) : (
           <>
             <ChartContainer
               config={chartConfig}
-              className='[&_.recharts-surface:focus-visible]:outline-primary h-72 w-full [&_.recharts-surface:focus-visible]:outline-2 [&_.recharts-surface:focus-visible]:-outline-offset-2 [&_.recharts-surface:focus-visible]:outline-solid'
+              className='[&_.recharts-surface:focus-visible]:outline-primary aspect-auto min-h-72 w-full flex-1 [&_.recharts-surface:focus-visible]:outline-2 [&_.recharts-surface:focus-visible]:-outline-offset-2 [&_.recharts-surface:focus-visible]:outline-solid'
               aria-label='Daily stock-in and stock-out units'
             >
               <BarChart accessibilityLayer aria-label='Daily stock-in and stock-out units' data={chartData} barGap={4}>

@@ -35,7 +35,7 @@ Product CRUD, categories, stock tracking with low-stock alerts, sales / stock-ou
 | Charts                | Recharts                             |
 | Icons                 | Hugeicons + Lucide                   |
 | Theming               | next-themes                         |
-| Package manager       | pnpm                                 |
+| Package manager       | npm                                  |
 
 ## Project Structure
 
@@ -65,42 +65,55 @@ src/
 
 ### Prerequisites
 
-- Node.js 18, 20, or 22+
-- pnpm (recommended)
+- Node.js 20.17+, 22.9+, or 24+
+- npm 11.16+ (install-script approvals are configured in `package.json`)
 
 ### Installation
 
 ```bash
-pnpm install
+npm install
 ```
+
+For a clean install using the committed lockfile, run `npm ci`.
+Add development packages with `npm install <package> -D`.
+Router compatibility overrides and approved install scripts are defined in `package.json`.
+Keep `@tanstack/router-plugin` pinned to `1.120.0` to match the router and generator versions.
 
 ### Development
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 The app is available at http://localhost:3000.
 
+### Development annotations
+
+Agentation appears in the bottom-right corner during development and is excluded from production builds.
+To sync annotations with your coding agent, connect its Agentation MCP integration to `npx -y agentation-mcp server`.
+The toolbar connects to `http://localhost:4747`; use the same server and port for the MCP integration.
+Click the toolbar, select an element, and add a note. Ask your agent to read pending annotations to confirm the connection.
+Copying feedback also works without the MCP server.
+
 ### Production build
 
 ```bash
-pnpm build
-pnpm preview
+npm run build
+npm run preview
 ```
 
 ## Available Commands
 
 | Command             | Action                                                          |
 | ------------------- | --------------------------------------------------------------- |
-| `pnpm dev`          | Start the Vite dev server on port 3000                          |
-| `pnpm build`        | Create an optimized production build with TypeScript checks     |
-| `pnpm preview`      | Preview the production build locally                            |
-| `pnpm lint`         | Run ESLint                                                      |
-| `pnpm lint:fix`     | Run ESLint and fix problems                                     |
-| `pnpm format`       | Format source files with Prettier                               |
-| `pnpm check-types`  | Run TypeScript type checking                                    |
-| `pnpm clean`        | Remove `dist` and `node_modules`                                |
+| `npm run dev`          | Start the Vite dev server on port 3000                          |
+| `npm run build`        | Create an optimized production build with TypeScript checks     |
+| `npm run preview`      | Preview the production build locally                            |
+| `npm run lint`         | Run ESLint                                                      |
+| `npm run lint:fix`     | Run ESLint and fix problems                                     |
+| `npm run format`       | Format source files with Prettier                               |
+| `npm run check-types`  | Run TypeScript type checking                                    |
+| `npm run clean`        | Remove `dist` and `node_modules`                                |
 
 ## Documentation
 

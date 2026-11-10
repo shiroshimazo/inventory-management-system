@@ -41,7 +41,7 @@ function InventoryDashboard() {
           />
         ))}
       </div>
-      <div className='grid items-start gap-6 xl:grid-cols-3'>
+      <div className='grid items-stretch gap-6 xl:grid-cols-3'>
         <LowStockAlerts products={inventoryProducts} />
         <div className='min-w-0 xl:col-span-2'>
           <StockMovementChart movements={stockMovements} dates={movementDates} />
