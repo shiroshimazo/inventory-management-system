@@ -52,6 +52,6 @@ function InventoryDashboard() {
   )
 }
 
-export const Route = createFileRoute('/_pages/dashboard/orders')({
+export const Route = createFileRoute('/_pages/dashboard')({
   component: InventoryDashboard
 })

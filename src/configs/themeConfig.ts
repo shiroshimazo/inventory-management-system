@@ -1,6 +1,6 @@
 const themeConfig = {
   templateName: 'Inventory',
-  homePageUrl: '/dashboard/orders'
+  homePageUrl: '/dashboard'
 } as const
 
 export default themeConfig

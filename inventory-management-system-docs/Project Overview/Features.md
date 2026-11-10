@@ -9,7 +9,7 @@
 - Footer and scroll-to-top behavior
 - Custom 404 page
 
-### Dashboard (`/dashboard/orders`)
+### Dashboard (`/dashboard`)
 
 - Statistics cards: Total Products, Low Stock Items, Out of Stock, Pending Purchase Orders
 - Low stock alerts, including out-of-stock items; products at the reorder level are not flagged

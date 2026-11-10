@@ -56,7 +56,7 @@ export const navItems: NavItem[] = [
       {
         icon: 'dashboard',
         label: 'Dashboard',
-        href: '/dashboard/orders'
+        href: '/dashboard'
       }
     ]
   },

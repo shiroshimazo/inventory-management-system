@@ -2,8 +2,8 @@
 
 | Route                                    | Layout      | Page                                                |
 | ---------------------------------------- | ----------- | --------------------------------------------------- |
-| `/`                                      | —           | Redirects to `/dashboard/orders`                    |
-| `/dashboard/orders`                      | Admin shell | Inventory dashboard                                 |
+| `/`                                      | —           | Redirects to `/dashboard`                            |
+| `/dashboard`                             | Admin shell | Inventory dashboard                                 |
 | `/datatable`                             | Admin shell | Data table demos (basic, pinnable columns, filters) |
 | `/forms/form-layouts/vertical`           | Admin shell | Vertical form layout                                |
 | `/forms/form-layouts/horizontal`         | Admin shell | Horizontal form layout                              |
@@ -27,7 +27,7 @@ The data table, form, and authentication demo routes remain available by URL but
 
 ### Overview
 
-- Dashboard → `/dashboard/orders`
+- Dashboard → `/dashboard`
 
 ### Inventory
 
