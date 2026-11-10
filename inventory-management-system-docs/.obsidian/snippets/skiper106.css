@@ -1,0 +1,24 @@
+/* Skiper106-style editor caret, inspired by https://skiper-ui.com/v1/skiper106 (gxuri). */
+.markdown-source-view.mod-cm6 .cm-cursor {
+  border-left-width: 2px;
+  border-radius: 1px;
+}
+
+@media (prefers-reduced-motion: no-preference) and (forced-colors: none) {
+  .markdown-source-view.mod-cm6 .cm-cursor {
+    /* shortcut: CSS restarts easing on each move; use a plugin for full spring physics and native input fields. */
+    transition-property: left, top;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Samples of Skiper106's spring: stiffness 500, damping 30, mass 0.5. */
+    transition-timing-function: linear(
+      0, 0.0837, 0.2511, 0.4283, 0.5836, 0.7073, 0.8003,
+      0.8672, 0.9137, 0.9452, 0.9660, 0.9794, 0.9878, 0.9930,
+      0.9962, 0.9980, 0.9990, 0.9996, 0.9999, 1, 1
+    );
+  }
+
+  .markdown-source-view.mod-cm6 .cm-editor.cm-focused .cm-cursorLayer {
+    animation: none !important;
+  }
+}

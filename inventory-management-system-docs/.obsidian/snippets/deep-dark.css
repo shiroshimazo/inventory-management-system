@@ -1,0 +1,48 @@
+/* Deep neutral surfaces with lighter hover and active states. */
+body.theme-dark {
+  --color-base-00: #0d0d0f;
+  --color-base-05: #101012;
+  --color-base-10: #151518;
+  --color-base-20: #19191d;
+  --color-base-25: #242429;
+  --color-base-30: #303036;
+  --color-base-35: #3c3c44;
+  --color-base-40: #50505a;
+  --color-base-50: #90909c;
+  --color-base-60: #aaaab5;
+  --color-base-70: #c5c5cf;
+  --color-base-100: #eeeef2;
+
+  --background-primary: #0d0d0f;
+  --background-primary-alt: #151518;
+  --background-secondary: #101012;
+  --background-secondary-alt: #151518;
+  --background-modifier-hover: #29292f;
+  --background-modifier-active-hover: #36363e;
+  --background-modifier-form-field: #19191d;
+  --interactive-normal: #242429;
+  --interactive-hover: #36363e;
+
+  --titlebar-background: #101012;
+  --titlebar-background-focused: #101012;
+  --ribbon-background: #101012;
+  --ribbon-background-collapsed: #101012;
+  --tab-container-background: #101012;
+  --tab-background-active: #303038;
+  --tab-text-color-active: #eeeef2;
+  --tab-text-color-focused-active: #eeeef2;
+  --tab-text-color-focused-active-current: #eeeef2;
+  --nav-item-background-hover: #29292f;
+  --nav-item-background-active: #36363e;
+  --nav-item-background-selected: #36363e;
+  --nav-item-color-active: #eeeef2;
+
+  --modal-background: #151518;
+  --modal-sidebar-background: #101012;
+  --menu-background: #19191d;
+  --prompt-background: #151518;
+  --text-normal: #eeeef2;
+  --text-muted: #b8b8c2;
+  --text-faint: #a0a0ac;
+  --text-on-accent: #ffffff;
+}

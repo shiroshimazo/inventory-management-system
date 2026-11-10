@@ -1,0 +1,12 @@
+packages:
+  - .
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+# Keep generator APIs compatible with router-plugin 1.120.0.
+overrides:
+  '@tanstack/router-generator': 1.120.0
+  '@tanstack/router-core': 1.119.0
+  '@tanstack/router-utils': 1.115.0
+  '@tanstack/virtual-file-routes': 1.115.0
