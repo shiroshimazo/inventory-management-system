@@ -1,24 +1,22 @@
-# Pages & Navigation
-
 ## Routes
 
-| Route | Layout | Page |
-|---|---|---|
-| `/` | — | Redirects to `/dashboard/orders` |
-| `/dashboard/orders` | Admin shell | Inventory dashboard |
-| `/datatable` | Admin shell | Data table demos (basic, pinnable columns, filters) |
-| `/forms/form-layouts/vertical` | Admin shell | Vertical form layout |
-| `/forms/form-layouts/horizontal` | Admin shell | Horizontal form layout |
-| `/forms/form-validation` | Admin shell | Form validation demos |
-| `/pages/user-settings?setting=general` | Admin shell | User settings — general |
-| `/pages/user-settings?setting=workspace` | Admin shell | User settings — workspace |
-| `/pages/auth/login` | Blank | Login |
-| `/pages/auth/register` | Blank | Register |
-| `/pages/auth/forgot-password` | Blank | Forgot password |
-| `/pages/auth/verify-email` | Blank | Verify email |
-| `/pages/auth/reset-password` | Blank | Reset password |
-| `/pages/auth/two-steps` | Blank | Two-step verification |
-| `*` (unknown) | Root | Custom 404 page |
+| Route                                    | Layout      | Page                                                |
+| ---------------------------------------- | ----------- | --------------------------------------------------- |
+| `/`                                      | —           | Redirects to `/dashboard/orders`                    |
+| `/dashboard/orders`                      | Admin shell | Inventory dashboard                                 |
+| `/datatable`                             | Admin shell | Data table demos (basic, pinnable columns, filters) |
+| `/forms/form-layouts/vertical`           | Admin shell | Vertical form layout                                |
+| `/forms/form-layouts/horizontal`         | Admin shell | Horizontal form layout                              |
+| `/forms/form-validation`                 | Admin shell | Form validation demos                               |
+| `/pages/user-settings?setting=general`   | Admin shell | User settings — general                             |
+| `/pages/user-settings?setting=workspace` | Admin shell | User settings — workspace                           |
+| `/pages/auth/login`                      | Blank       | Login                                               |
+| `/pages/auth/register`                   | Blank       | Register                                            |
+| `/pages/auth/forgot-password`            | Blank       | Forgot password                                     |
+| `/pages/auth/verify-email`               | Blank       | Verify email                                        |
+| `/pages/auth/reset-password`             | Blank       | Reset password                                      |
+| `/pages/auth/two-steps`                  | Blank       | Two-step verification                               |
+| `*` (unknown)                            | Root        | Custom 404 page                                     |
 
 ## Sidebar Navigation
 

@@ -1,5 +1,3 @@
-# Architecture
-
 ## Overview
 
 The Inventory Management System is currently a **frontend-only single-page application (SPA)**. It is built with React and TypeScript, bundled by Vite, and routed with TanStack Router. There is no backend or database in the codebase yet: all data shown in the UI is static mock data defined next to the pages. A backend (for example Supabase/PostgreSQL) is planned and can be added without restructuring the frontend.
@@ -74,13 +72,13 @@ src/
 
 ## Build and Tooling
 
-| Command | Action |
-|---|---|
-| `pnpm dev` | Start the Vite dev server on port 3000 |
-| `pnpm build` | `vite build` plus TypeScript checks |
-| `pnpm lint` / `pnpm lint:fix` | ESLint checks |
-| `pnpm format` | Prettier formatting |
-| `pnpm check-types` | TypeScript type checking |
+| Command                       | Action                                 |
+| ----------------------------- | -------------------------------------- |
+| `pnpm dev`                    | Start the Vite dev server on port 3000 |
+| `pnpm build`                  | `vite build` plus TypeScript checks    |
+| `pnpm lint` / `pnpm lint:fix` | ESLint checks                          |
+| `pnpm format`                 | Prettier formatting                    |
+| `pnpm check-types`            | TypeScript type checking               |
 
 - Path alias: `@/*` maps to `src/*`.
 - Production hosting must serve `index.html` for unknown application paths so direct links and refreshes work (SPA fallback).

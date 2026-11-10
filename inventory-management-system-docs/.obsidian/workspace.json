@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Project Overview/Project Overview.md",
+                "file": "Project Overview/User Roles & Permissions.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Project Overview"
+              "title": "User Roles & Permissions"
             }
           }
         ]
@@ -188,14 +188,14 @@
       "bases:Create new base": false
     }
   },
-  "active": "058db1e0be6a2428",
+  "active": "08c0016ad483fbdb",
   "lastOpenFiles": [
+    "Project Overview/Project Overview.md",
     "Project Overview/Pages & Navigation.md",
     "Project Overview/Glossary.md",
-    "Project Overview/User Roles & Permissions.md",
-    "Project Overview/Features.md",
     "Project Overview/Architecture.md",
-    "Project Overview/Project Overview.md",
+    "Project Overview/Features.md",
+    "Project Overview/User Roles & Permissions.md",
     "Code Rules",
     "Database Design",
     "Flowchart",

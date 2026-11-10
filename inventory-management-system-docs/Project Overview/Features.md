@@ -1,5 +1,3 @@
-# Features
-
 ## Implemented (UI)
 
 ### Layout and Shell
