@@ -53,3 +53,7 @@ migration-backup.zip
 .pnpm-store/
 dist/
 src/routeTree.gen.ts
+
+# AI workflow vault and agent instructions (local only)
+ai-workflow/
+AGENTS.md
