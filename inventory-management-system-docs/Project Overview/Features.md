@@ -11,11 +11,11 @@
 
 ### Dashboard (`/dashboard/orders`)
 
-- Statistics cards (shipped orders, damaged returns, missed delivery slots)
-- Product insights widget
-- Total earnings widget with trend and comparison
-- Sales metrics chart (bar and pie charts via Recharts)
-- Transactions data table with status badges
+- Statistics cards: Total Products, Low Stock Items, Out of Stock, Pending Purchase Orders
+- Low stock alerts, including out-of-stock items; products at the reorder level are not flagged
+- Daily stock-in vs stock-out chart (Recharts), derived from the same movement records as the table
+- Recent stock movements with product, SKU, quantity, reference, time, and recorder
+- Clearly labeled mock snapshot for 4–10 November 2026; no backend or invented comparison trends
 
 ### Data Tables (`/datatable`)
 
