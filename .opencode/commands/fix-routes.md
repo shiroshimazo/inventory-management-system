@@ -16,6 +16,8 @@ project.
 | Logo / home link           | `src/configs/themeConfig.tsx`                        |
 | `/` redirect               | `src/routes/index.tsx`                               |
 | Header breadcrumb          | `src/components/layout/Header.tsx` (built from URL) |
+| 404 page                   | `src/components/NotFound.tsx`, registered in `src/router.tsx` |
+| Catch-all route            | `src/routes/$.tsx` — every unknown URL lands here   |
 | Route reference table      | `inventory-management-system-docs/Project Overview/Pages & Navigation.md` |
 
 ## The bug to look for
@@ -41,11 +43,28 @@ page itself was the Dashboard.
    plugin writes the file before the build). Do not hand-edit it.
 7. Verify with `npm run check-types` and `npm run lint`.
 
+## Verifying that a wrong URL hits the 404
+
+Check the router's own matching, not the browser. A short script that builds the router from
+`src/routeTree.gen.ts` and calls `router.matchRoutes(path)` shows which route each URL
+resolves to, and which match carries the `globalNotFound` flag.
+
+Two shapes of wrong URL must both end on the 404 page:
+
+- A URL that half-matches a real route, for example `/dashboard/orders` matches the
+  `/dashboard` route and leaves a leftover segment. The router reports it as not found on
+  that route.
+- A URL that matches nothing, for example `/anything/else`. This matches the `$.tsx`
+  catch-all route.
+
 ## Rules
 
 - Renaming is the default fix. Do not delete a route file unless I name it in `$ARGUMENTS`.
 - Do not touch `src/routeTree.gen.ts` by hand.
 - Keep the sidebar, the redirect, and the docs in sync with the new URL.
+- Keep the 404 page registered once, in `src/router.tsx`
+  (`defaultNotFoundComponent` plus `notFoundMode: 'root'`). Do not add a second
+  `notFoundComponent` to a route.
 - Report every route you changed, the old URL, the new URL, and the files you touched.
 
 $ARGUMENTS

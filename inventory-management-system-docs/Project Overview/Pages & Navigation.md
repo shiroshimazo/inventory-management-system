@@ -16,7 +16,7 @@
 | `/pages/auth/verify-email`               | Blank       | Verify email                                        |
 | `/pages/auth/reset-password`             | Blank       | Reset password                                      |
 | `/pages/auth/two-steps`                  | Blank       | Two-step verification                               |
-| `*` (unknown)                            | Root        | Custom 404 page                                     |
+| `*` (unknown)                            | Root        | 404 page (no sidebar, no breadcrumb)                |
 
 ## Sidebar Navigation
 
@@ -66,4 +66,10 @@ The data table, form, and authentication demo routes remain available by URL but
 
 - **Admin shell (`_pages`):** sidebar + header + page content + footer.
 - **Blank shell (`_auth`):** centered content with no sidebar or header, used by authentication pages.
-- **Root:** wraps all routes with theme, tooltip, and sidebar providers, plus the toaster, scroll-to-top, and 404 handling.
+- **Root:** wraps all routes with theme, tooltip, and sidebar providers, plus the toaster and scroll-to-top.
+
+## 404 Page
+
+- Any URL that does not match a route shows the 404 page.
+- The 404 page renders at the root level: no sidebar and no breadcrumb trail for a page that does not exist.
+- It offers one action, `Go back to home`, which returns to `/dashboard`.
