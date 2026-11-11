@@ -14,7 +14,7 @@ import {
   useReactTable
 } from '@tanstack/react-table'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Search01Icon } from '@hugeicons/core-free-icons'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'

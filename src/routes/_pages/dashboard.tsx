@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Alert02Icon, ClipboardIcon, PackageIcon, PackageRemoveIcon } from '@hugeicons/core-free-icons'
 import StatisticsCard from '@/views/dashboards/statistics/statistics-card-01'
 import LowStockAlerts from '@/views/dashboards/widgets/LowStockAlerts'

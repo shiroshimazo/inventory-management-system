@@ -2,7 +2,7 @@
 
 import { cva, type VariantProps } from 'class-variance-authority'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Cancel01Icon, CircleIcon, Tick01Icon } from '@hugeicons/core-free-icons'
 
 import { cn } from '@/lib/utils'

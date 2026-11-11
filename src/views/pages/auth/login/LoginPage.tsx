@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { HugeiconsIcon } from '@hugeicons/react'
-import { AlertCircleIcon, LockPasswordIcon, UserIcon, ViewIcon, ViewOffIcon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
+import { AlertCircleIcon, LockPasswordIcon, UserRoundIcon, ViewIcon, ViewOffIcon } from '@hugeicons/core-free-icons'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 
@@ -45,7 +45,7 @@ export default function LoginPage() {
                 <FieldLabel htmlFor='loginUsername'>Username</FieldLabel>
                 <InputGroup className='h-11'>
                   <InputGroupAddon>
-                    <HugeiconsIcon icon={UserIcon} aria-hidden='true' />
+                    <HugeiconsIcon icon={UserRoundIcon} strokeWidth={2} className='size-[17.5px]' aria-hidden='true' />
                   </InputGroupAddon>
                   <InputGroupInput
                     {...register('username')}
@@ -71,7 +71,7 @@ export default function LoginPage() {
                 <FieldLabel htmlFor='loginPassword'>Password</FieldLabel>
                 <InputGroup className='h-11'>
                   <InputGroupAddon>
-                    <HugeiconsIcon icon={LockPasswordIcon} aria-hidden='true' />
+                    <HugeiconsIcon icon={LockPasswordIcon} strokeWidth={2} className='size-[17.5px]' aria-hidden='true' />
                   </InputGroupAddon>
                   <InputGroupInput
                     {...register('password')}
@@ -94,7 +94,12 @@ export default function LoginPage() {
                       aria-controls='loginPassword'
                       onClick={() => setIsPasswordVisible(isVisible => !isVisible)}
                     >
-                      <HugeiconsIcon icon={isPasswordVisible ? ViewOffIcon : ViewIcon} aria-hidden='true' />
+                      <HugeiconsIcon
+                        icon={isPasswordVisible ? ViewOffIcon : ViewIcon}
+                        strokeWidth={2}
+                        className='size-[17.5px]'
+                        aria-hidden='true'
+                      />
                     </Button>
                   </InputGroupAddon>
                 </InputGroup>

@@ -3,7 +3,7 @@
 // Third-party Imports
 import { toast } from 'sonner'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { CheckmarkCircle02Icon, Download01Icon } from '@hugeicons/core-free-icons'
 
 // Component Imports

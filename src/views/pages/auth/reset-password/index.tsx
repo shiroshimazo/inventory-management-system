@@ -2,7 +2,7 @@
 import { Link } from '@tanstack/react-router'
 
 // Third-party imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { ChevronLeftIcon } from '@hugeicons/core-free-icons'
 
 // Component Imports

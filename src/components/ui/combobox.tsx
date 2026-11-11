@@ -4,7 +4,7 @@ import * as React from 'react'
 
 import { Combobox as ComboboxPrimitive } from '@base-ui/react'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Cancel01Icon, ChevronDownIcon, Tick01Icon } from '@hugeicons/core-free-icons'
 
 import { cn } from '@/lib/utils'

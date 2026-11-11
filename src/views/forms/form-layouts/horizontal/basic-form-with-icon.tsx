@@ -1,5 +1,5 @@
 ﻿// Third-party Imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Building02Icon, Mail01Icon, MessageSquareIcon, PhoneIcon, UserIcon } from '@hugeicons/core-free-icons'
 
 // Component Imports

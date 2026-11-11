@@ -1,6 +1,6 @@
 ﻿// Third-party Imports
 import { useTheme } from 'next-themes'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { MoonStarIcon, Sun01Icon } from '@hugeicons/core-free-icons'
 
 // Component Imports

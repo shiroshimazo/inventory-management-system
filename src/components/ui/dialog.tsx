@@ -4,7 +4,7 @@ import * as React from 'react'
 
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Cancel01Icon } from '@hugeicons/core-free-icons'
 
 import { cn } from '@/lib/utils'

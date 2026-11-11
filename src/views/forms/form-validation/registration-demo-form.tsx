@@ -6,7 +6,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Tick02Icon } from '@hugeicons/core-free-icons'
 
 import { Alert, AlertTitle } from '@/components/ui/alert'

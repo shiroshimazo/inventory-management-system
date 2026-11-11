@@ -4,7 +4,7 @@
 import { useMemo, useState } from 'react'
 
 // Third-party Imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Cancel01Icon, Mail01Icon, Tick01Icon, ViewIcon, ViewOffIcon } from '@hugeicons/core-free-icons'
 
 // Component Imports

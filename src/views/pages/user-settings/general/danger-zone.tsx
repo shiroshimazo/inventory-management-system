@@ -1,5 +1,5 @@
 ﻿// Third-party Imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Delete02Icon } from '@hugeicons/core-free-icons'
 
 // Component Imports

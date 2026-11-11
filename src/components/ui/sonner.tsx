@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 import { Toaster as Sonner, type ToasterProps } from 'sonner'
 
 // Third-party Imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import {
   Alert02Icon,
   CheckmarkCircle01Icon,

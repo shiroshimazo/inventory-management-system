@@ -2,7 +2,7 @@
 import { Fragment } from 'react'
 
 // Third-party Imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { LanguagesIcon, PanelLeftIcon } from '@hugeicons/core-free-icons'
 import { createLink, useLocation } from '@tanstack/react-router'
 

@@ -6,7 +6,7 @@ import { useState } from 'react'
 import type { Column, ColumnDef, SortingState } from '@tanstack/react-table'
 import { flexRender, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { ArrowLeft01Icon, ArrowRight01Icon, MoreHorizontalIcon, PinOffIcon } from '@hugeicons/core-free-icons'
 
 import { Button } from '@/components/ui/button'

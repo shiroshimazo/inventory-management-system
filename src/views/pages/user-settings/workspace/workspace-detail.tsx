@@ -4,7 +4,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 // Third-party Imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Image01Icon, TrashIcon, Upload01Icon } from '@hugeicons/core-free-icons'
 
 // Component Imports

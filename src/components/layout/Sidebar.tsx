@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from '@tanstack/react-router'
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Cancel01Icon } from '@hugeicons/core-free-icons'
 import LogoSvg from '@/assets/svg/logo'
 import {

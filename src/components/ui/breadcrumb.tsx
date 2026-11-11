@@ -1,4 +1,4 @@
-﻿import { HugeiconsIcon } from '@hugeicons/react'
+﻿import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { ChevronRightIcon, MoreHorizontalIcon } from '@hugeicons/core-free-icons'
 
 import { cn } from '@/lib/utils'

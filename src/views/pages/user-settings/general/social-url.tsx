@@ -4,7 +4,7 @@
 import { useState } from 'react'
 
 // Third-party Imports
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { PlusIcon } from '@hugeicons/core-free-icons'
 
 // Component Imports

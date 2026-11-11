@@ -1,6 +1,6 @@
 ﻿import * as React from 'react'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from '@hugeicons/core-free-icons'
 
 import { Button } from '@/components/ui/button'

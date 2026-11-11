@@ -4,7 +4,7 @@ import * as React from 'react'
 
 import { Command as CommandPrimitive } from 'cmdk'
 
-import { HugeiconsIcon } from '@hugeicons/react'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Search01Icon, Tick01Icon } from '@hugeicons/core-free-icons'
 
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
