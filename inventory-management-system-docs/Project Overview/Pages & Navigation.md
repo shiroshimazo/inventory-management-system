@@ -11,6 +11,8 @@
 | `/pages/user-settings?setting=general`   | Admin shell | User settings — general                             |
 | `/pages/user-settings?setting=workspace` | Admin shell | User settings — workspace                           |
 | `/pages/auth/login`                      | Blank       | Login                                               |
+| `/login`                                 | Blank       | Username login UI preview                           |
+| `/forgot-password`                       | Blank       | Existing forgot password UI                         |
 | `/pages/auth/register`                   | Blank       | Register                                            |
 | `/pages/auth/forgot-password`            | Blank       | Forgot password                                     |
 | `/pages/auth/verify-email`               | Blank       | Verify email                                        |
