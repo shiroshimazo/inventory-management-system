@@ -89,7 +89,7 @@ export default function LoginPage() {
                       type='button'
                       variant='ghost'
                       size='icon'
-                      className='size-11'
+                      className='size-11 bg-transparent hover:bg-transparent dark:hover:bg-transparent'
                       aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
                       aria-controls='loginPassword'
                       onClick={() => setIsPasswordVisible(isVisible => !isVisible)}
@@ -111,9 +111,9 @@ export default function LoginPage() {
                 )}
                 <Link
                   to='/forgot-password'
-                  className='focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-md text-sm underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:outline-none'
+                  className='text-foreground focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-md text-sm underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:outline-none'
                 >
-                  Forgot Password
+                  Forgot Password?
                 </Link>
               </Field>
               <Button type='submit' className='h-11 w-full'>
