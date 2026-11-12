@@ -66,7 +66,7 @@ const ProfileDropdown = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem variant='destructive' render={<Link to='/pages/auth/login' />}>
+          <DropdownMenuItem variant='destructive' render={<Link to='/login' />}>
             <HugeiconsIcon icon={Logout01Icon} />
             <span>Sign out</span>
           </DropdownMenuItem>

@@ -10,14 +10,8 @@
 | `/forms/form-validation`                 | Admin shell | Form validation demos                               |
 | `/pages/user-settings?setting=general`   | Admin shell | User settings — general                             |
 | `/pages/user-settings?setting=workspace` | Admin shell | User settings — workspace                           |
-| `/pages/auth/login`                      | Blank       | Login                                               |
 | `/login`                                 | Blank       | Username login UI preview                           |
-| `/forgot-password`                       | Blank       | Existing forgot password UI                         |
-| `/pages/auth/register`                   | Blank       | Register                                            |
-| `/pages/auth/forgot-password`            | Blank       | Forgot password                                     |
-| `/pages/auth/verify-email`               | Blank       | Verify email                                        |
-| `/pages/auth/reset-password`             | Blank       | Reset password                                      |
-| `/pages/auth/two-steps`                  | Blank       | Two-step verification                               |
+| `/forgot-password`                       | Blank       | Three-step password recovery UI preview             |
 | `*` (unknown)                            | Root        | 404 page (no sidebar, no breadcrumb)                |
 
 ## Sidebar Navigation
@@ -25,7 +19,7 @@
 The sidebar is defined in `src/configs/navConfig.tsx` and grouped as follows:
 
 Planned modules appear as disabled items with a `Planned` badge and no link until their routes exist.
-The data table, form, and authentication demo routes remain available by URL but are not shown in the sidebar.
+The data table and form demo routes remain available by URL but are not shown in the sidebar. The old `/pages/auth/*` demos have been removed and show the 404 page.
 
 ### Overview
 

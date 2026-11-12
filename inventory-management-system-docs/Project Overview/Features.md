@@ -31,8 +31,9 @@
 
 ### Authentication Screens (UI only)
 
-- Login, Register, Forgot Password, Verify Email, Reset Password, Two Steps Verification
-- Static "Login as User" / "Login as Admin" buttons (no real authentication yet)
+- `/login`: username and password validation preview (no real authentication yet)
+- `/forgot-password`: email, six-box verification code, and new/confirm password preview; use the displayed demo code `123456`
+- No email is sent and no password is saved. Old `/pages/auth/*` demo pages have been removed.
 
 ### User Settings (`/pages/user-settings`)
 
