@@ -8,7 +8,8 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import logo from '@/assets/img/logo.png'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { loginSchema } from './LoginSchema'
@@ -26,13 +27,29 @@ export default function LoginPage() {
   })
 
   return (
-    <main className='bg-background flex min-h-dvh items-center justify-center px-4 py-8 sm:px-6'>
-      <Card className='w-full max-w-md shadow-none'>
-        <CardHeader>
-          <h1 className='text-2xl font-semibold'>Login</h1>
-          <CardDescription>Inventory Management System</CardDescription>
-        </CardHeader>
-        <CardContent>
+    <main className='bg-background text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'>
+      <aside className='relative isolate hidden items-center justify-center overflow-hidden px-12 py-16 lg:flex'>
+        <div
+          className='absolute inset-0 z-0'
+          style={{ background: 'radial-gradient(125% 125% at 50% 90%, #fff 40%, #7c3aed 100%)' }}
+        />
+        {/* Keep the white brand copy readable over the supplied light gradient in both themes. */}
+        <div className='bg-foreground/70 dark:bg-background/70 absolute inset-0 z-0' />
+        <div className='text-background dark:text-foreground relative z-10 w-full max-w-sm'>
+          <img src={logo} alt='' width={64} height={64} className='mb-8 size-16 object-contain' />
+          <h2 className='text-3xl font-semibold tracking-tight'>Inventory Management System</h2>
+          <p className='mt-4 text-base'>Sign in to manage your inventory.</p>
+        </div>
+      </aside>
+      <section aria-labelledby='loginHeading' className='flex items-center justify-center px-6 py-12 sm:px-12'>
+        <div className='w-full max-w-md'>
+          <img src={logo} alt='' width={56} height={56} className='mb-8 size-14 object-contain lg:hidden' />
+          <header className='mb-8'>
+            <h1 id='loginHeading' className='text-3xl font-semibold tracking-tight'>
+              Sign in
+            </h1>
+            <p className='text-muted-foreground mt-2 text-sm'>Inventory Management System</p>
+          </header>
           <form
             noValidate
             onSubmit={handleSubmit(
@@ -40,7 +57,7 @@ export default function LoginPage() {
               () => toast.error('Please fix the highlighted fields.')
             )}
           >
-            <FieldGroup className='gap-4'>
+            <FieldGroup className='gap-6'>
               <Field data-invalid={Boolean(errors.username)} className='gap-2'>
                 <FieldLabel htmlFor='loginUsername'>Username</FieldLabel>
                 <InputGroup className='h-11'>
@@ -71,7 +88,12 @@ export default function LoginPage() {
                 <FieldLabel htmlFor='loginPassword'>Password</FieldLabel>
                 <InputGroup className='h-11'>
                   <InputGroupAddon>
-                    <HugeiconsIcon icon={LockPasswordIcon} strokeWidth={2} className='size-[17.5px]' aria-hidden='true' />
+                    <HugeiconsIcon
+                      icon={LockPasswordIcon}
+                      strokeWidth={2}
+                      className='size-[17.5px]'
+                      aria-hidden='true'
+                    />
                   </InputGroupAddon>
                   <InputGroupInput
                     {...register('password')}
@@ -109,20 +131,26 @@ export default function LoginPage() {
                     {errors.password.message}
                   </FieldError>
                 )}
+              </Field>
+              <div className='flex flex-wrap items-center justify-between gap-x-4'>
+                <FieldLabel htmlFor='loginRemember' className='min-h-11 cursor-pointer gap-3'>
+                  <Checkbox id='loginRemember' name='remember' className='after:-inset-3.5' />
+                  Remember me
+                </FieldLabel>
                 <Link
                   to='/forgot-password'
                   className='text-foreground focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-md text-sm underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:outline-none'
                 >
-                  Forgot Password?
+                  Forgot password?
                 </Link>
-              </Field>
+              </div>
               <Button type='submit' className='h-11 w-full'>
-                Login
+                Sign in
               </Button>
             </FieldGroup>
           </form>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
     </main>
   )
 }
