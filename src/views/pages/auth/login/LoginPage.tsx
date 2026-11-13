@@ -136,7 +136,7 @@ export default function LoginPage() {
               <div className='flex justify-end'>
                 <Link
                   to='/forgot-password'
-                  className='text-foreground focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-md text-sm underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:outline-none'
+                  className='text-foreground focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-md text-sm focus-visible:ring-2 focus-visible:outline-none'
                 >
                   Forgot password?
                 </Link>

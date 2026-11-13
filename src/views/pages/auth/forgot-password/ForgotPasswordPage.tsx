@@ -12,6 +12,7 @@ import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Input } from '@/components/ui/input'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
+import RecoveryStepper from './RecoveryStepper'
 import { previewCode, recoveryCodeSchema, recoveryEmailSchema, recoveryPasswordSchema } from './RecoverySchema'
 
 function RecoveryError({ id, message }: { id: string; message?: string }) {
@@ -196,6 +197,13 @@ export default function ForgotPasswordPage() {
   }, [step])
 
   const titles = ['Forgot password', 'Verify your email', 'Choose a password', 'Preview complete']
+
+  function handleStepSelect(nextStep: number) {
+    if (nextStep < step) {
+      setStep(nextStep)
+    }
+  }
+
   return (
     <main
       className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'
@@ -219,9 +227,14 @@ export default function ForgotPasswordPage() {
           className='absolute inset-0 z-0 lg:hidden'
           style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}
         />
-        <div className='relative z-10 w-full max-w-md'>
-          <header className='mb-8'>
-            <h1 ref={headingRef} tabIndex={-1} id='recoveryHeading' className='text-4xl font-semibold tracking-tight outline-none'>
+        <div className='relative z-10 grid w-full max-w-md gap-6 xl:max-w-[38rem] xl:grid-cols-[9rem_minmax(0,1fr)] xl:gap-x-4 xl:gap-y-8'>
+          <header className='xl:col-start-2 xl:row-start-1'>
+            <h1
+              ref={headingRef}
+              tabIndex={-1}
+              id='recoveryHeading'
+              className='text-4xl font-semibold tracking-tight outline-none'
+            >
               {titles[step - 1]}
             </h1>
             <p className='text-muted-foreground mt-2 text-base'>Inventory Management System</p>
@@ -231,11 +244,16 @@ export default function ForgotPasswordPage() {
               </p>
             ) : (
               <p className='text-muted-foreground mt-1 text-sm'>
-                Step {step} of 3 · UI preview only. No emails are sent or passwords saved.
+                UI preview only. No emails are sent or passwords saved.
               </p>
             )}
           </header>
-          <div className='space-y-4'>
+          <RecoveryStepper
+            className='xl:col-start-1 xl:row-span-2 xl:row-start-1'
+            onStepSelect={handleStepSelect}
+            step={step}
+          />
+          <div className='space-y-4 xl:col-start-2 xl:row-start-2'>
             {step === 1 && (
               <EmailStep
                 email={email}
