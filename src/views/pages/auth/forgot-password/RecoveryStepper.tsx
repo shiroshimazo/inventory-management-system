@@ -18,7 +18,6 @@ const totalRecoverySteps = recoverySteps.length
 
 type RecoveryStepperProps = {
   step: number
-  onStepSelect: (step: number) => void
   className?: string
 }
 
@@ -39,7 +38,7 @@ function RecoveryStepTrigger({
     <StepperTrigger
       aria-current={step === currentStep ? 'step' : undefined}
       aria-label={`Step ${step} of ${totalRecoverySteps}: ${label}${isCompleted ? ' (completed)' : ''}`}
-      className={showLabel ? 'min-h-11 w-full justify-start px-1' : 'size-11 justify-center'}
+      className={showLabel ? 'min-h-11 w-full justify-start gap-[5px] px-1' : 'size-11 justify-center'}
     >
       <StepperIndicator />
       {showLabel && <StepperTitle>{label}</StepperTitle>}
@@ -48,13 +47,11 @@ function RecoveryStepTrigger({
 }
 
 function RecoveryStepList({ step, showLabel = false }: { step: number; showLabel?: boolean }) {
-  const isComplete = step > totalRecoverySteps
-
   return recoverySteps.map(recoveryStep => (
     <StepperItem
       key={recoveryStep.step}
       className={showLabel ? undefined : 'not-last:flex-1'}
-      disabled={isComplete || recoveryStep.step > step}
+      disabled
       step={recoveryStep.step}
     >
       <RecoveryStepTrigger
@@ -68,13 +65,13 @@ function RecoveryStepList({ step, showLabel = false }: { step: number; showLabel
   ))
 }
 
-export default function RecoveryStepper({ step, onStepSelect, className }: RecoveryStepperProps) {
+export default function RecoveryStepper({ step, className }: RecoveryStepperProps) {
   return (
     <nav aria-label='Password recovery progress' className={cn('w-full', className)}>
-      <Stepper className='xl:hidden' onValueChange={onStepSelect} orientation='horizontal' value={step}>
+      <Stepper className='xl:hidden' orientation='horizontal' value={step}>
         <RecoveryStepList step={step} />
       </Stepper>
-      <Stepper className='hidden xl:flex' onValueChange={onStepSelect} orientation='vertical' value={step}>
+      <Stepper className='hidden xl:flex' orientation='vertical' value={step}>
         <RecoveryStepList showLabel step={step} />
       </Stepper>
     </nav>

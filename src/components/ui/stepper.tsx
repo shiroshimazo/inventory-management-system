@@ -9,7 +9,7 @@ type StepperStepState = 'active' | 'completed' | 'inactive'
 
 type StepperContextValue = {
   activeStep: number
-  onStepSelect: (step: number) => void
+  onStepSelect?: (step: number) => void
   orientation: StepperOrientation
 }
 
@@ -47,7 +47,7 @@ function Stepper({
   ...props
 }: React.ComponentProps<'div'> & {
   value: number
-  onValueChange: (step: number) => void
+  onValueChange?: (step: number) => void
   orientation?: StepperOrientation
 }) {
   return (
@@ -102,7 +102,7 @@ function StepperTrigger({ className, type = 'button', ...props }: React.Componen
         'focus-visible:border-ring focus-visible:ring-ring/50 hover:bg-muted/40 group-data-[state=inactive]/step:text-muted-foreground inline-flex items-center rounded-md text-left transition-colors outline-none focus-visible:ring-3 disabled:pointer-events-none',
         className
       )}
-      onClick={() => onStepSelect(step)}
+      onClick={() => onStepSelect?.(step)}
       disabled={isDisabled}
       {...props}
     />

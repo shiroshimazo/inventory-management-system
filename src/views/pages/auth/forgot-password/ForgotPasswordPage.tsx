@@ -2,16 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Controller, useForm } from 'react-hook-form'
-import { REGEXP_ONLY_DIGITS } from 'input-otp'
-import { AlertCircleIcon } from '@hugeicons/core-free-icons'
+import { AlertCircleIcon, ViewIcon, ViewOffIcon } from '@hugeicons/core-free-icons'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 
+import { OTPInput } from '@/components/motion/otp-input'
 import { Button } from '@/components/ui/button'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Input } from '@/components/ui/input'
-import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
+import PasswordStrengthMeter from './PasswordStrengthMeter'
 import RecoveryStepper from './RecoveryStepper'
 import { previewCode, recoveryCodeSchema, recoveryEmailSchema, recoveryPasswordSchema } from './RecoverySchema'
 
@@ -83,33 +84,19 @@ function CodeStep({ onContinue, onBack }: { onContinue: () => void; onBack: () =
           Preview code: <strong>{previewCode}</strong>. No email was sent.
         </p>
         <Field className='gap-2' data-invalid={Boolean(errors.code)}>
-          <FieldLabel htmlFor='recoveryCode'>Verification code</FieldLabel>
           <Controller
             control={control}
             name='code'
             render={({ field }) => (
-              <InputOTP
-                {...field}
-                id='recoveryCode'
-                maxLength={6}
-                pattern={REGEXP_ONLY_DIGITS}
-                inputMode='numeric'
-                autoComplete='one-time-code'
-                required
-                aria-invalid={Boolean(errors.code)}
+              <OTPInput
                 aria-describedby={`previewCode${errors.code ? ' recoveryCodeError' : ''}`}
-              >
-                <InputOTPGroup className='w-full has-aria-invalid:ring-0'>
-                  {Array.from({ length: 6 }, (_, index) => (
-                    <InputOTPSlot
-                      key={index}
-                      index={index}
-                      aria-invalid={Boolean(errors.code)}
-                      className='h-11 min-w-0 flex-1 shadow-none motion-reduce:transition-none motion-reduce:[&_div]:animate-none'
-                    />
-                  ))}
-                </InputOTPGroup>
-              </InputOTP>
+                aria-label='Verification code'
+                label='Verification code'
+                onBlur={field.onBlur}
+                onChange={field.onChange}
+                status={errors.code ? 'error' : 'idle'}
+                value={field.value}
+              />
             )}
           />
           <RecoveryError id='recoveryCodeError' message={errors.code?.message} />
@@ -126,6 +113,7 @@ function CodeStep({ onContinue, onBack }: { onContinue: () => void; onBack: () =
 }
 
 function PasswordStep({ email, onComplete }: { email: string; onComplete: () => void }) {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const {
     register,
     handleSubmit,
@@ -149,22 +137,39 @@ function PasswordStep({ email, onComplete }: { email: string; onComplete: () => 
       <FieldGroup className='gap-4'>
         <Field className='gap-2' data-invalid={Boolean(errors.password)}>
           <FieldLabel htmlFor='recoveryPassword'>New password</FieldLabel>
-          <Input
-            {...register('password', { deps: touchedFields.confirmPassword || isSubmitted ? ['confirmPassword'] : [] })}
-            id='recoveryPassword'
-            type='password'
-            autoComplete='new-password'
-            required
-            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent aria-invalid:ring-0'
-            aria-invalid={Boolean(errors.password)}
-            aria-describedby={`passwordHint${errors.password ? ' recoveryPasswordError' : ''}`}
-          />
-          <p id='passwordHint' className='text-muted-foreground text-sm'>
-            {password.length < 8
-              ? 'Use 8–128 characters. Avoid common passwords.'
-              : 'For a stronger password, use a long, unique phrase.'}
-          </p>
+          <InputGroup className='h-11 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-transparent has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-transparent has-[[data-slot][aria-invalid=true]]:ring-0'>
+            <InputGroupInput
+              {...register('password', {
+                deps: touchedFields.confirmPassword || isSubmitted ? ['confirmPassword'] : []
+              })}
+              id='recoveryPassword'
+              type={isPasswordVisible ? 'text' : 'password'}
+              autoComplete='new-password'
+              required
+              aria-invalid={Boolean(errors.password)}
+              aria-describedby={`passwordStrength${errors.password ? ' recoveryPasswordError' : ''}`}
+            />
+            <InputGroupAddon align='inline-end' className='pr-0'>
+              <Button
+                type='button'
+                variant='ghost'
+                size='icon'
+                className='size-11 bg-transparent hover:bg-transparent dark:hover:bg-transparent'
+                aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
+                aria-controls='recoveryPassword'
+                onClick={() => setIsPasswordVisible(isVisible => !isVisible)}
+              >
+                <HugeiconsIcon
+                  icon={isPasswordVisible ? ViewOffIcon : ViewIcon}
+                  strokeWidth={2}
+                  className='size-[17.5px]'
+                  aria-hidden='true'
+                />
+              </Button>
+            </InputGroupAddon>
+          </InputGroup>
           <RecoveryError id='recoveryPasswordError' message={errors.password?.message} />
+          <PasswordStrengthMeter id='passwordStrength' password={password} />
         </Field>
         <Field className='gap-2' data-invalid={Boolean(errors.confirmPassword)}>
           <FieldLabel htmlFor='recoveryConfirmPassword'>Confirm password</FieldLabel>
@@ -198,17 +203,8 @@ export default function ForgotPasswordPage() {
 
   const titles = ['Forgot password', 'Verify your email', 'Choose a password', 'Preview complete']
 
-  function handleStepSelect(nextStep: number) {
-    if (nextStep < step) {
-      setStep(nextStep)
-    }
-  }
-
   return (
-    <main
-      className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'
-      style={{ backgroundColor: '#171717' }}
-    >
+    <main className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]' style={{ backgroundColor: '#171717' }}>
       <aside className='relative isolate hidden items-end justify-center overflow-hidden rounded-3xl px-16 pt-32 pb-64 lg:flex'>
         <div
           className='absolute inset-0 z-0'
@@ -248,11 +244,7 @@ export default function ForgotPasswordPage() {
               </p>
             )}
           </header>
-          <RecoveryStepper
-            className='xl:col-start-1 xl:row-span-2 xl:row-start-1'
-            onStepSelect={handleStepSelect}
-            step={step}
-          />
+          <RecoveryStepper className='xl:col-start-1 xl:row-span-2 xl:row-start-1' step={step} />
           <div className='space-y-4 xl:col-start-2 xl:row-start-2'>
             {step === 1 && (
               <EmailStep
