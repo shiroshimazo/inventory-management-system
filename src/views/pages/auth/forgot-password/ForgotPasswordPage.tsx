@@ -8,7 +8,6 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Input } from '@/components/ui/input'
@@ -51,7 +50,7 @@ function EmailStep({ email, onContinue }: { email: string; onContinue: (email: s
             autoComplete='email'
             autoCapitalize='none'
             required
-            className='h-11'
+            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent'
             placeholder='name@example.com'
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? 'recoveryEmailError' : undefined}
@@ -155,7 +154,7 @@ function PasswordStep({ email, onComplete }: { email: string; onComplete: () => 
             type='password'
             autoComplete='new-password'
             required
-            className='h-11'
+            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent'
             aria-invalid={Boolean(errors.password)}
             aria-describedby={`passwordHint${errors.password ? ' recoveryPasswordError' : ''}`}
           />
@@ -174,7 +173,7 @@ function PasswordStep({ email, onComplete }: { email: string; onComplete: () => 
             type='password'
             autoComplete='new-password'
             required
-            className='h-11'
+            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent'
             aria-invalid={Boolean(errors.confirmPassword)}
             aria-describedby={errors.confirmPassword ? 'recoveryConfirmPasswordError' : undefined}
           />
@@ -198,55 +197,80 @@ export default function ForgotPasswordPage() {
 
   const titles = ['Forgot password', 'Verify your email', 'Choose a password', 'Preview complete']
   return (
-    <main className='bg-background flex min-h-dvh items-center justify-center px-4 py-8 sm:px-6'>
-      <Card className='w-full max-w-md shadow-none'>
-        <CardHeader>
-          <CardDescription>Inventory Management System</CardDescription>
-          {step < 4 && <p className='text-muted-foreground text-sm'>Step {step} of 3</p>}
-          <h1 ref={headingRef} tabIndex={-1} className='text-2xl font-semibold outline-none'>
-            {titles[step - 1]}
-          </h1>
-          <CardDescription>
-            {step === 4
-              ? 'No password was changed. Return to login to continue.'
-              : 'UI preview only. No emails are sent or passwords saved.'}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className='space-y-4'>
-          {step === 1 && (
-            <EmailStep
-              email={email}
-              onContinue={value => {
-                setEmail(value)
-                setStep(2)
-              }}
-            />
-          )}
-          {step === 2 && (
-            <>
-              <p className='text-sm break-all'>{email}</p>
-              <CodeStep onContinue={() => setStep(3)} onBack={() => setStep(1)} />
-            </>
-          )}
-          {step === 3 && (
-            <PasswordStep
-              email={email}
-              onComplete={() => {
-                setEmail('')
-                setStep(4)
-              }}
-            />
-          )}
-          <Button
-            variant={step === 4 ? 'default' : 'ghost'}
-            className='h-11 w-full'
-            render={<Link to='/login' />}
-            nativeButton={false}
-          >
-            Back to login
-          </Button>
-        </CardContent>
-      </Card>
+    <main
+      className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'
+      style={{ backgroundColor: '#171717' }}
+    >
+      <aside className='relative isolate hidden items-end justify-center overflow-hidden rounded-3xl px-16 pt-32 pb-64 lg:flex'>
+        <div
+          className='absolute inset-0 z-0'
+          style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}
+        />
+        <div className='relative z-10 flex w-full max-w-sm flex-col items-center text-center'>
+          <h2 className='text-4xl font-semibold tracking-tight'>Inventory Management System</h2>
+          <p className='mt-4 text-lg'>Reset your password to manage your inventory.</p>
+        </div>
+      </aside>
+      <section
+        aria-labelledby='recoveryHeading'
+        className='relative isolate flex items-center justify-center px-6 py-12 sm:px-12 lg:static'
+      >
+        <div
+          className='absolute inset-0 z-0 lg:hidden'
+          style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}
+        />
+        <div className='relative z-10 w-full max-w-md'>
+          <header className='mb-8'>
+            <h1 ref={headingRef} tabIndex={-1} id='recoveryHeading' className='text-4xl font-semibold tracking-tight outline-none'>
+              {titles[step - 1]}
+            </h1>
+            <p className='text-muted-foreground mt-2 text-base'>Inventory Management System</p>
+            {step === 4 ? (
+              <p className='text-muted-foreground mt-1 text-sm'>
+                No password was changed. Return to login to continue.
+              </p>
+            ) : (
+              <p className='text-muted-foreground mt-1 text-sm'>
+                Step {step} of 3 · UI preview only. No emails are sent or passwords saved.
+              </p>
+            )}
+          </header>
+          <div className='space-y-4'>
+            {step === 1 && (
+              <EmailStep
+                email={email}
+                onContinue={value => {
+                  setEmail(value)
+                  setStep(2)
+                }}
+              />
+            )}
+            {step === 2 && (
+              <>
+                <p className='text-sm break-all'>{email}</p>
+                <CodeStep onContinue={() => setStep(3)} onBack={() => setStep(1)} />
+              </>
+            )}
+            {step === 3 && (
+              <PasswordStep
+                email={email}
+                onComplete={() => {
+                  setEmail('')
+                  setStep(4)
+                }}
+              />
+            )}
+            <Button
+              variant={step === 4 ? 'default' : 'ghost'}
+              className='h-11 w-full'
+              render={<Link to='/login' />}
+              nativeButton={false}
+            >
+              Back to login
+            </Button>
+          </div>
+        </div>
+      </section>
     </main>
   )
 }

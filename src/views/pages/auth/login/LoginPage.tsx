@@ -35,8 +35,8 @@ export default function LoginPage() {
           style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}
         />
         <div className='relative z-10 flex w-full max-w-sm flex-col items-center text-center'>
-          <h2 className='text-3xl font-semibold tracking-tight'>Inventory Management System</h2>
-          <p className='mt-4 text-base'>Sign in to manage your inventory.</p>
+          <h2 className='text-4xl font-semibold tracking-tight'>Inventory Management System</h2>
+          <p className='mt-4 text-lg'>Sign in to manage your inventory.</p>
         </div>
       </aside>
       <section aria-labelledby='loginHeading' className='relative isolate flex items-center justify-center px-6 py-12 sm:px-12 lg:static'>
@@ -46,10 +46,10 @@ export default function LoginPage() {
         />
         <div className='relative z-10 w-full max-w-md'>
           <header className='mb-8'>
-            <h1 id='loginHeading' className='text-3xl font-semibold tracking-tight'>
+            <h1 id='loginHeading' className='text-4xl font-semibold tracking-tight'>
               Sign in
             </h1>
-            <p className='text-muted-foreground mt-2 text-sm'>Inventory Management System</p>
+            <p className='text-muted-foreground mt-2 text-base'>Inventory Management System</p>
           </header>
           <form
             noValidate
