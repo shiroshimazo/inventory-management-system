@@ -25,7 +25,7 @@ export default function RecentStockMovements({
     .slice(0, RECENT_MOVEMENT_LIMIT)
 
   return (
-    <Card className='min-w-0 shadow-none'>
+    <Card className='min-w-0 shadow-none ring-0'>
       <CardHeader>
         <h2 className='text-base font-semibold'>Recent stock movements</h2>
         <CardDescription>Latest {RECENT_MOVEMENT_LIMIT} entries · Times UTC+08:00</CardDescription>
@@ -66,7 +66,7 @@ export default function RecentStockMovements({
                       <p className='text-muted-foreground text-xs'>{product?.sku ?? movement.productId}</p>
                     </TableCell>
                     <TableCell>
-                      <Badge variant='outline'>{movement.type === 'in' ? 'Stock-in' : 'Stock-out'}</Badge>
+                      <Badge variant='outline' className='border-transparent'>{movement.type === 'in' ? 'Stock-in' : 'Stock-out'}</Badge>
                     </TableCell>
                     <TableCell className='text-right font-medium tabular-nums'>
                       {movement.type === 'in' ? '+' : '−'}

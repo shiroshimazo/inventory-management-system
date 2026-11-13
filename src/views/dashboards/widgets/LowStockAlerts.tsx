@@ -8,7 +8,7 @@ export default function LowStockAlerts({ products }: { products: InventoryProduc
     .sort((first, second) => first.quantity - second.quantity)
 
   return (
-    <Card className='min-w-0 shadow-none'>
+    <Card className='min-w-0 shadow-none ring-0'>
       <CardHeader>
         <h2 className='text-base font-semibold'>Low stock alerts</h2>
         <CardDescription>Below reorder level, including out-of-stock items.</CardDescription>
@@ -30,7 +30,7 @@ export default function LowStockAlerts({ products }: { products: InventoryProduc
                     {product.quantity} on hand · Reorder level {product.reorderLevel}
                   </p>
                 </div>
-                <Badge variant={product.quantity === 0 ? 'default' : 'outline'}>
+                <Badge variant={product.quantity === 0 ? 'default' : 'outline'} className='border-transparent'>
                   {product.quantity === 0 ? 'Out of stock' : 'Low stock'}
                 </Badge>
               </li>

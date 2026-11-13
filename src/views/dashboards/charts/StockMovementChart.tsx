@@ -23,7 +23,7 @@ export default function StockMovementChart({ movements, dates }: { movements: St
   const hasMovements = chartData.some(day => day.stockIn > 0 || day.stockOut > 0)
 
   return (
-    <Card className='h-full min-w-0 shadow-none'>
+    <Card className='h-full min-w-0 shadow-none ring-0'>
       <CardHeader>
         <h2 className='text-base font-semibold'>Stock movement</h2>
         <CardDescription>Stock-in vs stock-out · Units per day</CardDescription>

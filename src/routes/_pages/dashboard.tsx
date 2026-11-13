@@ -37,7 +37,7 @@ function InventoryDashboard() {
             icon={<HugeiconsIcon icon={statistic.icon} className='size-4' />}
             title={statistic.title}
             value={String(statistic.value)}
-            className='shadow-none'
+            className='shadow-none ring-0'
           />
         ))}
       </div>
