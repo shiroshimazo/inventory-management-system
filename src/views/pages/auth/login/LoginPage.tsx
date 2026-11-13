@@ -61,7 +61,7 @@ export default function LoginPage() {
             <FieldGroup className='gap-6'>
               <Field data-invalid={Boolean(errors.username)} className='gap-2'>
                 <FieldLabel htmlFor='loginUsername'>Username</FieldLabel>
-                <InputGroup className='h-11 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-transparent has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-transparent'>
+                <InputGroup className='h-11 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-transparent has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-transparent has-[[data-slot][aria-invalid=true]]:ring-0'>
                   <InputGroupAddon>
                     <HugeiconsIcon icon={UserRoundIcon} strokeWidth={2} className='size-[17.5px]' aria-hidden='true' />
                   </InputGroupAddon>
@@ -87,7 +87,7 @@ export default function LoginPage() {
               </Field>
               <Field data-invalid={Boolean(errors.password)} className='gap-2'>
                 <FieldLabel htmlFor='loginPassword'>Password</FieldLabel>
-                <InputGroup className='h-11 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-transparent has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-transparent'>
+                <InputGroup className='h-11 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-transparent has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-transparent has-[[data-slot][aria-invalid=true]]:ring-0'>
                   <InputGroupAddon>
                     <HugeiconsIcon
                       icon={LockPasswordIcon}

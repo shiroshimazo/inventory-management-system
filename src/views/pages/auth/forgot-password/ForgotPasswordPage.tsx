@@ -50,7 +50,7 @@ function EmailStep({ email, onContinue }: { email: string; onContinue: (email: s
             autoComplete='email'
             autoCapitalize='none'
             required
-            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent'
+            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent aria-invalid:ring-0'
             placeholder='name@example.com'
             aria-invalid={Boolean(errors.email)}
             aria-describedby={errors.email ? 'recoveryEmailError' : undefined}
@@ -98,7 +98,7 @@ function CodeStep({ onContinue, onBack }: { onContinue: () => void; onBack: () =
                 aria-invalid={Boolean(errors.code)}
                 aria-describedby={`previewCode${errors.code ? ' recoveryCodeError' : ''}`}
               >
-                <InputOTPGroup className='w-full'>
+                <InputOTPGroup className='w-full has-aria-invalid:ring-0'>
                   {Array.from({ length: 6 }, (_, index) => (
                     <InputOTPSlot
                       key={index}
@@ -154,7 +154,7 @@ function PasswordStep({ email, onComplete }: { email: string; onComplete: () => 
             type='password'
             autoComplete='new-password'
             required
-            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent'
+            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent aria-invalid:ring-0'
             aria-invalid={Boolean(errors.password)}
             aria-describedby={`passwordHint${errors.password ? ' recoveryPasswordError' : ''}`}
           />
@@ -173,7 +173,7 @@ function PasswordStep({ email, onComplete }: { email: string; onComplete: () => 
             type='password'
             autoComplete='new-password'
             required
-            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent'
+            className='h-11 border-transparent shadow-none focus-visible:border-transparent focus-visible:ring-0 focus-visible:ring-transparent aria-invalid:ring-0'
             aria-invalid={Boolean(errors.confirmPassword)}
             aria-describedby={errors.confirmPassword ? 'recoveryConfirmPasswordError' : undefined}
           />
