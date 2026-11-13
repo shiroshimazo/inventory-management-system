@@ -8,7 +8,6 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
-import logo from '@/assets/img/logo.png'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { loginSchema } from './LoginSchema'
@@ -30,20 +29,22 @@ export default function LoginPage() {
       className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'
       style={{ backgroundColor: '#171717' }}
     >
-      <aside className='relative isolate hidden items-end justify-center overflow-hidden px-12 py-16 lg:flex'>
+      <aside className='relative isolate hidden items-end justify-center overflow-hidden rounded-3xl px-16 pt-32 pb-64 lg:flex'>
         <div
           className='absolute inset-0 z-0'
-          style={{ background: 'radial-gradient(125% 125% at 50% 90%, #171717 40%, #7c3aed 100%)' }}
+          style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}
         />
         <div className='relative z-10 flex w-full max-w-sm flex-col items-center text-center'>
-          <img src={logo} alt='' width={120} height={120} className='mb-8 size-[120px] object-contain' />
           <h2 className='text-3xl font-semibold tracking-tight'>Inventory Management System</h2>
           <p className='mt-4 text-base'>Sign in to manage your inventory.</p>
         </div>
       </aside>
-      <section aria-labelledby='loginHeading' className='flex items-center justify-center px-6 py-12 sm:px-12'>
-        <div className='w-full max-w-md'>
-          <img src={logo} alt='' width={56} height={56} className='mb-8 size-14 object-contain lg:hidden' />
+      <section aria-labelledby='loginHeading' className='relative isolate flex items-center justify-center px-6 py-12 sm:px-12 lg:static'>
+        <div
+          className='absolute inset-0 z-0 lg:hidden'
+          style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}
+        />
+        <div className='relative z-10 w-full max-w-md'>
           <header className='mb-8'>
             <h1 id='loginHeading' className='text-3xl font-semibold tracking-tight'>
               Sign in
@@ -60,7 +61,7 @@ export default function LoginPage() {
             <FieldGroup className='gap-6'>
               <Field data-invalid={Boolean(errors.username)} className='gap-2'>
                 <FieldLabel htmlFor='loginUsername'>Username</FieldLabel>
-                <InputGroup className='h-11'>
+                <InputGroup className='h-11 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-transparent has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-transparent'>
                   <InputGroupAddon>
                     <HugeiconsIcon icon={UserRoundIcon} strokeWidth={2} className='size-[17.5px]' aria-hidden='true' />
                   </InputGroupAddon>
@@ -86,7 +87,7 @@ export default function LoginPage() {
               </Field>
               <Field data-invalid={Boolean(errors.password)} className='gap-2'>
                 <FieldLabel htmlFor='loginPassword'>Password</FieldLabel>
-                <InputGroup className='h-11'>
+                <InputGroup className='h-11 border-transparent has-[[data-slot=input-group-control]:focus-visible]:border-transparent has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot=input-group-control]:focus-visible]:ring-transparent'>
                   <InputGroupAddon>
                     <HugeiconsIcon
                       icon={LockPasswordIcon}
