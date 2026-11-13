@@ -8,7 +8,6 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
-import { Checkbox } from '@/components/ui/checkbox'
 import logo from '@/assets/img/logo.png'
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
@@ -27,16 +26,17 @@ export default function LoginPage() {
   })
 
   return (
-    <main className='bg-background text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'>
-      <aside className='relative isolate hidden items-center justify-center overflow-hidden px-12 py-16 lg:flex'>
+    <main
+      className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'
+      style={{ backgroundColor: '#171717' }}
+    >
+      <aside className='relative isolate hidden items-end justify-center overflow-hidden px-12 py-16 lg:flex'>
         <div
           className='absolute inset-0 z-0'
-          style={{ background: 'radial-gradient(125% 125% at 50% 90%, #fff 40%, #7c3aed 100%)' }}
+          style={{ background: 'radial-gradient(125% 125% at 50% 90%, #171717 40%, #7c3aed 100%)' }}
         />
-        {/* Keep the white brand copy readable over the supplied light gradient in both themes. */}
-        <div className='bg-foreground/70 dark:bg-background/70 absolute inset-0 z-0' />
-        <div className='text-background dark:text-foreground relative z-10 w-full max-w-sm'>
-          <img src={logo} alt='' width={64} height={64} className='mb-8 size-16 object-contain' />
+        <div className='relative z-10 flex w-full max-w-sm flex-col items-center text-center'>
+          <img src={logo} alt='' width={120} height={120} className='mb-8 size-[120px] object-contain' />
           <h2 className='text-3xl font-semibold tracking-tight'>Inventory Management System</h2>
           <p className='mt-4 text-base'>Sign in to manage your inventory.</p>
         </div>
@@ -132,11 +132,7 @@ export default function LoginPage() {
                   </FieldError>
                 )}
               </Field>
-              <div className='flex flex-wrap items-center justify-between gap-x-4'>
-                <FieldLabel htmlFor='loginRemember' className='min-h-11 cursor-pointer gap-3'>
-                  <Checkbox id='loginRemember' name='remember' className='after:-inset-3.5' />
-                  Remember me
-                </FieldLabel>
+              <div className='flex justify-end'>
                 <Link
                   to='/forgot-password'
                   className='text-foreground focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-md text-sm underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:outline-none'
