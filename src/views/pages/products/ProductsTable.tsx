@@ -91,8 +91,8 @@ export default function ProductsTable() {
 
   return (
     <div className='min-w-0 space-y-4'>
-      <div className='flex items-center gap-2'>
-        <div className='relative min-w-0 flex-1 sm:max-w-xs'>
+      <div className='flex flex-wrap items-center gap-2'>
+        <div className='relative w-full min-w-0 sm:max-w-xs'>
           <label htmlFor='product-search' className='sr-only'>
             Search fruits
           </label>
