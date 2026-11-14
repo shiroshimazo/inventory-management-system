@@ -18,7 +18,13 @@ import {
   StepperSeparator
 } from '@/components/ui/stepper'
 import { productCategories, priceFormatter, type FruitProduct } from './FruitProductsData'
-import { createProductSchema, productStepFields, productFieldLabels, type ProductDraft } from './ProductSchema'
+import {
+  createProductSchema,
+  productStepFields,
+  productFieldLabels,
+  productFieldPlaceholders,
+  type ProductDraft
+} from './ProductSchema'
 const steps = ['Details', 'Stock & price', 'Review']
 const inputClasses =
   'h-11 w-full shadow-none focus-visible:ring-0 focus-visible:border-foreground aria-invalid:ring-0 aria-invalid:focus-visible:border-destructive data-[size=default]:h-11'
@@ -146,7 +152,7 @@ export default function AddProductDialog({
                           aria-describedby={errors.category ? 'product-category-error' : undefined}
                           className={inputClasses}
                         >
-                          <SelectValue placeholder='Choose a category' />
+                          <SelectValue placeholder={productFieldPlaceholders.category} />
                         </SelectTrigger>
                         <SelectContent>
                           {productCategories.map(category => (
@@ -172,6 +178,7 @@ export default function AddProductDialog({
                     }
                     aria-invalid={!!errors[name]}
                     aria-describedby={errors[name] ? `product-${name}-error` : undefined}
+                    placeholder={productFieldPlaceholders[name]}
                     className={inputClasses}
                   />
                 )}

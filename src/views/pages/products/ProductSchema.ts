@@ -65,3 +65,12 @@ export const productFieldLabels: Record<keyof ProductDraft, string> = {
   quantity: 'Quantity',
   reorderLevel: 'Reorder level'
 }
+export const productFieldPlaceholders: Record<keyof ProductDraft, string> = {
+  name: 'Red apple',
+  sku: 'APPLE-001',
+  category: 'Choose a category',
+  pricePerKg: '4.50',
+  weightKg: '12.5',
+  quantity: '120',
+  reorderLevel: '20'
+}
