@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import type { ColumnDef, FilterFn, SortingState } from '@tanstack/react-table'
+import type { ColumnDef, ColumnFiltersState, FilterFn, SortingState } from '@tanstack/react-table'
 import {
   flexRender,
   getCoreRowModel,
@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import ProductsFilters from '@/views/pages/products/ProductsFilters'
 import { fruitProducts, getStockStatus, type FruitProduct } from '@/views/pages/products/FruitProductsData'
 
 const priceFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
@@ -23,22 +24,30 @@ const columns: ColumnDef<FruitProduct>[] = [
   {
     accessorKey: 'category',
     header: 'Category',
+    filterFn: 'equalsString',
     cell: ({ row }) => <span className='text-muted-foreground'>{row.original.category}</span>
   },
   {
     accessorKey: 'pricePerKg',
-    header: 'Price / kg',
+    header: 'Price',
+    filterFn: 'inNumberRange',
     cell: ({ row }) => priceFormatter.format(row.original.pricePerKg),
+    enableGlobalFilter: false
+  },
+  {
+    accessorKey: 'weightKg',
+    header: 'Kg',
     enableGlobalFilter: false
   },
   {
     accessorKey: 'quantity',
     header: 'Stock',
-    cell: ({ row }) => `${row.original.quantity} kg`,
+    cell: ({ row }) => row.original.quantity,
     enableGlobalFilter: false
   },
   {
     id: 'status',
+    filterFn: (row, _columnId, value) => getStockStatus(row.original) === value,
     header: 'Status',
     enableSorting: false,
     enableGlobalFilter: false,
@@ -58,11 +67,13 @@ const filterFruits: FilterFn<FruitProduct> = (row, _columnId, filterValue) => {
 export default function ProductsTable() {
   const searchInputRef = useRef<HTMLInputElement>(null)
   const [globalFilter, setGlobalFilter] = useState('')
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: false }])
   const table = useReactTable({
     data: fruitProducts,
     columns,
-    state: { sorting, globalFilter },
+    state: { sorting, globalFilter, columnFilters },
+    onColumnFiltersChange: setColumnFilters,
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: filterFruits,
@@ -80,40 +91,43 @@ export default function ProductsTable() {
 
   return (
     <div className='min-w-0 space-y-4'>
-      <div className='relative w-full sm:max-w-xs'>
-        <label htmlFor='product-search' className='sr-only'>
-          Search fruits
-        </label>
-        <HugeiconsIcon
-          icon={Search01Icon}
-          className='text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2'
-          aria-hidden='true'
-        />
-        <Input
-          ref={searchInputRef}
-          id='product-search'
-          type='text'
-          inputMode='search'
-          autoComplete='off'
-          spellCheck={false}
-          value={globalFilter}
-          onChange={event => setGlobalFilter(event.target.value)}
-          placeholder='Search fruits'
-          maxLength={60}
-          className='h-11 pr-12 pl-9'
-        />
-        {globalFilter && (
-          <Button
-            type='button'
-            variant='ghost'
-            size='icon'
-            onClick={clearSearch}
-            aria-label='Clear search'
-            className='absolute top-0 right-0 size-11'
-          >
-            <HugeiconsIcon icon={Cancel01Icon} className='size-4' aria-hidden='true' />
-          </Button>
-        )}
+      <div className='flex items-center gap-2'>
+        <div className='relative min-w-0 flex-1 sm:max-w-xs'>
+          <label htmlFor='product-search' className='sr-only'>
+            Search fruits
+          </label>
+          <HugeiconsIcon
+            icon={Search01Icon}
+            className='text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2'
+            aria-hidden='true'
+          />
+          <Input
+            ref={searchInputRef}
+            id='product-search'
+            type='text'
+            inputMode='search'
+            autoComplete='off'
+            spellCheck={false}
+            value={globalFilter}
+            onChange={event => setGlobalFilter(event.target.value)}
+            placeholder='Search fruits'
+            maxLength={60}
+            className='focus-visible:border-foreground h-11 pr-12 pl-9 shadow-none focus-visible:ring-0'
+          />
+          {globalFilter && (
+            <Button
+              type='button'
+              variant='ghost'
+              size='icon'
+              onClick={clearSearch}
+              aria-label='Clear search'
+              className='absolute top-0 right-0 size-11'
+            >
+              <HugeiconsIcon icon={Cancel01Icon} className='size-4' aria-hidden='true' />
+            </Button>
+          )}
+        </div>
+        <ProductsFilters columnFilters={columnFilters} onApply={setColumnFilters} />
       </div>
       <div className='border-y'>
         <Table>
@@ -172,9 +186,18 @@ export default function ProductsTable() {
             ) : (
               <TableRow>
                 <TableCell colSpan={table.getAllColumns().length} className='h-32 text-center'>
-                  <p>No fruits match your search.</p>
-                  <Button type='button' variant='link' size='sm' className='h-11' onClick={clearSearch}>
-                    Clear search
+                  <p>No fruits match your search or filters.</p>
+                  <Button
+                    type='button'
+                    variant='link'
+                    size='sm'
+                    className='h-11'
+                    onClick={() => {
+                      setColumnFilters([])
+                      clearSearch()
+                    }}
+                  >
+                    Clear all
                   </Button>
                 </TableCell>
               </TableRow>
