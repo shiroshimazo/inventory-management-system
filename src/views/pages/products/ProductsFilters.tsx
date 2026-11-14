@@ -8,11 +8,11 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { fruitProducts } from '@/views/pages/products/FruitProductsData'
+import { productCategories, MAX_PRODUCT_VALUE } from '@/views/pages/products/FruitProductsData'
 
-const categories = ['All', ...Array.from(new Set(fruitProducts.map(product => product.category))).sort()]
+const categories = ['All', ...productCategories]
 const statuses = ['All', 'In stock', 'Low stock', 'Out of stock']
-const maxPrice = 1000000
+const maxPrice = MAX_PRODUCT_VALUE
 
 function priceError(value: string) {
   const price = value.trim()

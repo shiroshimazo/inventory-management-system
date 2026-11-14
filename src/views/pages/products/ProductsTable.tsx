@@ -7,16 +7,29 @@ import {
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table'
-import { ArrowDown01Icon, ArrowUp01Icon, ArrowUpDownIcon, Cancel01Icon, Search01Icon } from '@hugeicons/core-free-icons'
+import {
+  Add01Icon,
+  ArrowDown01Icon,
+  ArrowUp01Icon,
+  ArrowUpDownIcon,
+  Cancel01Icon,
+  Search01Icon
+} from '@hugeicons/core-free-icons'
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import ProductsFilters from '@/views/pages/products/ProductsFilters'
-import { fruitProducts, getStockStatus, type FruitProduct } from '@/views/pages/products/FruitProductsData'
+import {
+  fruitProducts,
+  getStockStatus,
+  priceFormatter,
+  type FruitProduct
+} from '@/views/pages/products/FruitProductsData'
 
-const priceFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+import AddProductDialog from './AddProductDialog'
 const statusVariants = { 'Out of stock': 'destructive', 'Low stock': 'secondary', 'In stock': 'outline' } as const
 
 const statusClasses = {
@@ -26,7 +39,16 @@ const statusClasses = {
 }
 
 const columns: ColumnDef<FruitProduct>[] = [
-  { accessorKey: 'name', header: 'Fruit', cell: ({ row }) => <span className='font-medium'>{row.original.name}</span> },
+  {
+    accessorKey: 'name',
+    header: 'Fruit',
+    cell: ({ row }) => (
+      <div>
+        <span className='font-medium'>{row.original.name}</span>
+        <span className='text-muted-foreground block text-xs'>{row.original.sku}</span>
+      </div>
+    )
+  },
   {
     accessorKey: 'category',
     header: 'Category',
@@ -75,12 +97,15 @@ const filterFruits: FilterFn<FruitProduct> = (row, _columnId, filterValue) => {
 }
 
 export default function ProductsTable() {
+  const [products, setProducts] = useState(() => fruitProducts)
+  const [addOpen, setAddOpen] = useState(false)
+  const addButtonRef = useRef<HTMLButtonElement>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
   const [globalFilter, setGlobalFilter] = useState('')
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: false }])
   const table = useReactTable({
-    data: fruitProducts,
+    data: products,
     columns,
     state: { sorting, globalFilter, columnFilters },
     onColumnFiltersChange: setColumnFilters,
@@ -93,6 +118,11 @@ export default function ProductsTable() {
     getRowId: row => row.id,
     enableSortingRemoval: false
   })
+
+  function handleAddOpenChange(open: boolean) {
+    setAddOpen(open)
+    if (!open) requestAnimationFrame(() => addButtonRef.current?.focus())
+  }
 
   function clearSearch() {
     setGlobalFilter('')
@@ -146,6 +176,20 @@ export default function ProductsTable() {
         <Button type='button' variant='ghost' className='h-11' onClick={resetFilters}>
           Reset
         </Button>
+        <Dialog open={addOpen} onOpenChange={handleAddOpenChange}>
+          <DialogTrigger render={<Button ref={addButtonRef} className='h-11 w-full sm:ml-auto sm:w-auto' />}>
+            <HugeiconsIcon icon={Add01Icon} aria-hidden='true' />
+            Add Products
+          </DialogTrigger>
+          {addOpen && (
+            <AddProductDialog
+              products={products}
+              onAddProduct={product => setProducts(current => [...current, product])}
+              onClose={() => handleAddOpenChange(false)}
+              returnFocus={addButtonRef}
+            />
+          )}
+        </Dialog>
       </div>
       <div className='border-y'>
         <Table>
