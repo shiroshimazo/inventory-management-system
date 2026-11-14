@@ -139,5 +139,5 @@ export function getStockStatus(product: FruitProduct): 'In stock' | 'Low stock' 
 }
 
 export const productCategories = Array.from(new Set(fruitProducts.map(product => product.category))).sort()
-export const priceFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+export const priceFormatter = new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' })
 export const MAX_PRODUCT_VALUE = 1_000_000

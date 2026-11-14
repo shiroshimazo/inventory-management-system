@@ -4,7 +4,7 @@ import { Alert02Icon, FilterHorizontalIcon } from '@hugeicons/core-free-icons'
 import { toast } from 'sonner'
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Label } from '@/components/ui/label'
 import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from '@/components/ui/popover'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -114,7 +114,7 @@ export default function ProductsFilters({
             }}
           >
             <fieldset className='space-y-2'>
-              <legend className='text-sm font-medium'>Price per kg (USD)</legend>
+              <legend className='text-sm font-medium'>Price per kg (PHP)</legend>
               <div className='grid grid-cols-2 gap-2'>
                 {[
                   { id: 'minimum-price', label: 'Minimum', value: minimum, setValue: setMinimum, error: minimumError },
@@ -122,18 +122,21 @@ export default function ProductsFilters({
                 ].map(field => (
                   <div key={field.id} className='space-y-2'>
                     <Label htmlFor={field.id}>{field.label}</Label>
-                    <Input
-                      id={field.id}
-                      type='text'
-                      inputMode='decimal'
-                      maxLength={16}
-                      value={field.value}
-                      onChange={event => field.setValue(event.target.value)}
-                      onBlur={() => setPriceTouched(true)}
-                      aria-invalid={priceTouched && !!field.error}
-                      aria-describedby={priceTouched && field.error ? `${field.id}-error` : undefined}
-                      className='h-11'
-                    />
+                    <InputGroup className='h-11'>
+                      <InputGroupAddon>₱</InputGroupAddon>
+                      <InputGroupInput
+                        id={field.id}
+                        type='text'
+                        inputMode='decimal'
+                        maxLength={16}
+                        value={field.value}
+                        onChange={event => field.setValue(event.target.value)}
+                        onBlur={() => setPriceTouched(true)}
+                        aria-invalid={priceTouched && !!field.error}
+                        aria-describedby={priceTouched && field.error ? `${field.id}-error` : undefined}
+                        className='h-11'
+                      />
+                    </InputGroup>
                     {priceTouched && field.error && (
                       <p
                         id={`${field.id}-error`}

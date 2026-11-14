@@ -1,11 +1,11 @@
-import { useState, type RefObject } from 'react'
+import { useRef, useState, type RefObject } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AlertCircleIcon } from '@hugeicons/core-free-icons'
 import { toast } from 'sonner'
 import { DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Field, FieldLabel, FieldError } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { Button } from '@/components/ui/button'
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
@@ -17,7 +17,7 @@ import {
   StepperTitle,
   StepperSeparator
 } from '@/components/ui/stepper'
-import { productCategories, priceFormatter, type FruitProduct } from './FruitProductsData'
+import { productCategories, priceFormatter, MAX_PRODUCT_VALUE, type FruitProduct } from './FruitProductsData'
 import {
   createProductSchema,
   productStepFields,
@@ -28,6 +28,21 @@ import {
 const steps = ['Details', 'Stock & price', 'Review']
 const inputClasses =
   'h-11 w-full shadow-none focus-visible:ring-0 focus-visible:border-foreground aria-invalid:ring-0 aria-invalid:focus-visible:border-destructive data-[size=default]:h-11'
+const inputGroupClasses =
+  'h-11 w-full shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-foreground has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot][aria-invalid=true]]:ring-0'
+const MAX_PRICE_DIGITS = String(MAX_PRODUCT_VALUE * 100).length
+function formatPriceDigits(digits: string) {
+  if (!digits) return '0.00'
+  const whole = (digits.length > 2 ? digits.slice(0, -2) : digits.slice(0, 1)).replace(/^0+(?=\d)/, '')
+  const decimals = digits.length > 1 ? digits.slice(1).slice(-2).padEnd(2, '0') : '00'
+  return `${whole}.${decimals}`
+}
+function getPriceCaretPosition(digits: string) {
+  if (!digits) return 0
+  if (digits.length === 1) return 2
+  if (digits.length === 2) return 3
+  return formatPriceDigits(digits).length
+}
 export default function AddProductDialog({
   products,
   onAddProduct,
@@ -43,10 +58,12 @@ export default function AddProductDialog({
   const form = useForm<ProductDraft>({
     resolver: zodResolver(createProductSchema(products)),
     mode: 'onTouched',
-    defaultValues: { name: '', sku: '', category: '', pricePerKg: '', weightKg: '', quantity: '', reorderLevel: '' }
+    defaultValues: { name: '', sku: '', category: '', pricePerKg: '0.00', weightKg: '', quantity: '', reorderLevel: '' }
   })
   const { errors } = form.formState
   const values = form.getValues()
+  const priceDigitsRef = useRef('')
+  const priceInputRef = useRef<HTMLInputElement>(null)
   function focusField(field: keyof ProductDraft) {
     requestAnimationFrame(() => form.setFocus(field))
   }
@@ -164,23 +181,94 @@ export default function AddProductDialog({
                       </Select>
                     )}
                   />
+                ) : name === 'pricePerKg' ? (
+                  <InputGroup className={inputGroupClasses}>
+                    <InputGroupAddon>₱</InputGroupAddon>
+                    <Controller
+                      name={name}
+                      control={form.control}
+                      render={({ field }) => {
+                        function updatePriceDigits(digits: string) {
+                          const nextDigits = digits.slice(0, MAX_PRICE_DIGITS)
+                          const formattedPrice = formatPriceDigits(nextDigits)
+                          priceDigitsRef.current = nextDigits
+                          field.onChange(formattedPrice)
+                          if (priceInputRef.current) priceInputRef.current.value = formattedPrice
+                          requestAnimationFrame(() => {
+                            const position = getPriceCaretPosition(nextDigits)
+                            priceInputRef.current?.setSelectionRange(position, position)
+                          })
+                        }
+                        return (
+                          <InputGroupInput
+                            ref={node => {
+                              priceInputRef.current = node
+                              field.ref(node)
+                            }}
+                            id={`product-${name}`}
+                            type='text'
+                            inputMode='numeric'
+                            value={field.value}
+                            onChange={event => {
+                              const inputEvent = event.nativeEvent as InputEvent
+                              if (inputEvent.inputType === 'deleteContentBackward') {
+                                updatePriceDigits(event.target.value === '' ? '' : priceDigitsRef.current.slice(0, -1))
+                                return
+                              }
+                              const typedDigits = inputEvent.data?.replace(/\D/g, '') ?? ''
+                              if (!typedDigits) {
+                                event.target.value = field.value
+                                return
+                              }
+                              const isReplacing = event.target.value.length <= field.value.length
+                              updatePriceDigits((isReplacing ? '' : priceDigitsRef.current) + typedDigits)
+                            }}
+                            onPaste={event => {
+                              event.preventDefault()
+                              const pastedDigits = event.clipboardData.getData('text').replace(/\D/g, '')
+                              if (pastedDigits) updatePriceDigits(priceDigitsRef.current + pastedDigits)
+                            }}
+                            onBeforeInput={event => {
+                              const data = (event.nativeEvent as InputEvent).data
+                              if (data && /\D/.test(data)) event.preventDefault()
+                            }}
+                            onBlur={field.onBlur}
+                            onFocus={event => {
+                              const input = event.currentTarget
+                              requestAnimationFrame(() => {
+                                const position = getPriceCaretPosition(priceDigitsRef.current)
+                                input.setSelectionRange(position, position)
+                              })
+                            }}
+                            aria-invalid={!!errors[name]}
+                            aria-describedby={errors[name] ? `product-${name}-error` : undefined}
+                            placeholder={productFieldPlaceholders[name]}
+                            className='h-11'
+                          />
+                        )
+                      }}
+                    />
+                  </InputGroup>
                 ) : (
-                  <Input
-                    {...form.register(name, {
-                      onChange: () => {
-                        if (form.getFieldState(name).error) void form.trigger(name)
+                  <InputGroup className={inputGroupClasses}>
+                    <InputGroupInput
+                      {...form.register(name, {
+                        onChange: () => {
+                          if (form.getFieldState(name).error) void form.trigger(name)
+                        }
+                      })}
+                      id={`product-${name}`}
+                      type='text'
+                      inputMode={
+                        step === 2 ? (name === 'quantity' || name === 'reorderLevel' ? 'numeric' : 'decimal') : 'text'
                       }
-                    })}
-                    id={`product-${name}`}
-                    type='text'
-                    inputMode={
-                      step === 2 ? (name === 'quantity' || name === 'reorderLevel' ? 'numeric' : 'decimal') : 'text'
-                    }
-                    aria-invalid={!!errors[name]}
-                    aria-describedby={errors[name] ? `product-${name}-error` : undefined}
-                    placeholder={productFieldPlaceholders[name]}
-                    className={inputClasses}
-                  />
+                      aria-invalid={!!errors[name]}
+                      aria-describedby={errors[name] ? `product-${name}-error` : undefined}
+                      placeholder={productFieldPlaceholders[name]}
+                      className='h-11'
+                    />
+                    {name === 'weightKg' && <InputGroupAddon align='inline-end'>kg</InputGroupAddon>}
+                  </InputGroup>
                 )}
                 {errors[name] && (
                   <FieldError id={`product-${name}-error`} className='flex items-start gap-1'>

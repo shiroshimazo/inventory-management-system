@@ -60,7 +60,7 @@ export const productFieldLabels: Record<keyof ProductDraft, string> = {
   name: 'Product name',
   sku: 'SKU',
   category: 'Category',
-  pricePerKg: 'Price per kg (USD)',
+  pricePerKg: 'Price per kg (PHP)',
   weightKg: 'Total weight (kg)',
   quantity: 'Quantity',
   reorderLevel: 'Reorder level'
@@ -69,7 +69,7 @@ export const productFieldPlaceholders: Record<keyof ProductDraft, string> = {
   name: 'Red apple',
   sku: 'APPLE-001',
   category: 'Choose a category',
-  pricePerKg: '4.50',
+  pricePerKg: '0.00',
   weightKg: '12.5',
   quantity: '120',
   reorderLevel: '20'
