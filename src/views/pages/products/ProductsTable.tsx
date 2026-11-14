@@ -1,0 +1,187 @@
+import { useRef, useState } from 'react'
+import type { ColumnDef, FilterFn, SortingState } from '@tanstack/react-table'
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable
+} from '@tanstack/react-table'
+import { ArrowDown01Icon, ArrowUp01Icon, ArrowUpDownIcon, Cancel01Icon, Search01Icon } from '@hugeicons/core-free-icons'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { fruitProducts, getStockStatus, type FruitProduct } from '@/views/pages/products/FruitProductsData'
+
+const priceFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+const statusVariants = { 'Out of stock': 'destructive', 'Low stock': 'secondary', 'In stock': 'outline' } as const
+
+const columns: ColumnDef<FruitProduct>[] = [
+  { accessorKey: 'name', header: 'Fruit', cell: ({ row }) => <span className='font-medium'>{row.original.name}</span> },
+  {
+    accessorKey: 'category',
+    header: 'Category',
+    cell: ({ row }) => <span className='text-muted-foreground'>{row.original.category}</span>
+  },
+  {
+    accessorKey: 'pricePerKg',
+    header: 'Price / kg',
+    cell: ({ row }) => priceFormatter.format(row.original.pricePerKg),
+    enableGlobalFilter: false
+  },
+  {
+    accessorKey: 'quantity',
+    header: 'Stock',
+    cell: ({ row }) => `${row.original.quantity} kg`,
+    enableGlobalFilter: false
+  },
+  {
+    id: 'status',
+    header: 'Status',
+    enableSorting: false,
+    enableGlobalFilter: false,
+    cell: ({ row }) => {
+      const status = getStockStatus(row.original)
+      return <Badge variant={statusVariants[status]}>{status}</Badge>
+    }
+  }
+]
+
+const filterFruits: FilterFn<FruitProduct> = (row, _columnId, filterValue) => {
+  const query = String(filterValue).trim().toLowerCase()
+  if (!query) return true
+  return row.original.name.toLowerCase().includes(query) || row.original.category.toLowerCase().includes(query)
+}
+
+export default function ProductsTable() {
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const [globalFilter, setGlobalFilter] = useState('')
+  const [sorting, setSorting] = useState<SortingState>([{ id: 'name', desc: false }])
+  const table = useReactTable({
+    data: fruitProducts,
+    columns,
+    state: { sorting, globalFilter },
+    onSortingChange: setSorting,
+    onGlobalFilterChange: setGlobalFilter,
+    globalFilterFn: filterFruits,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getRowId: row => row.id,
+    enableSortingRemoval: false
+  })
+
+  function clearSearch() {
+    setGlobalFilter('')
+    searchInputRef.current?.focus()
+  }
+
+  return (
+    <div className='min-w-0 space-y-4'>
+      <div className='relative w-full sm:max-w-xs'>
+        <label htmlFor='product-search' className='sr-only'>
+          Search fruits
+        </label>
+        <HugeiconsIcon
+          icon={Search01Icon}
+          className='text-muted-foreground pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2'
+          aria-hidden='true'
+        />
+        <Input
+          ref={searchInputRef}
+          id='product-search'
+          type='text'
+          inputMode='search'
+          autoComplete='off'
+          spellCheck={false}
+          value={globalFilter}
+          onChange={event => setGlobalFilter(event.target.value)}
+          placeholder='Search fruits'
+          maxLength={60}
+          className='h-11 pr-12 pl-9'
+        />
+        {globalFilter && (
+          <Button
+            type='button'
+            variant='ghost'
+            size='icon'
+            onClick={clearSearch}
+            aria-label='Clear search'
+            className='absolute top-0 right-0 size-11'
+          >
+            <HugeiconsIcon icon={Cancel01Icon} className='size-4' aria-hidden='true' />
+          </Button>
+        )}
+      </div>
+      <div className='border-y'>
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map(headerGroup => (
+              <TableRow key={headerGroup.id} className='bg-muted/50'>
+                {headerGroup.headers.map(header => {
+                  const direction = header.column.getIsSorted()
+                  const label = String(header.column.columnDef.header)
+                  return (
+                    <TableHead
+                      key={header.id}
+                      className='h-11 p-0'
+                      aria-sort={direction === 'asc' ? 'ascending' : direction === 'desc' ? 'descending' : 'none'}
+                    >
+                      {header.column.getCanSort() ? (
+                        <button
+                          type='button'
+                          onClick={header.column.getToggleSortingHandler()}
+                          className='hover:text-foreground focus-visible:ring-ring flex h-11 w-full items-center gap-1.5 px-2 text-left font-medium focus-visible:ring-2 focus-visible:outline-none'
+                          aria-label={`Sort by ${label}`}
+                        >
+                          {label}
+                          <HugeiconsIcon
+                            icon={
+                              direction === 'asc'
+                                ? ArrowUp01Icon
+                                : direction === 'desc'
+                                  ? ArrowDown01Icon
+                                  : ArrowUpDownIcon
+                            }
+                            className='text-muted-foreground size-3.5'
+                            aria-hidden='true'
+                          />
+                        </button>
+                      ) : (
+                        <span className='flex h-11 items-center px-2 font-medium'>{label}</span>
+                      )}
+                    </TableHead>
+                  )
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows.length ? (
+              table.getRowModel().rows.map(row => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map(cell => (
+                    <TableCell key={cell.id} className='py-3'>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={table.getAllColumns().length} className='h-32 text-center'>
+                  <p>No fruits match your search.</p>
+                  <Button type='button' variant='link' size='sm' className='h-11' onClick={clearSearch}>
+                    Clear search
+                  </Button>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+    </div>
+  )
+}
