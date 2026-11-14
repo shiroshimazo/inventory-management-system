@@ -27,10 +27,21 @@ import {
 } from './ProductSchema'
 const steps = ['Details', 'Stock & price', 'Review']
 const inputClasses =
-  'h-11 w-full shadow-none focus-visible:ring-0 focus-visible:border-foreground aria-invalid:ring-0 aria-invalid:focus-visible:border-destructive data-[size=default]:h-11'
+  'h-11 w-full border-transparent shadow-none focus-visible:ring-0 focus-visible:border-foreground aria-invalid:ring-0 aria-invalid:focus-visible:border-destructive data-[size=default]:h-11'
 const inputGroupClasses =
-  'h-11 w-full shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-foreground has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot][aria-invalid=true]]:ring-0'
+  'h-11 w-full border-transparent shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-foreground has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot][aria-invalid=true]]:ring-0'
 const MAX_PRICE_DIGITS = String(MAX_PRODUCT_VALUE * 100).length
+function sanitizeNumericInput(value: string, allowDecimal: boolean) {
+  const numericValue = value.replace(allowDecimal ? /[^\d.]/g : /\D/g, '')
+  if (!allowDecimal) return numericValue
+  const [whole, ...fractionParts] = numericValue.split('.')
+  return fractionParts.length > 0 ? `${whole}.${fractionParts.join('').slice(0, 2)}` : whole
+}
+function sanitizeProductField(name: keyof ProductDraft, value: string) {
+  if (name === 'weightKg') return sanitizeNumericInput(value, true)
+  if (name === 'quantity' || name === 'reorderLevel') return sanitizeNumericInput(value, false)
+  return value
+}
 function formatPriceDigits(digits: string) {
   if (!digits) return '0.00'
   const whole = (digits.length > 2 ? digits.slice(0, -2) : digits.slice(0, 1)).replace(/^0+(?=\d)/, '')
@@ -253,7 +264,11 @@ export default function AddProductDialog({
                   <InputGroup className={inputGroupClasses}>
                     <InputGroupInput
                       {...form.register(name, {
-                        onChange: () => {
+                        setValueAs: value => sanitizeProductField(name, value),
+                        onChange: event => {
+                          const input = event.target as HTMLInputElement
+                          const sanitizedValue = sanitizeProductField(name, input.value)
+                          if (sanitizedValue !== input.value) input.value = sanitizedValue
                           if (form.getFieldState(name).error) void form.trigger(name)
                         }
                       })}
