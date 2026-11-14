@@ -19,6 +19,12 @@ import { fruitProducts, getStockStatus, type FruitProduct } from '@/views/pages/
 const priceFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 const statusVariants = { 'Out of stock': 'destructive', 'Low stock': 'secondary', 'In stock': 'outline' } as const
 
+const statusClasses = {
+  'In stock': 'border-transparent bg-green-100 text-green-800 dark:bg-green-400/10 dark:text-green-400',
+  'Low stock': 'bg-orange-100 text-orange-800 dark:bg-orange-400/10 dark:text-orange-400',
+  'Out of stock': ''
+}
+
 const columns: ColumnDef<FruitProduct>[] = [
   { accessorKey: 'name', header: 'Fruit', cell: ({ row }) => <span className='font-medium'>{row.original.name}</span> },
   {
@@ -53,7 +59,11 @@ const columns: ColumnDef<FruitProduct>[] = [
     enableGlobalFilter: false,
     cell: ({ row }) => {
       const status = getStockStatus(row.original)
-      return <Badge variant={statusVariants[status]}>{status}</Badge>
+      return (
+        <Badge variant={statusVariants[status]} className={`rounded-sm ${statusClasses[status]}`}>
+          {status}
+        </Badge>
+      )
     }
   }
 ]
@@ -87,6 +97,11 @@ export default function ProductsTable() {
   function clearSearch() {
     setGlobalFilter('')
     searchInputRef.current?.focus()
+  }
+
+  function resetFilters() {
+    setColumnFilters([])
+    clearSearch()
   }
 
   return (
@@ -128,6 +143,9 @@ export default function ProductsTable() {
           )}
         </div>
         <ProductsFilters columnFilters={columnFilters} onApply={setColumnFilters} />
+        <Button type='button' variant='ghost' className='h-11' onClick={resetFilters}>
+          Reset
+        </Button>
       </div>
       <div className='border-y'>
         <Table>
@@ -187,16 +205,7 @@ export default function ProductsTable() {
               <TableRow>
                 <TableCell colSpan={table.getAllColumns().length} className='h-32 text-center'>
                   <p>No fruits match your search or filters.</p>
-                  <Button
-                    type='button'
-                    variant='link'
-                    size='sm'
-                    className='h-11'
-                    onClick={() => {
-                      setColumnFilters([])
-                      clearSearch()
-                    }}
-                  >
+                  <Button type='button' variant='link' size='sm' className='h-11' onClick={resetFilters}>
                     Clear all
                   </Button>
                 </TableCell>
