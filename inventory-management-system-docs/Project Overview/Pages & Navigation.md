@@ -4,6 +4,7 @@
 | ---------------------------------------- | ----------- | --------------------------------------------------- |
 | `/`                                      | —           | Redirects to `/dashboard`                            |
 | `/dashboard`                             | Admin shell | Inventory dashboard                                 |
+| `/sales` | Admin shell | Sales / stock-out log |
 | `/datatable`                             | Admin shell | Data table demos (basic, pinnable columns, filters) |
 | `/forms/form-layouts/vertical`           | Admin shell | Vertical form layout                                |
 | `/forms/form-layouts/horizontal`         | Admin shell | Horizontal form layout                              |
@@ -34,7 +35,7 @@ The data table and form demo routes remain available by URL but are not shown in
 
 ### Sales
 
-- Sales / Stock-Out (planned)
+- Sales / Stock-Out: `/sales`
 
 ### Purchasing
 

@@ -8,6 +8,8 @@ A responsive admin dashboard and inventory management front-end built with React
 
 ### Implemented
 
+- **Sales / Stock-Out** — searchable `/sales` log, date presets, two-step recording, read-only details, and in-memory stock deduction (mock data resets on reload)
+
 - **Admin shell** — collapsible sidebar, sticky header with breadcrumbs, footer, scroll-to-top
 - **Dashboard** — statistics cards, product insights, total earnings, sales metrics charts, transactions table
 - **Data tables** — basic, pinnable columns, and filters (TanStack Table)
@@ -19,7 +21,7 @@ A responsive admin dashboard and inventory management front-end built with React
 
 ### Planned
 
-Product CRUD, categories, stock tracking with low-stock alerts, sales / stock-out, suppliers, purchase orders, reports, user management, and role-based access control.
+Product CRUD, categories, stock tracking with low-stock alerts, suppliers, purchase orders, reports, user management, and role-based access control.
 
 ## Tech Stack
 

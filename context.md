@@ -30,3 +30,11 @@ Add Products opens a responsive three-step dialog (Details, Stock & price, Revie
 ## Categories preview
 
 `/categories` mirrors the restrained Products list with existing tokens, thin borders, and border-only input focus. Seven mock categories support name/description search, name/product-count sorting, and in-memory add, edit, and confirmed removal. Names use 2-40 characters and case-insensitive uniqueness; optional descriptions allow 120 characters. Counts derive from the original fruit products and are illustrative. Products are unchanged. Nothing persists; reload restores the seed rows.
+
+## Sales preview
+
+`/sales` shows six seed sales, SO-2026-111 through SO-2026-116. Search matches reference, product, SKU, and recorded-by name. Date and total sort; All dates, Today, Last 7 days, and Last 30 days use Asia/Manila dates. A two-step form records immutable sales with name, SKU, and price snapshots. Totals derive from lines. `SalesSchema.ts` validates quantities and re-checks stock before deducting from a local product copy. Seed history is not replayed against stock. Products and dashboard data remain separate.
+
+Preview assumption: catalogue `pricePerKg` is treated as the per-item PHP price on sale lines. Nothing persists; reload restores sales and stock. There is no authentication or server validation. A backend must atomically validate and deduct stock. All matching rows render without pagination.
+
+Design direction: calm inventory administration, energy 1 / rhythm 1 / motion 1.

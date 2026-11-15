@@ -41,6 +41,15 @@
 - Workspace settings
 - Tab state kept in the `setting` search parameter so browser back/forward works
 
+### Sales / Stock-Out (`/sales`)
+
+- Six seed sales with reference, date, item count, derived PHP total, and recorded-by name
+- Search by reference, product, SKU, or recorder; date presets and date/total sorting
+- Two-step recording with quantity validation, stock checks, and in-memory stock deduction
+- Read-only details preserve product names, SKUs, and unit prices; saved sales cannot be edited or removed
+- Mock data resets on reload; no auth, persistence, pagination, or shared stock with Products/dashboard
+- Catalogue price-per-kg values serve as per-item prices for this preview
+
 ## Planned
 
 | Module | Description | Status |
@@ -49,7 +58,6 @@
 | Product management | Add, edit, delete, search products; SKU, category, price, quantity, reorder level | To build |
 | Categories | Category management and filtering | To build |
 | Stock tracking | Real-time quantities, low-stock alerts, stock movement history | To build |
-| Sales / stock-out | Record sales that reduce stock automatically | To build |
 | Suppliers | Supplier records: name, contact person, phone, email, address | To build |
 | Purchase orders | Multi-item orders with Pending / Ordered / Received / Cancelled statuses; receiving increases stock | To build |
 | Reports | Current inventory, low-stock items, sales summary by date range, top-selling products; CSV/PDF export | To build |
@@ -66,6 +74,6 @@
 | Forms and validation | Implemented |
 | Authentication UI | Implemented |
 | Authentication logic | Not implemented |
-| Inventory modules | Not implemented |
+| Inventory modules | Partially implemented (products, categories, sales; mock data) |
 | Reports | Not implemented |
 | Backend / database | Not implemented |

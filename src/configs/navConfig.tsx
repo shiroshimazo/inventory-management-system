@@ -69,7 +69,7 @@ export const navItems: NavItem[] = [
   },
   {
     groupLabel: 'Sales',
-    items: [{ icon: 'sales', label: 'Sales / Stock-Out', disabled: true, badge: 'Planned' }]
+    items: [{ icon: 'sales', label: 'Sales / Stock-Out', href: '/sales' }]
   },
   {
     groupLabel: 'Purchasing',

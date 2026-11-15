@@ -4,6 +4,18 @@
 
 All notable changes to this template will be documented in this file
 
+## v1.1.0 (2026-11-15)
+
+### Added
+
+#### Sales / Stock-Out
+
+- Sales preview at `/sales`
+  - Searchable mock log with date presets and date/total sorting
+  - Two-step recording, validated quantities, and in-memory stock deduction
+  - Immutable sale snapshots and read-only details
+  - Schema/helper checks and module documentation
+
 ## v1.0.0 (2026-07-10)
 
 ### Added
