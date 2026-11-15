@@ -14,6 +14,8 @@
 | `/forgot-password`                       | Blank       | Three-step password recovery UI preview             |
 | `*` (unknown)                            | Root        | 404 page (no sidebar, no breadcrumb)                |
 
+| `/categories` | Admin shell | Mock categories |
+
 ## Sidebar Navigation
 
 The sidebar is defined in `src/configs/navConfig.tsx` and grouped as follows:
@@ -28,7 +30,7 @@ The data table and form demo routes remain available by URL but are not shown in
 ### Inventory
 
 - Products (planned)
-- Categories (planned)
+- Categories: `/categories`
 
 ### Sales
 

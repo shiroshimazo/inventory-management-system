@@ -64,7 +64,7 @@ export const navItems: NavItem[] = [
     groupLabel: 'Inventory',
     items: [
       { icon: 'products', label: 'Products', href: '/products' },
-      { icon: 'categories', label: 'Categories', disabled: true, badge: 'Planned' }
+      { icon: 'categories', label: 'Categories', href: '/categories' }
     ]
   },
   {
