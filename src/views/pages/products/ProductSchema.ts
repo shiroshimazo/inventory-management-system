@@ -33,13 +33,13 @@ export function createProductSchema(products: FruitProduct[]) {
         /\p{L}/u.test(name) &&
         /^[\p{L}\p{N} '&-]+$/u.test(name)
       )
-    }, 'Use 2�60 characters with a letter; letters, numbers, spaces, hyphens, apostrophes or &.'),
+    }, 'Use 2-60 characters with a letter; letters, numbers, spaces, hyphens, apostrophes or &.'),
     sku: z
       .string()
       .refine(value => {
         const sku = value.trim()
         return sku.length >= MIN_SKU_LENGTH && sku.length <= MAX_SKU_LENGTH && /^[a-z0-9-]+$/i.test(sku)
-      }, 'Use 3�20 letters, numbers or hyphens.')
+      }, 'Use 3-20 letters, numbers or hyphens.')
       .refine(
         value => !products.some(product => product.sku.toUpperCase() === value.trim().toUpperCase()),
         'This SKU is already used.'

@@ -31,6 +31,7 @@ const inputClasses =
 const inputGroupClasses =
   'h-11 w-full border-transparent shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-foreground has-[[data-slot=input-group-control]:focus-visible]:ring-0 has-[[data-slot][aria-invalid=true]]:ring-0'
 const MAX_PRICE_DIGITS = String(MAX_PRODUCT_VALUE * 100).length
+const MIN_PRICE_DIGITS = 3
 function sanitizeNumericInput(value: string, allowDecimal: boolean) {
   const numericValue = value.replace(allowDecimal ? /[^\d.]/g : /\D/g, '')
   if (!allowDecimal) return numericValue
@@ -41,6 +42,24 @@ function sanitizeProductField(name: keyof ProductDraft, value: string) {
   if (name === 'weightKg') return sanitizeNumericInput(value, true)
   if (name === 'quantity' || name === 'reorderLevel') return sanitizeNumericInput(value, false)
   return value
+}
+function getProductDefaults(product?: FruitProduct): ProductDraft {
+  if (!product) {
+    return { name: '', sku: '', category: '', pricePerKg: '0.00', weightKg: '', quantity: '', reorderLevel: '' }
+  }
+  return {
+    name: product.name,
+    sku: product.sku,
+    category: product.category,
+    pricePerKg: product.pricePerKg.toFixed(2),
+    weightKg: String(product.weightKg),
+    quantity: String(product.quantity),
+    reorderLevel: String(product.reorderLevel)
+  }
+}
+function getInitialPriceDigits(product?: FruitProduct) {
+  // Keep two-decimal prices stable in the existing digit mask (0.90 needs "090").
+  return product ? String(Math.round(product.pricePerKg * 100)).padStart(MIN_PRICE_DIGITS, '0') : ''
 }
 function formatPriceDigits(digits: string) {
   if (!digits) return '0.00'
@@ -56,24 +75,26 @@ function getPriceCaretPosition(digits: string) {
 }
 export default function AddProductDialog({
   products,
-  onAddProduct,
+  product,
+  onSaveProduct,
   onClose,
   returnFocus
 }: {
   products: FruitProduct[]
-  onAddProduct: (product: FruitProduct) => void
+  product?: FruitProduct
+  onSaveProduct: (product: FruitProduct) => void
   onClose: () => void
   returnFocus: RefObject<HTMLButtonElement | null>
 }) {
   const [step, setStep] = useState(1)
   const form = useForm<ProductDraft>({
-    resolver: zodResolver(createProductSchema(products)),
+    resolver: zodResolver(createProductSchema(products.filter(item => item.id !== product?.id))),
     mode: 'onTouched',
-    defaultValues: { name: '', sku: '', category: '', pricePerKg: '0.00', weightKg: '', quantity: '', reorderLevel: '' }
+    defaultValues: getProductDefaults(product)
   })
   const { errors } = form.formState
   const values = form.getValues()
-  const priceDigitsRef = useRef('')
+  const priceDigitsRef = useRef(getInitialPriceDigits(product))
   const priceInputRef = useRef<HTMLInputElement>(null)
   function focusField(field: keyof ProductDraft) {
     requestAnimationFrame(() => form.setFocus(field))
@@ -92,8 +113,8 @@ export default function AddProductDialog({
   }
   const saveProduct = form.handleSubmit(
     draft => {
-      onAddProduct({
-        id: crypto.randomUUID(),
+      onSaveProduct({
+        id: product?.id ?? crypto.randomUUID(),
         name: draft.name.trim(),
         sku: draft.sku.trim().toUpperCase(),
         category: draft.category as FruitProduct['category'],
@@ -103,7 +124,7 @@ export default function AddProductDialog({
         reorderLevel: Number(draft.reorderLevel.trim())
       })
       onClose()
-      toast.success('Product added.')
+      toast.success(product ? 'Product updated.' : 'Product added.')
     },
     invalid => {
       const index = productStepFields.findIndex(fields => fields.some(field => invalid[field]))
@@ -119,10 +140,12 @@ export default function AddProductDialog({
       className='max-h-[85vh] overflow-y-auto sm:max-w-xl [&>[data-slot=dialog-close]]:size-11'
     >
       <DialogHeader>
-        <DialogTitle>Add product</DialogTitle>
-        <DialogDescription>Add a product to the inventory.</DialogDescription>
+        <DialogTitle>{product ? 'Edit product' : 'Add product'}</DialogTitle>
+        <DialogDescription>
+          {product ? "Update this product's details." : 'Add a product to the inventory.'}
+        </DialogDescription>
       </DialogHeader>
-      <nav aria-label='Add product progress'>
+      <nav aria-label={product ? 'Edit product progress' : 'Add product progress'}>
         <Stepper
           value={step}
           onValueChange={value => {
@@ -341,7 +364,7 @@ export default function AddProductDialog({
             </Button>
           )}
           <Button type='submit' className='ml-auto h-11'>
-            {step === 3 ? 'Add Products' : 'Continue'}
+            {step === 3 ? (product ? 'Save changes' : 'Add Products') : 'Continue'}
           </Button>
         </div>
       </form>
