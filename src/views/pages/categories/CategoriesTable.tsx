@@ -293,7 +293,7 @@ export default function CategoriesTable() {
         {deletingCategory && (
           <DialogContent finalFocus={deleteReturnFocusRef} className='sm:max-w-md [&>[data-slot=dialog-close]]:size-11'>
             <DialogHeader>
-              <DialogTitle>Remove category</DialogTitle>
+              <DialogTitle className='text-xl font-semibold'>Remove category</DialogTitle>
               <DialogDescription>Remove {deletingCategory.name}? This cannot be undone.</DialogDescription>
             </DialogHeader>
             <div className='flex flex-col-reverse gap-2 sm:flex-row sm:justify-end'>

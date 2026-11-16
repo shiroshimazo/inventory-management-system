@@ -337,7 +337,7 @@ export default function ProductsTable() {
         {deletingProduct && (
           <DialogContent finalFocus={deleteReturnFocusRef} className='sm:max-w-md'>
             <DialogHeader>
-              <DialogTitle>Remove product</DialogTitle>
+              <DialogTitle className='text-xl font-semibold'>Remove product</DialogTitle>
               <DialogDescription>Remove {deletingProduct.name}? This cannot be undone.</DialogDescription>
             </DialogHeader>
             <div className='flex flex-col-reverse gap-2 sm:flex-row sm:justify-end'>

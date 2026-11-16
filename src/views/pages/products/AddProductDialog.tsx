@@ -140,7 +140,7 @@ export default function AddProductDialog({
       className='max-h-[85vh] overflow-y-auto sm:max-w-xl [&>[data-slot=dialog-close]]:size-11'
     >
       <DialogHeader>
-        <DialogTitle>{product ? 'Edit product' : 'Add product'}</DialogTitle>
+        <DialogTitle className='text-xl font-semibold'>{product ? 'Edit product' : 'Add product'}</DialogTitle>
         <DialogDescription>
           {product ? "Update this product's details." : 'Add a product to the inventory.'}
         </DialogDescription>

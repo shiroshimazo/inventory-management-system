@@ -47,7 +47,7 @@ export default function CategoryDialog({
   return (
     <DialogContent finalFocus={returnFocus} className='sm:max-w-md [&>[data-slot=dialog-close]]:size-11'>
       <DialogHeader>
-        <DialogTitle>{category ? 'Edit category' : 'Add category'}</DialogTitle>
+        <DialogTitle className='text-xl font-semibold'>{category ? 'Edit category' : 'Add category'}</DialogTitle>
         <DialogDescription>Group products for faster filtering.</DialogDescription>
       </DialogHeader>
       <form noValidate onSubmit={saveCategory} className='space-y-6'>

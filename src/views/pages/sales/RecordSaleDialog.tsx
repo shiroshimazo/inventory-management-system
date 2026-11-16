@@ -139,7 +139,7 @@ export default function RecordSaleDialog({
         className='max-h-[85vh] overflow-y-auto duration-200 ease-out motion-reduce:animate-none sm:max-w-xl [&>[data-slot=dialog-close]]:size-11'
       >
         <DialogHeader>
-          <DialogTitle>{discarding ? 'Discard this sale?' : 'Record sale'}</DialogTitle>
+          <DialogTitle className='text-xl font-semibold'>{discarding ? 'Discard this sale?' : 'Record sale'}</DialogTitle>
           <DialogDescription>
             {discarding
               ? 'The items you added will be lost.'
