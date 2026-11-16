@@ -4,13 +4,20 @@ import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } f
 import { type ReportDatePreset, type SalesPoint } from '@/views/reports/ReportsData'
 import { formatCentavos, formatDateTick, formatMonthTick } from '@/views/reports/ReportsFormat'
 import ReportsState, { type SectionState } from '@/views/reports/ReportsStates'
+import {
+  clampNonNegative,
+  getChartMargins,
+  truncateTick,
+  useIsNarrowChart,
+  useIsRtl
+} from '@/views/reports/charts/ChartAxisHelpers'
 
 const chartConfig = {
   revenueCentavos: { label: 'Revenue', color: 'var(--primary)' }
 } satisfies ChartConfig
 
 const chartClassName =
-  '[&_.recharts-surface:focus-visible]:outline-primary aspect-auto min-h-72 w-full flex-1 [&_.recharts-surface:focus-visible]:outline-2 [&_.recharts-surface:focus-visible]:-outline-offset-2 [&_.recharts-surface:focus-visible]:outline-solid'
+  '[&_.recharts-surface:focus-visible]:outline-primary aspect-auto min-h-52 w-full flex-1 [&_.recharts-surface:focus-visible]:outline-2 [&_.recharts-surface:focus-visible]:-outline-offset-2 [&_.recharts-surface:focus-visible]:outline-solid'
 
 export default function SalesOverTimeChart({
   points,
@@ -25,6 +32,10 @@ export default function SalesOverTimeChart({
 }) {
   const tickFormatter = datePreset === 'all' ? formatMonthTick : formatDateTick
   const ariaLabel = 'Revenue over time'
+  const isNarrow = useIsNarrowChart()
+  const isRtl = useIsRtl()
+  const axisTickFormatter = (value: string | number) => truncateTick(tickFormatter(String(value)))
+  const clampedPoints = points.map(point => ({ ...point, revenueCentavos: clampNonNegative(point.revenueCentavos) }))
 
   return (
     <Card className='borderline-surface h-full min-w-0'>
@@ -32,18 +43,24 @@ export default function SalesOverTimeChart({
         <h2 className='text-base font-semibold'>Sales over time</h2>
         <CardDescription>Revenue in PHP</CardDescription>
       </CardHeader>
-      <CardContent className='flex flex-1 flex-col'>
+      <CardContent className='flex min-h-0 flex-1 flex-col'>
         {state !== 'ready' ? (
-          <div className='flex min-h-72 flex-1 items-center justify-center'>
+          <div className='flex min-h-52 flex-1 items-center justify-center'>
             <ReportsState state={state} onClearFilters={onClearFilters} />
           </div>
         ) : (
           <>
             <ChartContainer config={chartConfig} className={chartClassName} aria-label={ariaLabel}>
-              <AreaChart accessibilityLayer aria-label={ariaLabel} data={points} margin={{ left: 4, right: 8 }}>
+              <AreaChart accessibilityLayer aria-label={ariaLabel} data={clampedPoints} margin={getChartMargins(isRtl)}>
                 <CartesianGrid vertical={false} />
-                <XAxis dataKey='label' tickFormatter={tickFormatter} tickLine={false} axisLine={false} minTickGap={16} />
-                <YAxis tickLine={false} axisLine={false} width={56} />
+                <XAxis
+                  dataKey='label'
+                  tickFormatter={axisTickFormatter}
+                  tickLine={false}
+                  axisLine={false}
+                  minTickGap={16}
+                />
+                <YAxis tickLine={false} axisLine={false} width={isNarrow ? 32 : 56} />
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
@@ -78,8 +95,8 @@ export default function SalesOverTimeChart({
                 </tr>
               </thead>
               <tbody>
-                {points.map(point => (
-                  <tr key={point.label}>
+                {clampedPoints.map((point, index) => (
+                  <tr key={`${point.label}-${index}`}>
                     <th scope='row'>{tickFormatter(point.label)}</th>
                     <td>{formatCentavos(point.revenueCentavos)}</td>
                   </tr>

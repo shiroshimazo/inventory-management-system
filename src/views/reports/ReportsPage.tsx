@@ -3,6 +3,12 @@ import { fruitProducts } from '@/views/pages/products/FruitProductsData'
 import { seedSales } from '@/views/pages/sales/SalesData'
 import { purchaseOrdersSeed } from '@/views/pages/purchase-orders/PurchaseOrdersData'
 import {
+  stressSalesSeries,
+  stressSalesByCategory,
+  stressPoSpendByStatus,
+  stressLowStockItems
+} from '@/views/reports/charts/StressTestData'
+import {
   ALL_CATEGORIES,
   DEFAULT_DATE_PRESET,
   DEFAULT_REPORT_FILTERS,
@@ -29,27 +35,39 @@ import SalesByCategoryChart from '@/views/reports/charts/SalesByCategoryChart'
 import PurchaseOrdersByStatusChart from '@/views/reports/charts/PurchaseOrdersByStatusChart'
 import LowStockItemsChart from '@/views/reports/charts/LowStockItemsChart'
 
+declare const process: { env: { NODE_ENV?: string } }
+
+function isWorstCaseMode(): boolean {
+  return (
+    process.env.NODE_ENV === 'development' &&
+    typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).get('data') === 'worst'
+  )
+}
+
 export default function ReportsPage() {
   const [filters, setFilters] = useState<ReportFilters>(DEFAULT_REPORT_FILTERS)
+  const [worstCaseActive, setWorstCaseActive] = useState(isWorstCaseMode())
 
   const report = useMemo(() => {
     const filteredSales = filterSales(seedSales, filters)
     const categoryProducts = filterProducts(fruitProducts, filters.category)
     const filteredOrders = filterPurchaseOrders(purchaseOrdersSeed, fruitProducts, filters)
     const poSpendByStatus = getPurchaseOrderSpendByStatus(filteredOrders)
+    const activePoSpendByStatus = worstCaseActive ? stressPoSpendByStatus : poSpendByStatus
 
     return {
       filteredSales,
       salesSummary: getSalesSummary(filteredSales),
       inventorySummary: getInventorySummary(categoryProducts),
-      poSpendByStatus,
-      poSpendCentavos: poSpendByStatus.reduce((total, row) => total + row.spendCentavos, 0),
-      salesByCategory: getSalesByCategory(filteredSales, fruitProducts),
-      lowStockItems: getLowStockItems(categoryProducts),
-      salesSeries: getSalesSeries(filteredSales, filters.datePreset),
+      poSpendByStatus: activePoSpendByStatus,
+      poSpendCentavos: activePoSpendByStatus.reduce((total, row) => total + row.spendCentavos, 0),
+      salesByCategory: worstCaseActive ? stressSalesByCategory : getSalesByCategory(filteredSales, fruitProducts),
+      lowStockItems: worstCaseActive ? stressLowStockItems : getLowStockItems(categoryProducts),
+      salesSeries: worstCaseActive ? stressSalesSeries : getSalesSeries(filteredSales, filters.datePreset),
       reportRows: getReportRows(filteredSales, fruitProducts)
     }
-  }, [filters])
+  }, [filters, worstCaseActive])
 
   const {
     filteredSales,
@@ -83,6 +101,17 @@ export default function ReportsPage() {
 
   function clearFilters() {
     setFilters(DEFAULT_REPORT_FILTERS)
+  }
+
+  function setWorstCaseMode(isWorst: boolean) {
+    const url = new URL(window.location.href)
+    if (isWorst) {
+      url.searchParams.set('data', 'worst')
+    } else {
+      url.searchParams.delete('data')
+    }
+    window.history.pushState(null, '', url.toString())
+    setWorstCaseActive(isWorstCaseMode())
   }
 
   return (
@@ -131,6 +160,32 @@ export default function ReportsPage() {
         <h2 className='text-base font-semibold'>Sales detail</h2>
         <ReportsTable rows={reportRows} state={sectionState} onClearFilters={clearFilters} />
       </div>
+
+      {process.env.NODE_ENV === 'development' && (
+        <div
+          role='group'
+          aria-label='Report data mode'
+          className='fixed bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-0.5 rounded-md bg-neutral-300 p-0.5'
+          style={{ fontFamily: 'system-ui, sans-serif' }}
+        >
+          <button
+            type='button'
+            aria-pressed={!worstCaseActive}
+            onClick={() => setWorstCaseMode(false)}
+            className={`rounded px-2 py-1 text-xs ${worstCaseActive ? 'text-neutral-600' : 'bg-white text-black'}`}
+          >
+            Demo data
+          </button>
+          <button
+            type='button'
+            aria-pressed={worstCaseActive}
+            onClick={() => setWorstCaseMode(true)}
+            className={`rounded px-2 py-1 text-xs ${worstCaseActive ? 'bg-white text-black' : 'text-neutral-600'}`}
+          >
+            Worst case
+          </button>
+        </div>
+      )}
     </section>
   )
 }

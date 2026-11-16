@@ -26,9 +26,14 @@ export default function ReportsState({
 
   return (
     <div className='flex flex-col items-center justify-center gap-2 py-8 text-center'>
-      <p className='text-sm text-muted-foreground'>{message}</p>
+      <p className='text-muted-foreground text-sm'>{message}</p>
       {state === 'empty' ? (
-        <Button type='button' variant='link' className='h-11' onClick={onClearFilters}>
+        <Button
+          type='button'
+          variant='link'
+          className='h-auto min-h-11 shrink-0 whitespace-normal'
+          onClick={onClearFilters}
+        >
           Clear filters
         </Button>
       ) : null}

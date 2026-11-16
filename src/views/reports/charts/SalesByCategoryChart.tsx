@@ -1,6 +1,13 @@
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
+import {
+  clampNonNegative,
+  getChartMargins,
+  truncateTick,
+  useIsNarrowChart,
+  useIsRtl
+} from '@/views/reports/charts/ChartAxisHelpers'
 import { type CategorySale } from '@/views/reports/ReportsData'
 import { formatCentavos } from '@/views/reports/ReportsFormat'
 import ReportsState, { type SectionState } from '@/views/reports/ReportsStates'
@@ -10,7 +17,7 @@ const chartConfig = {
 } satisfies ChartConfig
 
 const chartClassName =
-  '[&_.recharts-surface:focus-visible]:outline-primary aspect-auto min-h-72 w-full flex-1 [&_.recharts-surface:focus-visible]:outline-2 [&_.recharts-surface:focus-visible]:-outline-offset-2 [&_.recharts-surface:focus-visible]:outline-solid'
+  '[&_.recharts-surface:focus-visible]:outline-primary aspect-auto min-h-52 w-full flex-1 [&_.recharts-surface:focus-visible]:outline-2 [&_.recharts-surface:focus-visible]:-outline-offset-2 [&_.recharts-surface:focus-visible]:outline-solid'
 
 export default function SalesByCategoryChart({
   data,
@@ -22,6 +29,9 @@ export default function SalesByCategoryChart({
   onClearFilters: () => void
 }) {
   const ariaLabel = 'Revenue by category'
+  const isNarrow = useIsNarrowChart()
+  const isRtl = useIsRtl()
+  const chartData = data.map(item => ({ ...item, revenueCentavos: clampNonNegative(item.revenueCentavos) }))
 
   return (
     <Card className='borderline-surface h-full min-w-0'>
@@ -29,18 +39,24 @@ export default function SalesByCategoryChart({
         <h2 className='text-base font-semibold'>Sales by category</h2>
         <CardDescription>Revenue in PHP</CardDescription>
       </CardHeader>
-      <CardContent className='flex flex-1 flex-col'>
+      <CardContent className='flex min-h-0 flex-1 flex-col'>
         {state !== 'ready' ? (
-          <div className='flex min-h-72 flex-1 items-center justify-center'>
+          <div className='flex min-h-52 flex-1 items-center justify-center'>
             <ReportsState state={state} onClearFilters={onClearFilters} />
           </div>
         ) : (
           <>
             <ChartContainer config={chartConfig} className={chartClassName} aria-label={ariaLabel}>
-              <BarChart accessibilityLayer aria-label={ariaLabel} data={data} margin={{ left: 4, right: 8 }}>
+              <BarChart accessibilityLayer aria-label={ariaLabel} data={chartData} margin={getChartMargins(isRtl)}>
                 <CartesianGrid vertical={false} />
-                <XAxis dataKey='category' tickLine={false} axisLine={false} minTickGap={16} />
-                <YAxis tickLine={false} axisLine={false} width={56} />
+                <XAxis
+                  dataKey='category'
+                  tickLine={false}
+                  axisLine={false}
+                  minTickGap={16}
+                  tickFormatter={value => truncateTick(value)}
+                />
+                <YAxis tickLine={false} axisLine={false} width={isNarrow ? 32 : 56} />
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
@@ -72,8 +88,8 @@ export default function SalesByCategoryChart({
                 </tr>
               </thead>
               <tbody>
-                {data.map(item => (
-                  <tr key={item.category}>
+                {chartData.map((item, index) => (
+                  <tr key={`${item.category}-${index}`}>
                     <th scope='row'>{item.category}</th>
                     <td>{formatCentavos(item.revenueCentavos)}</td>
                   </tr>

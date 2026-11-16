@@ -12,6 +12,10 @@ const THEMES = { light: '', dark: '.dark' } as const
 
 const INITIAL_DIMENSION = { width: 320, height: 200 } as const
 
+const numberFormatter = new Intl.NumberFormat('en-PH')
+
+const SAFE_CSS_KEY = /^[a-zA-Z0-9_-]+$/
+
 type TooltipNameType = number | string
 
 export type ChartConfig = Record<
@@ -77,7 +81,9 @@ function ChartContainer({
 }
 
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
-  const colorConfig = Object.entries(config).filter(([, config]) => config.theme ?? config.color)
+  const colorConfig = Object.entries(config).filter(
+    ([key, config]) => SAFE_CSS_KEY.test(key) && Boolean(config.theme ?? config.color)
+  )
 
   if (!colorConfig.length) {
     return null
@@ -162,12 +168,12 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        'border-border/50 bg-background grid min-w-32 items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl',
+        'border-border/50 bg-background grid max-w-64 min-w-32 items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl',
         className
       )}
     >
       {!nestLabel ? tooltipLabel : null}
-      <div className='grid gap-1.5'>
+      <div className='grid min-w-0 gap-1.5'>
         {payload
           .filter(item => item.type !== 'none')
           .map((item, index) => {
@@ -213,13 +219,13 @@ function ChartTooltipContent({
                         nestLabel ? 'items-end' : 'items-center'
                       )}
                     >
-                      <div className='grid gap-1.5'>
+                      <div className='grid min-w-0 gap-1.5'>
                         {nestLabel ? tooltipLabel : null}
                         <span className='text-muted-foreground'>{itemConfig?.label ?? item.name}</span>
                       </div>
                       {item.value != null && (
-                        <span className='text-foreground font-mono font-medium tabular-nums'>
-                          {typeof item.value === 'number' ? item.value.toLocaleString() : String(item.value)}
+                        <span className='text-foreground font-mono font-medium break-words tabular-nums'>
+                          {typeof item.value === 'number' ? numberFormatter.format(item.value) : String(item.value)}
                         </span>
                       )}
                     </div>

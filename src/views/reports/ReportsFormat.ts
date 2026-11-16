@@ -22,9 +22,11 @@ export function formatCount(value: number): string {
 }
 
 export function formatDateTick(dateKey: string): string {
-  return dateTickFormatter.format(new Date(`${dateKey}T00:00:00Z`))
+  const date = new Date(`${dateKey}T00:00:00Z`)
+  return Number.isNaN(date.getTime()) ? dateKey : dateTickFormatter.format(date)
 }
 
 export function formatMonthTick(monthKey: string): string {
-  return monthTickFormatter.format(new Date(`${monthKey}-01T00:00:00Z`))
+  const date = new Date(`${monthKey}-01T00:00:00Z`)
+  return Number.isNaN(date.getTime()) ? monthKey : monthTickFormatter.format(date)
 }

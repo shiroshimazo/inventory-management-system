@@ -16,7 +16,7 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
 
 // Style Imports
-import './globals.css'
+import '../index.css'
 import ScrollToTop from '@/components/layout/ScrollToTop'
 
 const geistSans = Geist({
