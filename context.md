@@ -18,7 +18,7 @@ Validation runs on blur and submit, then updates touched fields as users type. P
 
 ## Dashboard preview
 
-`/dashboard` uses the Borderline tokens from `ai-workflow/09-DESIGN-TOKENS.md.md`, defined once in `src/index.css` under `.borderline` and scoped to this page only. The token set has no light palette, so the dashboard stays dark in both themes. Cards and the chart tooltip use a 1px `#0b0b0b` outer border with a 1px `#333333` inner line, a subtle `#1a1a1a` to `#151515` surface gradient, 16px corners, and 8px chips for status badges. The page heading uses `text-3xl`. Other pages keep their existing tokens.
+`/dashboard` uses the Borderline tokens from `ai-workflow/09-DESIGN-TOKENS.md`, defined once in `src/index.css` under `.borderline` and scoped to this page only. The light palette is the default; the dark palette applies under `.dark`. Cards and the chart tooltip use a double border (outer plus inset inner line), a subtle surface gradient, 16px corners, and 8px chips for status badges. The page heading uses `text-3xl`. Other pages keep their existing tokens.
 
 ## Products preview
 

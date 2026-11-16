@@ -117,21 +117,74 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-/* Borderline design tokens (ai-workflow/09-DESIGN-TOKENS.md.md), scoped to the dashboard for now. */
+/* Borderline design tokens (ai-workflow/09-DESIGN-TOKENS.md), scoped to the dashboard. */
 .borderline {
-  --page-bg: #222222;
-  --surface: #1a1a1a;
-  --surface-gradient-end: #151515;
-  --border-outer: #0b0b0b;
-  --border-inner: #333333;
+  color-scheme: light;
+
+  --page-bg: #eeeeee;
+  --surface: #f7f7f7;
+  --surface-gradient-end: #f2f2f2;
+  --border-outer: #cfcfcf;
+  --border-inner: #ffffff;
+  --divider: #e0e0e0;
+
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #6f6f6f;
+
+  --up-text: #166534;
+  --up-bg: #e8f5ec;
+  --up-border: #bfe3cb;
+  --down-text: #b91c1c;
+  --down-bg: #fcebeb;
+  --down-border: #f2c4c4;
+
+  --focus-border: #111111;
+  --error-border: #b91c1c;
+
   --radius-card: 16px;
   --radius-input: 16px;
   --radius-button: 14px;
   --radius-chip: 8px;
 
+  /* Map borderline tokens onto the shadcn utilities used by dashboard components. */
+  --foreground: var(--text-primary);
+  --card: var(--surface);
+  --card-foreground: var(--text-primary);
+  --muted-foreground: var(--text-secondary);
+  --border: var(--border-outer);
+  --popover: var(--surface);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--text-primary);
+
   background-color: var(--page-bg);
   border-radius: var(--radius-card);
-  color: var(--foreground);
+  color: var(--text-primary);
+}
+
+.dark .borderline {
+  color-scheme: dark;
+
+  --page-bg: #222222;
+  --surface: #1a1a1a;
+  --surface-gradient-end: #151515;
+  --border-outer: #0b0b0b;
+  --border-inner: #333333;
+  --divider: #2a2a2a;
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-muted: #8a8a8a;
+
+  --up-text: #4ade80;
+  --up-bg: #12261a;
+  --up-border: #1f4a30;
+  --down-text: #f87171;
+  --down-bg: #2a1414;
+  --down-border: #5a2323;
+
+  --focus-border: #8a8a8a;
+  --error-border: #f87171;
 }
 
 .borderline-surface {
