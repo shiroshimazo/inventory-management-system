@@ -80,7 +80,7 @@ export const navItems: NavItem[] = [
   },
   {
     groupLabel: 'Reports',
-    items: [{ icon: 'reports', label: 'Reports', disabled: true, badge: 'Planned' }]
+    items: [{ icon: 'reports', label: 'Reports', href: '/reports' }]
   },
   {
     groupLabel: 'Account',
