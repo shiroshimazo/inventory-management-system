@@ -38,3 +38,9 @@ Add Products opens a responsive three-step dialog (Details, Stock & price, Revie
 Preview assumption: catalogue `pricePerKg` is treated as the per-item PHP price on sale lines. Nothing persists; reload restores sales and stock. There is no authentication or server validation. A backend must atomically validate and deduct stock. All matching rows render without pagination.
 
 Design direction: calm inventory administration, energy 1 / rhythm 1 / motion 1.
+
+## Suppliers preview
+
+`/suppliers` shows seven mock suppliers with search across all contact fields, digit-only phone search, and name/contact sorting. Add, edit, and confirmed removal use component memory; reload restores the seed rows. Names and contacts use 2?60 characters, phones require at least seven digits within 20 characters, emails allow 254 characters, and addresses use 5?160 characters. Names are unique ignoring case and surrounding spaces. No backend, persistence, or pagination is included.
+
+The page follows the restrained Categories layout with existing tokens and border-only input focus. Workflow rules take precedence: the page heading uses `text-3xl`, and unsupported typed or pasted characters are rejected with field feedback. Server validation and Admin-manages/Staff-views permissions remain future work.
