@@ -1,0 +1,74 @@
+.purchase-orders {
+  --muted: var(--surface);
+  --accent: var(--surface);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--down-text);
+  --primary-foreground: var(--page-bg);
+}
+
+.purchase-orders [data-slot='button'],
+.purchase-orders [data-slot='badge'],
+.purchase-orders [data-slot='input'],
+.purchase-orders [data-slot='select-trigger'],
+.purchase-orders[data-slot='dialog-content'],
+.purchase-orders[data-slot='select-content'] {
+  border: 1px solid var(--border-outer);
+  box-shadow: inset 0 0 0 1px var(--border-inner);
+}
+
+.purchase-orders [data-slot='button'] {
+  border-radius: var(--radius-button);
+}
+.purchase-orders [data-slot='badge'] {
+  border-radius: var(--radius-chip);
+}
+.purchase-orders[data-slot='dialog-content'],
+.purchase-orders[data-slot='select-content'] {
+  background: var(--surface);
+  animation-duration: 200ms;
+}
+
+.purchase-orders [data-slot='input'],
+.purchase-orders [data-slot='select-trigger'] {
+  height: 44px;
+  border-radius: var(--radius-input);
+  background: transparent;
+  transition: border-color 150ms ease-out;
+}
+
+.purchase-orders form [data-slot='input'],
+.purchase-orders form [data-slot='select-trigger'] {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.purchase-orders [data-slot='input']:focus-visible,
+.purchase-orders [data-slot='select-trigger']:focus-visible {
+  border-color: var(--focus-border);
+  box-shadow: none;
+}
+
+.purchase-orders [data-slot='input'][aria-invalid='true'],
+.purchase-orders [data-slot='select-trigger'][aria-invalid='true'] {
+  border-color: var(--error-border);
+  box-shadow: none;
+}
+
+.purchase-orders input::placeholder {
+  color: var(--text-muted);
+}
+.purchase-orders [data-slot='button']:focus-visible {
+  outline: 2px solid var(--focus-border);
+  outline-offset: 2px;
+}
+.purchase-orders [data-slot='table-row'] {
+  border-color: var(--divider);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .purchase-orders,
+  .purchase-orders * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

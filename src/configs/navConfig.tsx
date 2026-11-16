@@ -75,7 +75,7 @@ export const navItems: NavItem[] = [
     groupLabel: 'Purchasing',
     items: [
       { icon: 'suppliers', label: 'Suppliers', href: '/suppliers' },
-      { icon: 'purchaseOrders', label: 'Purchase Orders', disabled: true, badge: 'Planned' }
+      { icon: 'purchaseOrders', label: 'Purchase Orders', href: '/purchase-orders' }
     ]
   },
   {

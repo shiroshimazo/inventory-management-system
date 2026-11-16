@@ -18,7 +18,7 @@ Validation runs on blur and submit, then updates touched fields as users type. P
 
 ## Dashboard preview
 
-`/dashboard` uses the Borderline tokens from `ai-workflow/09-DESIGN-TOKENS.md`, defined once in `src/index.css` under `.borderline` and scoped to this page only. The light palette is the default; the dark palette applies under `.dark`. Cards and the chart tooltip use a double border (outer plus inset inner line), a subtle surface gradient, 16px corners, and 8px chips for status badges. The page heading uses `text-3xl`. Other pages keep their existing tokens.
+`/dashboard` uses the Borderline tokens from `ai-workflow/09-DESIGN-TOKENS.md`, defined once in `src/index.css` under `.borderline` and scoped to this page only. The light palette is the default; the dark palette applies under `.dark`. Cards and the chart tooltip use a double border (outer plus inset inner line), a subtle surface gradient, 16px corners, and 8px chips for status badges. The page heading uses `text-3xl`. In both themes the admin shell (header, sidebar, content area) also uses the borderline page background; other pages keep their remaining tokens.
 
 ## Products preview
 
@@ -48,3 +48,13 @@ Design direction: calm inventory administration, energy 1 / rhythm 1 / motion 1.
 `/suppliers` shows seven mock suppliers with search across all contact fields, digit-only phone search, and name/contact sorting. Add, edit, and confirmed removal use component memory; reload restores the seed rows. Names and contacts use 2?60 characters, phones require at least seven digits within 20 characters, emails allow 254 characters, and addresses use 5?160 characters. Names are unique ignoring case and surrounding spaces. No backend, persistence, or pagination is included.
 
 The page follows the restrained Categories layout with existing tokens and border-only input focus. Workflow rules take precedence: the page heading uses `text-3xl`, and unsupported typed or pasted characters are rejected with field feedback. Server validation and Admin-manages/Staff-views permissions remain future work.
+
+## Purchase orders preview
+
+`/purchase-orders` uses four seed orders with Draft, Ordered, Received, and Cancelled statuses. Search matches reference and supplier; all data columns sort. Clear all resets search, status, and the default newest-order-date sorting. All matching rows render without pagination.
+
+Add and edit use existing supplier and product seed catalogues, independently of edits on other pages. Each order requires at least one unique product, whole-number quantities from 1 to 1,000,000, and PHP unit costs from 0.01 to 1,000,000 with at most two decimals. Costs are entered independently of catalogue sale prices. Totals use integer centavos. Dates are Asia/Manila calendar dates in YYYY-MM-DD format; expected dates cannot precede order dates. New references use the current Manila year and a sequence that is not reused after removal during the mounted session.
+
+The visual direction is a restrained inventory list using the existing Borderline tokens, table primitives, Hugeicons, and badges. Page headings use text-3xl; responsive forms use borderless resting fields with visible focus and error borders. No new dependencies or shared page restyling are needed.
+
+This is a frontend-only mock preview. State stays in component memory and resets on reload or page remount. There is no backend, persistence, pagination, or authentication. Received changes status only and never updates stock. Server validation, permissions, and atomic stock updates remain future work. No network loading state is simulated; submitting disables Save order while validation runs, errors remain beside fields, and successful saves and removals show a toast.

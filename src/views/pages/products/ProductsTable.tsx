@@ -43,9 +43,9 @@ import AddProductDialog from './AddProductDialog'
 const statusVariants = { 'Out of stock': 'destructive', 'Low stock': 'secondary', 'In stock': 'outline' } as const
 
 const statusClasses = {
-  'In stock': 'border-transparent bg-green-100 text-green-800 dark:bg-green-400/10 dark:text-green-400',
-  'Low stock': 'bg-orange-100 text-orange-800 dark:bg-orange-400/10 dark:text-orange-400',
-  'Out of stock': ''
+  'In stock': 'bg-[#142c1a] text-[#2ab34c]',
+  'Low stock': 'bg-[#33250e] text-[#ff9f0a]',
+  'Out of stock': 'bg-[#331716] text-[#ff453a]'
 }
 
 type ProductDialogState = { mode: 'add' } | { mode: 'edit'; product: FruitProduct }
