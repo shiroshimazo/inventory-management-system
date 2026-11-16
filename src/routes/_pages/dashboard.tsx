@@ -23,9 +23,9 @@ const statistics = [
 
 function InventoryDashboard() {
   return (
-    <section aria-labelledby='inventory-dashboard-title' className='min-w-0 space-y-6'>
+    <section aria-labelledby='inventory-dashboard-title' className='borderline dark min-w-0 space-y-6 p-4 sm:p-6'>
       <header className='space-y-1'>
-        <h1 id='inventory-dashboard-title' className='text-xl font-semibold'>
+        <h1 id='inventory-dashboard-title' className='text-3xl font-semibold'>
           Inventory dashboard
         </h1>
         <p className='text-muted-foreground text-sm'>Mock data · Snapshot 10 Nov 2026</p>
@@ -37,7 +37,7 @@ function InventoryDashboard() {
             icon={<HugeiconsIcon icon={statistic.icon} className='size-4' />}
             title={statistic.title}
             value={String(statistic.value)}
-            className='shadow-none ring-0'
+            className='borderline-surface'
           />
         ))}
       </div>

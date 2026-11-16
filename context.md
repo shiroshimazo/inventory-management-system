@@ -16,6 +16,10 @@ The page matches the login surface, typography, spacing, and light/dark tokens t
 
 Validation runs on blur and submit, then updates touched fields as users type. Passwords use 12–128 characters and must include upper and lowercase letters, a number, and a symbol. They preserve spaces exactly, reject repeated characters and a small common-password list, and cannot equal the email. These are provisional UI rules, not production authentication controls. All state stays in component memory and resets on reload.
 
+## Dashboard preview
+
+`/dashboard` uses the Borderline tokens from `ai-workflow/09-DESIGN-TOKENS.md.md`, defined once in `src/index.css` under `.borderline` and scoped to this page only. The token set has no light palette, so the dashboard stays dark in both themes. Cards and the chart tooltip use a 1px `#0b0b0b` outer border with a 1px `#333333` inner line, a subtle `#1a1a1a` to `#151515` surface gradient, 16px corners, and 8px chips for status badges. The page heading uses `text-3xl`. Other pages keep their existing tokens.
+
 ## Products preview
 
 `/products` displays 12 static fruit products inside the admin shell. Search matches names and categories, ignoring case and surrounding spaces. Fruit, category, price, and stock headers sort the table; fruit starts ascending. Stock badges derive from quantity and reorder level. Clearing search keeps filters and sorting and focuses the search field. Separate Category and Status dropdowns beside search apply immediately. The Price button opens inclusive price-per-kg limits; applying or resetting price preserves category and status. Invalid price ranges show an error. Reset price preserves search; Clear all in the empty state resets both. The Actions column after Status edits or removes products in memory. No backend, persistence, or pagination is included.

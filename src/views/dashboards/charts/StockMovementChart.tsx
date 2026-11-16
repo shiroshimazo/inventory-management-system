@@ -23,7 +23,7 @@ export default function StockMovementChart({ movements, dates }: { movements: St
   const hasMovements = chartData.some(day => day.stockIn > 0 || day.stockOut > 0)
 
   return (
-    <Card className='h-full min-w-0 shadow-none ring-0'>
+    <Card className='borderline-surface h-full min-w-0'>
       <CardHeader>
         <h2 className='text-base font-semibold'>Stock movement</h2>
         <CardDescription>Stock-in vs stock-out · Units per day</CardDescription>
@@ -44,7 +44,14 @@ export default function StockMovementChart({ movements, dates }: { movements: St
                 <CartesianGrid vertical={false} />
                 <XAxis dataKey='date' tickFormatter={formatDate} tickLine={false} axisLine={false} minTickGap={16} />
                 <YAxis allowDecimals={false} tickLine={false} axisLine={false} width={32} />
-                <ChartTooltip content={<ChartTooltipContent labelFormatter={label => formatDate(String(label))} />} />
+                <ChartTooltip
+                  content={
+                    <ChartTooltipContent
+                      className='borderline-surface'
+                      labelFormatter={label => formatDate(String(label))}
+                    />
+                  }
+                />
                 <ChartLegend content={<ChartLegendContent />} />
                 <Bar dataKey='stockIn' fill='var(--color-stockIn)' radius={[4, 4, 0, 0]} isAnimationActive={false} />
                 <Bar dataKey='stockOut' fill='var(--color-stockOut)' radius={[4, 4, 0, 0]} isAnimationActive={false} />

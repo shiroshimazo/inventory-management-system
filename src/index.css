@@ -117,6 +117,36 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* Borderline design tokens (ai-workflow/09-DESIGN-TOKENS.md.md), scoped to the dashboard for now. */
+.borderline {
+  --page-bg: #222222;
+  --surface: #1a1a1a;
+  --surface-gradient-end: #151515;
+  --border-outer: #0b0b0b;
+  --border-inner: #333333;
+  --radius-card: 16px;
+  --radius-input: 16px;
+  --radius-button: 14px;
+  --radius-chip: 8px;
+
+  background-color: var(--page-bg);
+  border-radius: var(--radius-card);
+  color: var(--foreground);
+}
+
+.borderline-surface {
+  border: 1px solid var(--border-outer);
+  border-radius: var(--radius-card);
+  background-image: linear-gradient(to bottom, var(--surface), var(--surface-gradient-end));
+  box-shadow: inset 0 0 0 1px var(--border-inner);
+}
+
+.borderline-chip {
+  border: 1px solid var(--border-inner);
+  border-radius: var(--radius-chip);
+  background-color: var(--surface);
+}
+
 .input-default {
   @apply h-9;
 }
