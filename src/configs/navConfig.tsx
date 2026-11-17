@@ -99,7 +99,7 @@ export const navItems: NavItem[] = [
           }
         ]
       },
-      { icon: 'userManagement', label: 'User Management', disabled: true, badge: 'Planned' }
+      { icon: 'userManagement', label: 'Users', href: '/users' }
     ]
   }
 ]
