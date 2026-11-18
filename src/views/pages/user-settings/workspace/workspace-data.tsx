@@ -45,7 +45,7 @@ const WorkspaceData = () => {
           <p className='text-muted-foreground text-sm'>Export your workspace data for backup or migration purposes.</p>
         </div>
         {/* Content */}
-        <div className='space-y-6 lg:col-span-2'>
+        <div className='min-w-0 space-y-6 lg:col-span-2'>
           <Button
             variant='outline'
             onClick={() =>
@@ -60,22 +60,22 @@ const WorkspaceData = () => {
             Get started
           </Button>
 
-          <div className='overflow-hidden rounded-[12px] border'>
+          <div className='borderline borderline-surface min-w-0 p-6'>
             <Table>
               <TableHeader>
-                <TableRow className='bg-muted'>
-                  <TableHead className='px-6'>TYPE</TableHead>
-                  <TableHead className='px-6'>DATE</TableHead>
-                  <TableHead className='px-6'></TableHead>
+                <TableRow>
+                  <TableHead>Type</TableHead>
+                  <TableHead>Date</TableHead>
+                  <TableHead></TableHead>
                   <TableHead className='w-[50px]'></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {exports.map(item => (
                   <TableRow key={item.id}>
-                    <TableCell className='px-6 font-medium'>{item.type}</TableCell>
-                    <TableCell className='px-6'>{item.date}</TableCell>
-                    <TableCell className='px-6'>
+                    <TableCell className='font-medium'>{item.type}</TableCell>
+                    <TableCell>{item.date}</TableCell>
+                    <TableCell>
                       {item.status === 'progress' ? (
                         <div className='flex flex-col items-start gap-1'>
                           <span className='text-xs'>Progress {item.progress}%</span>

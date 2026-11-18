@@ -215,7 +215,7 @@ export default function SalesTable() {
           Record sale
         </Button>
       </div>
-      <div className='border-y'>
+      <div className='borderline borderline-surface min-w-0 p-6'>
         <Table
           aria-label='Sales'
           tabIndex={0}
@@ -223,7 +223,7 @@ export default function SalesTable() {
         >
           <TableHeader>
             {table.getHeaderGroups().map(group => (
-              <TableRow key={group.id} className='bg-muted/50'>
+              <TableRow key={group.id}>
                 {group.headers.map(header => {
                   const direction = header.column.getIsSorted()
                   const label = String(header.column.columnDef.header)
@@ -278,7 +278,7 @@ export default function SalesTable() {
                   {row.getVisibleCells().map(cell => (
                     <TableCell
                       key={cell.id}
-                      className={`py-3 ${cell.column.id === 'total' ? 'text-right tabular-nums' : cell.column.id === 'items' ? 'tabular-nums' : ''}`}
+                      className={cell.column.id === 'total' ? 'text-right tabular-nums' : cell.column.id === 'items' ? 'tabular-nums' : undefined}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>

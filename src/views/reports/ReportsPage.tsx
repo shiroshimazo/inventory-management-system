@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { fruitProducts } from '@/views/pages/products/FruitProductsData'
 import { seedSales } from '@/views/pages/sales/SalesData'
 import { purchaseOrdersSeed } from '@/views/pages/purchase-orders/PurchaseOrdersData'
@@ -125,10 +126,14 @@ export default function ReportsPage() {
         <LowStockItemsChart data={lowStockItems} state={sectionState} onClearFilters={clearFilters} />
       </div>
 
-      <div className='space-y-3'>
-        <h2 className='text-base font-semibold'>Sales detail</h2>
-        <ReportsTable rows={reportRows} state={sectionState} onClearFilters={clearFilters} />
-      </div>
+      <Card className='borderline-surface min-w-0'>
+        <CardHeader>
+          <h2 className='text-base font-semibold'>Sales detail</h2>
+        </CardHeader>
+        <CardContent>
+          <ReportsTable rows={reportRows} state={sectionState} onClearFilters={clearFilters} />
+        </CardContent>
+      </Card>
     </section>
   )
 }

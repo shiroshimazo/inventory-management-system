@@ -91,25 +91,27 @@ export default function PurchaseOrdersByStatusChart({ data, state, onClearFilter
                 </Bar>
               </BarChart>
             </ChartContainer>
-            <table className='sr-only'>
-              <caption>Purchase order spend by status</caption>
-              <thead>
-                <tr>
-                  <th scope='col'>Status</th>
-                  <th scope='col'>Orders</th>
-                  <th scope='col'>Spend</th>
-                </tr>
-              </thead>
-              <tbody>
-                {chartData.map((item, index) => (
-                  <tr key={`${item.status}-${index}`}>
-                    <th scope='row'>{item.status}</th>
-                    <td>{formatCount(item.count)}</td>
-                    <td>{formatCentavos(item.spendCentavos)}</td>
+            <div className='sr-only'>
+              <table>
+                <caption>Purchase order spend by status</caption>
+                <thead>
+                  <tr>
+                    <th scope='col'>Status</th>
+                    <th scope='col'>Orders</th>
+                    <th scope='col'>Spend</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {chartData.map((item, index) => (
+                    <tr key={`${item.status}-${index}`}>
+                      <th scope='row'>{item.status}</th>
+                      <td>{formatCount(item.count)}</td>
+                      <td>{formatCentavos(item.spendCentavos)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </>
         )}
       </CardContent>

@@ -182,7 +182,7 @@ const transactionData: Payment[] = [
 
 const DataTableBasic = () => {
   return (
-    <Card className='py-0'>
+    <Card className='borderline borderline-surface min-w-0'>
       <DataTableDemo data={transactionData} />
     </Card>
   )

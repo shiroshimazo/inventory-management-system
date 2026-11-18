@@ -159,11 +159,11 @@ const DataTableFilters = ({ data }: { data: Item[] }) => {
           <Filter column={table.getColumn('rating')!} />
         </div>
       </div>
-      <div className='border-t border-b'>
+      <div className='px-6'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id} className='bg-muted/50'>
+              <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
                     <TableHead key={header.id} className='relative h-10 select-none'>

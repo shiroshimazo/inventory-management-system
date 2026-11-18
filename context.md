@@ -18,13 +18,15 @@ Validation runs on blur and submit, then updates touched fields as users type. P
 
 ## Dashboard preview
 
-`/dashboard` uses the Borderline tokens from `ai-workflow/09-DESIGN-TOKENS.md`, defined once in `src/index.css` under `.borderline` and scoped to this page only. The light palette is the default; the dark palette applies under `.dark`. Cards and the chart tooltip use a double border (outer plus inset inner line), a subtle surface gradient, 16px corners, and 8px chips for status badges. The page heading uses `text-3xl`. In both themes the admin shell (header, sidebar, content area) also uses the borderline page background; other pages keep their remaining tokens.
+`/dashboard` uses the Borderline tokens from `ai-workflow/09-DESIGN-TOKENS.md`, defined once in `src/index.css` under `.borderline`. The light palette is the default. The dark palette applies under `.dark`. Cards and the chart tooltip use a double border (outer plus inset inner line), a subtle surface gradient, and the shared radius token. Stock movement badges use the Borderline chip style. The page heading uses `text-3xl`. In both themes the admin shell (header, sidebar, content area) also uses the Borderline page background.
+
+Visible tables across the admin panels and demos use the rounded surface, double border, plain headers, and compact rows from Recent stock movements. Wide data tables scroll within their panel.
 
 ## Products preview
 
 `/products` displays 12 static fruit products inside the admin shell. Search matches names and categories, ignoring case and surrounding spaces. Fruit, category, price, and stock headers sort the table; fruit starts ascending. Stock badges derive from quantity and reorder level. Clearing search keeps filters and sorting and focuses the search field. Separate Category and Status dropdowns beside search apply immediately. The Price button opens inclusive price-per-kg limits; applying or resetting price preserves category and status. Invalid price ranges show an error. Reset price preserves search; Clear all in the empty state resets both. The Actions column after Status edits or removes products in memory. No backend, persistence, or pagination is included.
 
-The visual direction is a restrained inventory list using existing tokens, table primitives, and badges. A single search field sits above a table with horizontal borders and a muted header, without cards or shadows. Price (USD per kg), Kg (total weight), and Stock (mock item count) are separate columns. Stock status uses item counts and reorder counts; item counts are illustrative, not calculated from weight. Search uses a focus border without a glow. All seven columns remain visible through the table's horizontal scroll wrapper. Existing light and dark themes apply.
+The visual direction is a restrained inventory list using existing tokens, table primitives, and badges. The search and filters sit above the table panel. Price (USD per kg), Kg (total weight), and Stock (mock item count) are separate columns. Stock status uses item counts and reorder counts; item counts are illustrative, not calculated from weight. Search uses a focus border without a glow. All seven columns remain visible through the table's horizontal scroll wrapper. Existing light and dark themes apply.
 
 The toolbar Reset button clears search and all filters, preserves sorting, and focuses search. Product status badges use 6px corners, green for In stock, orange for Low stock, and the existing destructive style for Out of stock. Text labels retain the status meaning in both themes.
 

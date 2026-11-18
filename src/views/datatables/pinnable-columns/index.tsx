@@ -61,7 +61,7 @@ const productData: Product[] = [
 
 const DataTablePinnableColumn = () => {
   return (
-    <Card className='py-0'>
+    <Card className='borderline borderline-surface min-w-0'>
       <DataTablePinnableColumns data={productData} />
     </Card>
   )

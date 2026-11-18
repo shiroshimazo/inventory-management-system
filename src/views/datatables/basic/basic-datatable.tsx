@@ -101,7 +101,7 @@ const DataTableDemo = ({ data }: { data: Payment[] }) => {
   })
 
   return (
-    <div className='p-1'>
+    <div className='px-6'>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map(headerGroup => (

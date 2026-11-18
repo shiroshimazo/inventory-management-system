@@ -85,23 +85,25 @@ export default function SalesOverTimeChart({
                 />
               </AreaChart>
             </ChartContainer>
-            <table className='sr-only'>
-              <caption>Revenue over time</caption>
-              <thead>
-                <tr>
-                  <th scope='col'>Date</th>
-                  <th scope='col'>Revenue</th>
-                </tr>
-              </thead>
-              <tbody>
-                {clampedPoints.map((point, index) => (
-                  <tr key={`${point.label}-${index}`}>
-                    <th scope='row'>{tickFormatter(point.label)}</th>
-                    <td>{formatCentavos(point.revenueCentavos)}</td>
+            <div className='sr-only'>
+              <table>
+                <caption>Revenue over time</caption>
+                <thead>
+                  <tr>
+                    <th scope='col'>Date</th>
+                    <th scope='col'>Revenue</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {clampedPoints.map((point, index) => (
+                    <tr key={`${point.label}-${index}`}>
+                      <th scope='row'>{tickFormatter(point.label)}</th>
+                      <td>{formatCentavos(point.revenueCentavos)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </>
         )}
       </CardContent>

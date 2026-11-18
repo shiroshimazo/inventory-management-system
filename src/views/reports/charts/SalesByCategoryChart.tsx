@@ -77,23 +77,25 @@ export default function SalesByCategoryChart({
                 />
               </BarChart>
             </ChartContainer>
-            <table className='sr-only'>
-              <caption>Revenue by category</caption>
-              <thead>
-                <tr>
-                  <th scope='col'>Category</th>
-                  <th scope='col'>Revenue</th>
-                </tr>
-              </thead>
-              <tbody>
-                {chartData.map((item, index) => (
-                  <tr key={`${item.category}-${index}`}>
-                    <th scope='row'>{item.category}</th>
-                    <td>{formatCentavos(item.revenueCentavos)}</td>
+            <div className='sr-only'>
+              <table>
+                <caption>Revenue by category</caption>
+                <thead>
+                  <tr>
+                    <th scope='col'>Category</th>
+                    <th scope='col'>Revenue</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {chartData.map((item, index) => (
+                    <tr key={`${item.category}-${index}`}>
+                      <th scope='row'>{item.category}</th>
+                      <td>{formatCentavos(item.revenueCentavos)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </>
         )}
       </CardContent>

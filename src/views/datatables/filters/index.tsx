@@ -79,7 +79,7 @@ const productData: Item[] = [
 
 const DataTableWithFilters = () => {
   return (
-    <Card className='py-0'>
+    <Card className='borderline borderline-surface min-w-0'>
       <DataTableFilters data={productData} />
     </Card>
   )

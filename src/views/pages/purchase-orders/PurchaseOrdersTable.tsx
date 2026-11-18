@@ -210,7 +210,7 @@ export default function PurchaseOrdersTable() {
           Add order
         </Button>
       </div>
-      <div className='border-y'>
+      <div className='borderline borderline-surface min-w-0 p-6'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(group => (
@@ -257,7 +257,7 @@ export default function PurchaseOrdersTable() {
               table.getRowModel().rows.map(row => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id} className='py-3'>
+                    <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

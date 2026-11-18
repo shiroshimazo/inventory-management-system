@@ -233,35 +233,35 @@ const ValidationModesDemo = () => {
       </div>
 
       {/* Comparison Table */}
-      <div className='overflow-hidden rounded-[12px] border'>
+      <div className='borderline borderline-surface min-w-0 overflow-x-auto p-6'>
         <table className='w-full text-sm'>
-          <thead className='bg-muted'>
+          <thead className='border-b'>
             <tr>
-              <th className='p-4 text-left font-semibold'>Mode</th>
-              <th className='p-4 text-left font-semibold'>When Validation Occurs</th>
-              <th className='p-4 text-left font-semibold'>Best For</th>
+              <th className='h-10 px-2 text-left font-medium'>Mode</th>
+              <th className='h-10 px-2 text-left font-medium'>When Validation Occurs</th>
+              <th className='h-10 px-2 text-left font-medium'>Best For</th>
             </tr>
           </thead>
           <tbody className='divide-y'>
             <tr className='hover:bg-muted/20 transition-colors'>
-              <td className='p-4 font-medium'>onChange</td>
-              <td className='p-4'>Every keystroke</td>
-              <td className='p-4'>Real-time feedback (e.g., password strength)</td>
+              <td className='p-2 font-medium'>onChange</td>
+              <td className='p-2'>Every keystroke</td>
+              <td className='p-2'>Real-time feedback (e.g., password strength)</td>
             </tr>
             <tr className='hover:bg-muted/20 transition-colors'>
-              <td className='p-4 font-medium'>onBlur</td>
-              <td className='p-4'>When leaving the field</td>
-              <td className='p-4'>Less intrusive validation (recommended for most cases)</td>
+              <td className='p-2 font-medium'>onBlur</td>
+              <td className='p-2'>When leaving the field</td>
+              <td className='p-2'>Less intrusive validation (recommended for most cases)</td>
             </tr>
             <tr className='hover:bg-muted/20 transition-colors'>
-              <td className='p-4 font-medium'>onSubmit</td>
-              <td className='p-4'>When form is submitted</td>
-              <td className='p-4'>Simple forms, minimal interruption</td>
+              <td className='p-2 font-medium'>onSubmit</td>
+              <td className='p-2'>When form is submitted</td>
+              <td className='p-2'>Simple forms, minimal interruption</td>
             </tr>
             <tr className='hover:bg-muted/20 transition-colors'>
-              <td className='p-4 font-medium'>onTouched</td>
-              <td className='p-4'>First blur, then every change</td>
-              <td className='p-4'>Balance between UX and feedback</td>
+              <td className='p-2 font-medium'>onTouched</td>
+              <td className='p-2'>First blur, then every change</td>
+              <td className='p-2'>Balance between UX and feedback</td>
             </tr>
           </tbody>
         </table>

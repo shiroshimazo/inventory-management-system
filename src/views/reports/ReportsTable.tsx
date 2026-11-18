@@ -61,7 +61,7 @@ export default function ReportsTable({ rows, state, onClearFilters }: {
   }
 
   return (
-    <div className='border-y'>
+    <div className='min-w-0'>
       <Table
         aria-label='Sales report'
         tabIndex={0}
@@ -69,7 +69,7 @@ export default function ReportsTable({ rows, state, onClearFilters }: {
       >
         <TableHeader>
           {table.getHeaderGroups().map(group => (
-            <TableRow key={group.id} className='bg-muted/50'>
+            <TableRow key={group.id}>
               {group.headers.map(header => {
                 const direction = header.column.getIsSorted()
                 const label = String(header.column.columnDef.header)
@@ -109,7 +109,7 @@ export default function ReportsTable({ rows, state, onClearFilters }: {
               {row.getVisibleCells().map(cell => (
                 <TableCell
                   key={cell.id}
-                  className={`py-3 ${numericColumns.includes(cell.column.id) ? 'text-right tabular-nums' : ''}`}
+                  className={numericColumns.includes(cell.column.id) ? 'text-right tabular-nums' : undefined}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </TableCell>

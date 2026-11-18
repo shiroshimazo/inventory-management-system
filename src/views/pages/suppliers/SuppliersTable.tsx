@@ -234,11 +234,11 @@ export default function SuppliersTable() {
           )}
         </Dialog>
       </div>
-      <div className='border-y'>
+      <div className='borderline borderline-surface min-w-0 p-6'>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
-              <TableRow key={headerGroup.id} className='bg-muted/50'>
+              <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   const direction = header.column.getIsSorted()
                   const label = String(header.column.columnDef.header)
@@ -282,7 +282,7 @@ export default function SuppliersTable() {
               table.getRowModel().rows.map(row => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id} className='py-3'>
+                    <TableCell key={cell.id}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

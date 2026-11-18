@@ -69,25 +69,27 @@ export default function LowStockItemsChart({ data, state, onClearFilters }: Prop
                 <Bar dataKey='quantity' fill='var(--color-quantity)' radius={[0, 4, 4, 0]} isAnimationActive={false} />
               </BarChart>
             </ChartContainer>
-            <table className='sr-only'>
-              <caption>Low stock items with remaining quantity and reorder level</caption>
-              <thead>
-                <tr>
-                  <th scope='col'>Item</th>
-                  <th scope='col'>Quantity</th>
-                  <th scope='col'>Reorder level</th>
-                </tr>
-              </thead>
-              <tbody>
-                {clampedData.map((item, index) => (
-                  <tr key={`${item.name}-${index}`}>
-                    <th scope='row'>{item.name}</th>
-                    <td>{formatCount(item.quantity)}</td>
-                    <td>{formatCount(item.reorderLevel)}</td>
+            <div className='sr-only'>
+              <table>
+                <caption>Low stock items with remaining quantity and reorder level</caption>
+                <thead>
+                  <tr>
+                    <th scope='col'>Item</th>
+                    <th scope='col'>Quantity</th>
+                    <th scope='col'>Reorder level</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {clampedData.map((item, index) => (
+                    <tr key={`${item.name}-${index}`}>
+                      <th scope='row'>{item.name}</th>
+                      <td>{formatCount(item.quantity)}</td>
+                      <td>{formatCount(item.reorderLevel)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </>
         )}
       </CardContent>
