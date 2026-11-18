@@ -1,14 +1,14 @@
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from 'recharts'
+import { Area, AreaChart, XAxis, YAxis } from 'recharts'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import { type ReportDatePreset, type SalesPoint } from '@/views/reports/ReportsData'
-import { formatCentavos, formatDateTick, formatMonthTick } from '@/views/reports/ReportsFormat'
+import { formatAxisCentavos, formatCentavos, formatDateTick, formatMonthTick } from '@/views/reports/ReportsFormat'
 import ReportsState, { type SectionState } from '@/views/reports/ReportsStates'
 import {
   clampNonNegative,
   getChartMargins,
+  reportYAxisProps,
   truncateTick,
-  useIsNarrowChart,
   useIsRtl
 } from '@/views/reports/charts/ChartAxisHelpers'
 
@@ -32,7 +32,6 @@ export default function SalesOverTimeChart({
 }) {
   const tickFormatter = datePreset === 'all' ? formatMonthTick : formatDateTick
   const ariaLabel = 'Revenue over time'
-  const isNarrow = useIsNarrowChart()
   const isRtl = useIsRtl()
   const axisTickFormatter = (value: string | number) => truncateTick(tickFormatter(String(value)))
   const clampedPoints = points.map(point => ({ ...point, revenueCentavos: clampNonNegative(point.revenueCentavos) }))
@@ -52,7 +51,6 @@ export default function SalesOverTimeChart({
           <>
             <ChartContainer config={chartConfig} className={chartClassName} aria-label={ariaLabel}>
               <AreaChart accessibilityLayer aria-label={ariaLabel} data={clampedPoints} margin={getChartMargins(isRtl)}>
-                <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey='label'
                   tickFormatter={axisTickFormatter}
@@ -60,7 +58,7 @@ export default function SalesOverTimeChart({
                   axisLine={false}
                   minTickGap={16}
                 />
-                <YAxis tickLine={false} axisLine={false} width={isNarrow ? 32 : 56} />
+                <YAxis {...reportYAxisProps} allowDecimals={false} tickFormatter={formatAxisCentavos} />
                 <ChartTooltip
                   content={
                     <ChartTooltipContent
@@ -82,6 +80,7 @@ export default function SalesOverTimeChart({
                   fill='var(--color-revenueCentavos)'
                   stroke='var(--color-revenueCentavos)'
                   fillOpacity={0.2}
+                  dot={clampedPoints.length === 1}
                   isAnimationActive={false}
                 />
               </AreaChart>

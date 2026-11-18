@@ -2,6 +2,12 @@ import { priceFormatter } from '@/views/pages/products/FruitProductsData'
 import { CURRENCY_SCALE } from '@/views/pages/purchase-orders/PurchaseOrdersData'
 
 const countFormatter = new Intl.NumberFormat('en-PH')
+const axisCurrencyFormatter = new Intl.NumberFormat('en-PH', {
+  style: 'currency',
+  currency: 'PHP',
+  notation: 'compact',
+  maximumFractionDigits: 2
+})
 const dateTickFormatter = new Intl.DateTimeFormat('en-GB', {
   day: 'numeric',
   month: 'short',
@@ -15,6 +21,10 @@ const monthTickFormatter = new Intl.DateTimeFormat('en-GB', {
 
 export function formatCentavos(cents: number): string {
   return priceFormatter.format(cents / CURRENCY_SCALE)
+}
+
+export function formatAxisCentavos(cents: number): string {
+  return axisCurrencyFormatter.format(cents / CURRENCY_SCALE)
 }
 
 export function formatCount(value: number): string {

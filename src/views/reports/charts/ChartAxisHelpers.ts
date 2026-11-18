@@ -4,6 +4,14 @@ import * as React from 'react'
 
 export const AXIS_TICK_MAX_CHARS = 18
 
+export const reportYAxisProps = {
+  axisLine: false,
+  tickLine: false,
+  width: 'auto',
+  tickMargin: 8,
+  minTickGap: 8
+} as const
+
 export function truncateTick(value: string | number, maxChars: number = AXIS_TICK_MAX_CHARS): string {
   const text = String(value).trim()
 

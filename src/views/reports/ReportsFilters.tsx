@@ -28,7 +28,7 @@ export default function ReportsFilters({
 }) {
   return (
     <div className='flex flex-wrap items-center gap-4'>
-      <div className='flex items-center gap-2'>
+      <div className='flex flex-wrap items-center gap-2'>
         <Select
           value={filters.datePreset}
           onValueChange={value => {
@@ -53,7 +53,7 @@ export default function ReportsFilters({
         </Button>
       </div>
 
-      <div className='flex items-center gap-2'>
+      <div className='flex flex-wrap items-center gap-2'>
         <Select
           value={filters.category}
           onValueChange={value => {

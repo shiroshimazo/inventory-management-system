@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import type { LowStockItem } from '@/views/reports/ReportsData'
@@ -7,10 +7,13 @@ import ReportsState, { type SectionState } from '@/views/reports/ReportsStates'
 import {
   clampNonNegative,
   getChartMargins,
+  reportYAxisProps,
   truncateTick,
   useIsNarrowChart,
   useIsRtl
 } from '@/views/reports/charts/ChartAxisHelpers'
+
+const NARROW_ITEM_TICK_MAX_CHARS = 10
 
 const chartConfig = {
   name: { label: 'Item' },
@@ -54,15 +57,12 @@ export default function LowStockItemsChart({ data, state, onClearFilters }: Prop
                 layout='vertical'
                 margin={getChartMargins(isRtl)}
               >
-                <CartesianGrid horizontal={false} />
                 <XAxis type='number' allowDecimals={false} tickLine={false} axisLine={false} />
                 <YAxis
+                  {...reportYAxisProps}
                   dataKey='name'
                   type='category'
-                  tickLine={false}
-                  axisLine={false}
-                  tickFormatter={value => truncateTick(value)}
-                  width={isNarrow ? 64 : 112}
+                  tickFormatter={value => truncateTick(value, isNarrow ? NARROW_ITEM_TICK_MAX_CHARS : undefined)}
                   orientation={isRtl ? 'right' : 'left'}
                 />
                 <ChartTooltip cursor={false} content={<ChartTooltipContent className='borderline-surface' />} />

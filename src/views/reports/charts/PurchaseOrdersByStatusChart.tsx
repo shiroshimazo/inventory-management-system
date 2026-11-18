@@ -1,15 +1,15 @@
-import { Bar, BarChart, CartesianGrid, Cell, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, Cell, XAxis, YAxis } from 'recharts'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import {
   clampNonNegative,
   getChartMargins,
+  reportYAxisProps,
   truncateTick,
-  useIsNarrowChart,
   useIsRtl
 } from '@/views/reports/charts/ChartAxisHelpers'
 import type { StatusSpend } from '@/views/reports/ReportsData'
-import { formatCentavos, formatCount } from '@/views/reports/ReportsFormat'
+import { formatAxisCentavos, formatCentavos, formatCount } from '@/views/reports/ReportsFormat'
 import ReportsState, { type SectionState } from '@/views/reports/ReportsStates'
 
 const statusColor: Record<StatusSpend['status'], string> = {
@@ -32,7 +32,6 @@ type Props = {
 
 export default function PurchaseOrdersByStatusChart({ data, state, onClearFilters }: Props) {
   const sectionState: SectionState = state === 'ready' && data.length === 0 ? 'empty' : state
-  const isNarrow = useIsNarrowChart()
   const isRtl = useIsRtl()
   const chartData = data.map(item => ({
     ...item,
@@ -63,14 +62,13 @@ export default function PurchaseOrdersByStatusChart({ data, state, onClearFilter
                 data={chartData}
                 margin={getChartMargins(isRtl)}
               >
-                <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey='status'
                   tickFormatter={value => truncateTick(value)}
                   tickLine={false}
                   axisLine={false}
                 />
-                <YAxis allowDecimals={false} tickLine={false} axisLine={false} width={isNarrow ? 32 : 56} />
+                <YAxis {...reportYAxisProps} allowDecimals={false} tickFormatter={formatAxisCentavos} />
                 <ChartTooltip
                   content={
                     <ChartTooltipContent

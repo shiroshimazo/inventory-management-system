@@ -1,15 +1,15 @@
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, XAxis, YAxis } from 'recharts'
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card'
 import { type ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
 import {
   clampNonNegative,
   getChartMargins,
+  reportYAxisProps,
   truncateTick,
-  useIsNarrowChart,
   useIsRtl
 } from '@/views/reports/charts/ChartAxisHelpers'
 import { type CategorySale } from '@/views/reports/ReportsData'
-import { formatCentavos } from '@/views/reports/ReportsFormat'
+import { formatAxisCentavos, formatCentavos } from '@/views/reports/ReportsFormat'
 import ReportsState, { type SectionState } from '@/views/reports/ReportsStates'
 
 const chartConfig = {
@@ -29,7 +29,6 @@ export default function SalesByCategoryChart({
   onClearFilters: () => void
 }) {
   const ariaLabel = 'Revenue by category'
-  const isNarrow = useIsNarrowChart()
   const isRtl = useIsRtl()
   const chartData = data.map(item => ({ ...item, revenueCentavos: clampNonNegative(item.revenueCentavos) }))
 
@@ -48,7 +47,6 @@ export default function SalesByCategoryChart({
           <>
             <ChartContainer config={chartConfig} className={chartClassName} aria-label={ariaLabel}>
               <BarChart accessibilityLayer aria-label={ariaLabel} data={chartData} margin={getChartMargins(isRtl)}>
-                <CartesianGrid vertical={false} />
                 <XAxis
                   dataKey='category'
                   tickLine={false}
@@ -56,7 +54,7 @@ export default function SalesByCategoryChart({
                   minTickGap={16}
                   tickFormatter={value => truncateTick(value)}
                 />
-                <YAxis tickLine={false} axisLine={false} width={isNarrow ? 32 : 56} />
+                <YAxis {...reportYAxisProps} allowDecimals={false} tickFormatter={formatAxisCentavos} />
                 <ChartTooltip
                   content={
                     <ChartTooltipContent

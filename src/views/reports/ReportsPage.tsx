@@ -86,7 +86,7 @@ export default function ReportsPage() {
   }
 
   return (
-    <section aria-labelledby='reports-title' className='borderline min-w-0 p-4 sm:p-6'>
+    <section aria-labelledby='reports-title' className='borderline min-w-0 space-y-6 p-4 sm:p-6'>
       <header className='space-y-1'>
         <h1 id='reports-title' className='text-3xl font-semibold'>
           Reports
@@ -94,17 +94,15 @@ export default function ReportsPage() {
         <p className='text-muted-foreground text-sm'>Mock data · {getDatePresetLabel(filters.datePreset)}</p>
       </header>
 
-      <div className='border-t pt-6'>
-        <ReportsFilters
-          filters={filters}
-          onDatePresetChange={setDatePreset}
-          onCategoryChange={setCategory}
-          onResetDatePreset={resetDatePreset}
-          onResetCategory={resetCategory}
-        />
-      </div>
+      <ReportsFilters
+        filters={filters}
+        onDatePresetChange={setDatePreset}
+        onCategoryChange={setCategory}
+        onResetDatePreset={resetDatePreset}
+        onResetCategory={resetCategory}
+      />
 
-      <div className='space-y-3 border-t pt-6'>
+      <div className='space-y-3'>
         <h2 className='text-base font-semibold'>Summary</h2>
         <ReportsSummary
           sales={salesSummary}
@@ -115,7 +113,7 @@ export default function ReportsPage() {
         />
       </div>
 
-      <div className='grid items-stretch gap-4 border-t pt-6 lg:grid-cols-2'>
+      <div className='grid items-stretch gap-4 lg:grid-cols-2'>
         <SalesOverTimeChart
           points={salesSeries}
           datePreset={filters.datePreset}
@@ -127,7 +125,7 @@ export default function ReportsPage() {
         <LowStockItemsChart data={lowStockItems} state={sectionState} onClearFilters={clearFilters} />
       </div>
 
-      <div className='space-y-3 border-t pt-6'>
+      <div className='space-y-3'>
         <h2 className='text-base font-semibold'>Sales detail</h2>
         <ReportsTable rows={reportRows} state={sectionState} onClearFilters={clearFilters} />
       </div>
