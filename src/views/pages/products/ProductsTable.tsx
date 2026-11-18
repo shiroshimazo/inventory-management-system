@@ -112,7 +112,7 @@ export default function ProductsTable() {
         cell: ({ row }) => {
           const status = getStockStatus(row.original)
           return (
-            <Badge variant={statusVariants[status]} className={`rounded-sm ${statusClasses[status]}`}>
+            <Badge variant={statusVariants[status]} className={`rounded-[12px] ${statusClasses[status]}`}>
               {status}
             </Badge>
           )

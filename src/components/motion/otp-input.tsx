@@ -290,7 +290,7 @@ export function OTPInput({
                 data-active={isActive}
                 data-filled={char !== ''}
                 className={cn(
-                  'relative grid h-11 min-w-0 flex-1 place-items-center overflow-hidden rounded-md border text-lg font-semibold tabular-nums transition-colors duration-200',
+                  'relative grid h-11 min-w-0 flex-1 place-items-center overflow-hidden rounded-[12px] border text-lg font-semibold tabular-nums transition-colors duration-200',
                   showSuccess
                     ? 'text-foreground border-emerald-500/60'
                     : status === 'error'

@@ -233,7 +233,7 @@ const ValidationModesDemo = () => {
       </div>
 
       {/* Comparison Table */}
-      <div className='overflow-hidden rounded-lg border'>
+      <div className='overflow-hidden rounded-[12px] border'>
         <table className='w-full text-sm'>
           <thead className='bg-muted'>
             <tr>

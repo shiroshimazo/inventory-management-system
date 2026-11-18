@@ -205,7 +205,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <main className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]' style={{ backgroundColor: '#171717' }}>
-      <aside className='relative isolate hidden items-end justify-center overflow-hidden rounded-3xl px-16 pt-32 pb-64 lg:flex'>
+      <aside className='relative isolate hidden items-end justify-center overflow-hidden rounded-[12px] px-16 pt-32 pb-64 lg:flex'>
         <div
           className='absolute inset-0 z-0'
           style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}

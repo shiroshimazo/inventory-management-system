@@ -99,7 +99,7 @@ function StepperTrigger({ className, type = 'button', ...props }: React.Componen
       type={type}
       data-slot='stepper-trigger'
       className={cn(
-        'focus-visible:border-ring focus-visible:ring-ring/50 hover:bg-muted/40 group-data-[state=inactive]/step:text-muted-foreground inline-flex items-center rounded-md text-left transition-colors outline-none focus-visible:ring-3 disabled:pointer-events-none',
+        'focus-visible:border-ring focus-visible:ring-ring/50 hover:bg-muted/40 group-data-[state=inactive]/step:text-muted-foreground inline-flex items-center rounded-[12px] text-left transition-colors outline-none focus-visible:ring-3 disabled:pointer-events-none',
         className
       )}
       onClick={() => onStepSelect?.(step)}
@@ -117,7 +117,7 @@ function StepperIndicator({ className, ...props }: React.ComponentProps<'span'>)
       data-slot='stepper-indicator'
       data-state={state}
       className={cn(
-        'bg-muted text-muted-foreground data-[state=active]:bg-primary data-[state=completed]:bg-primary data-[state=active]:text-primary-foreground data-[state=completed]:text-primary-foreground relative flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-medium tabular-nums transition-colors',
+        'bg-muted text-muted-foreground data-[state=active]:bg-primary data-[state=completed]:bg-primary data-[state=active]:text-primary-foreground data-[state=completed]:text-primary-foreground relative flex size-6 shrink-0 items-center justify-center rounded-[12px] text-xs font-medium tabular-nums transition-colors',
         className
       )}
       {...props}

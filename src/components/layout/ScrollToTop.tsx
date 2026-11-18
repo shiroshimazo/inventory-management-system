@@ -1,4 +1,4 @@
-﻿// React Imports
+// React Imports
 import { useEffect, useState } from 'react'
 
 // Third-party Imports
@@ -39,7 +39,7 @@ const ScrollToTop = () => {
   return (
     <Button
       size='icon'
-      className={cn('fixed right-4 bottom-8 z-50 cursor-pointer rounded-full transition-all duration-200', {
+      className={cn('fixed right-4 bottom-8 z-50 cursor-pointer rounded-[12px] transition-all duration-200', {
         'scale-0': !showScrollButton
       })}
       onClick={scrollToTop}

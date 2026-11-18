@@ -29,7 +29,7 @@ export default function LoginPage() {
       className='dark text-foreground grid min-h-dvh lg:grid-cols-[45%_1fr]'
       style={{ backgroundColor: '#171717' }}
     >
-      <aside className='relative isolate hidden items-end justify-center overflow-hidden rounded-3xl px-16 pt-32 pb-64 lg:flex'>
+      <aside className='relative isolate hidden items-end justify-center overflow-hidden rounded-[12px] px-16 pt-32 pb-64 lg:flex'>
         <div
           className='absolute inset-0 z-0'
           style={{ background: 'radial-gradient(circle at 50% 90%, #171717 40%, #7c3aed 100%)' }}
@@ -136,7 +136,7 @@ export default function LoginPage() {
               <div className='flex justify-end'>
                 <Link
                   to='/forgot-password'
-                  className='text-foreground focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-md text-sm focus-visible:ring-2 focus-visible:outline-none'
+                  className='text-foreground focus-visible:ring-ring inline-flex min-h-11 w-fit items-center rounded-[12px] text-sm focus-visible:ring-2 focus-visible:outline-none'
                 >
                   Forgot password?
                 </Link>

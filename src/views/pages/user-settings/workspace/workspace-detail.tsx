@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 // React Imports
 import { useEffect, useRef, useState } from 'react'
@@ -90,7 +90,7 @@ const WorkspaceDetail = () => {
                     openPicker()
                   }
                 }}
-                className='flex h-20 w-20 cursor-pointer items-center justify-center overflow-hidden rounded-full border border-dashed hover:opacity-95'
+                className='flex h-20 w-20 cursor-pointer items-center justify-center overflow-hidden rounded-[12px] border border-dashed hover:opacity-95'
               >
                 {preview ? (
                   <img src={preview} alt='logo preview' className='h-full w-full object-cover' />

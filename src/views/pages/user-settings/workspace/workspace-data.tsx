@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 // Third-party Imports
 import { toast } from 'sonner'
@@ -60,7 +60,7 @@ const WorkspaceData = () => {
             Get started
           </Button>
 
-          <div className='overflow-hidden rounded-lg border'>
+          <div className='overflow-hidden rounded-[12px] border'>
             <Table>
               <TableHeader>
                 <TableRow className='bg-muted'>

@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 // React Imports
 import { useState } from 'react'
@@ -90,11 +90,11 @@ const ConnectedAccount = () => {
       <div className='space-y-4 lg:col-span-2'>
         <div className='flex flex-wrap items-center gap-4'>
           {connectedAccounts.map(account => (
-            <div key={account.id} className='flex h-9 w-fit items-center gap-2 rounded-md border px-2.5 text-sm'>
+            <div key={account.id} className='flex h-9 w-fit items-center gap-2 rounded-[12px] border px-2.5 text-sm'>
               {account.iconUrl ? (
-                <img src={account.iconUrl} alt={account.name} className='size-4 rounded' />
+                <img src={account.iconUrl} alt={account.name} className='size-4 rounded-[12px]' />
               ) : (
-                <div className='bg-muted-foreground/10 text-muted-foreground flex size-4 items-center justify-center rounded text-sm font-medium'>
+                <div className='bg-muted-foreground/10 text-muted-foreground flex size-4 items-center justify-center rounded-[12px] text-sm font-medium'>
                   {account.name.charAt(0)}
                 </div>
               )}
@@ -103,7 +103,7 @@ const ConnectedAccount = () => {
               <Button
                 size='icon-xs'
                 variant='ghost'
-                className='text-primary bg-primary/10 size-5 shrink-0 rounded-md transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none'
+                className='text-primary bg-primary/10 size-5 shrink-0 rounded-[12px] transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none'
                 aria-label={`Remove ${account.name}`}
                 onClick={() => handleRemoveAccount(account.id)}
               >
@@ -118,7 +118,7 @@ const ConnectedAccount = () => {
               render={
                 <Button
                   variant='outline'
-                  className='bg-background h-9 gap-2 rounded-md px-3'
+                  className='bg-background h-9 gap-2 rounded-[12px] px-3'
                   onClick={() => setIsDialogOpen(true)}
                 />
               }

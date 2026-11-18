@@ -107,7 +107,7 @@ export const SharedLayoutBg = forwardRef<HTMLElement, SharedLayoutBgProps>(funct
                   <motion.div
                     layoutId={`shared-bg-${uid}`}
                     transition={reduce ? { duration: 0 } : SPRING_LAYOUT}
-                    className={cn('bg-muted/80 pointer-events-none h-full w-full rounded-2xl', pillClassName)}
+                    className={cn('bg-muted/80 pointer-events-none h-full w-full rounded-[12px]', pillClassName)}
                   />
                 ) : null}
               </motion.div>

@@ -35,7 +35,7 @@ const UserSettingsTabs = () => {
         <div className='overflow-x-auto sm:overflow-visible'>
           <TabsList
             variant='line'
-            className='h-fit! w-max min-w-full flex-nowrap justify-start gap-0 rounded-none border-b p-0 sm:w-full sm:flex-wrap'
+            className='h-fit! w-max min-w-full flex-nowrap justify-start gap-0 rounded-[12px] border-b p-0 sm:w-full sm:flex-wrap'
           >
             {tabs.map(tab => (
               <TabsTrigger

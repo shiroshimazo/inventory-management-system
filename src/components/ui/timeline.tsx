@@ -1,4 +1,4 @@
-﻿import * as React from 'react'
+import * as React from 'react'
 
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -55,7 +55,7 @@ const TimelineItem = React.forwardRef<HTMLLIElement, TimelineItemProps>(({ class
 TimelineItem.displayName = 'TimelineItem'
 
 const timelineDotVariants = cva(
-  'col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center rounded-full border border-current',
+  'col-start-2 col-end-3 row-start-1 row-end-1 flex items-center justify-center rounded-[12px] border border-current',
   {
     variants: {
       status: {
@@ -196,7 +196,7 @@ const TimelineLine = React.forwardRef<HTMLHRElement, TimelineLineProps>(
         role='separator'
         aria-orientation='vertical'
         className={cn(
-          'col-start-2 col-end-3 row-start-2 row-end-2 mx-auto flex h-full min-h-16 w-0.5 justify-center rounded-full',
+          'col-start-2 col-end-3 row-start-2 row-end-2 mx-auto flex h-full min-h-16 w-0.5 justify-center rounded-[12px]',
           done ? 'bg-primary' : 'bg-muted',
           className
         )}

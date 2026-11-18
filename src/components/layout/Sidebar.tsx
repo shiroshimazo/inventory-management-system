@@ -66,7 +66,7 @@ export default function SidebarLayout() {
             to={themeConfig.homePageUrl}
             onClick={() => setOpenMobile(false)}
             aria-label={themeConfig.templateName}
-            className='focus-visible:outline-ring flex min-w-0 flex-1 items-center gap-2.5 overflow-hidden rounded-lg p-2 focus-visible:outline-2'
+            className='focus-visible:outline-ring flex min-w-0 flex-1 items-center gap-2.5 overflow-hidden rounded-[12px] p-2 focus-visible:outline-2'
           >
             <LogoSvg className='[&_rect]:fill-sidebar [&_rect:first-child]:fill-primary size-7 shrink-0' />
             <span className='truncate text-lg font-semibold group-data-[state=collapsed]/sidebar:hidden'>

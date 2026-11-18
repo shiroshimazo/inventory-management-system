@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 // React Imports
 import { useMemo, useState } from 'react'
@@ -100,7 +100,7 @@ const EmailPass = () => {
                   variant='ghost'
                   size='icon'
                   onClick={() => setIsVisible(prevState => !prevState)}
-                  className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'
+                  className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-[12px] hover:bg-transparent'
                 >
                   {isVisible ? <HugeiconsIcon icon={ViewOffIcon} /> : <HugeiconsIcon icon={ViewIcon} />}
                   <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
@@ -126,7 +126,7 @@ const EmailPass = () => {
                   variant='ghost'
                   size='icon'
                   onClick={toggleVisibility}
-                  className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'
+                  className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-[12px] hover:bg-transparent'
                 >
                   {isVisible ? <HugeiconsIcon icon={ViewOffIcon} /> : <HugeiconsIcon icon={ViewIcon} />}
                   <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>
@@ -139,7 +139,7 @@ const EmailPass = () => {
                 <span
                   key={index}
                   className={cn(
-                    'h-full flex-1 rounded-full transition-all duration-500 ease-out',
+                    'h-full flex-1 rounded-[12px] transition-all duration-500 ease-out',
                     index < strengthScore ? getColor(strengthScore) : 'bg-border'
                   )}
                 />

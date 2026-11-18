@@ -510,8 +510,8 @@ export const AnimatedSidebar = forwardRef<HTMLElement, AnimatedSidebarProps>(fun
           'bg-background sticky top-0 flex h-svh w-full flex-col overflow-hidden',
           collapsible === 'offcanvas' && 'w-[var(--sidebar-width)]',
           variant === 'sidebar' && (side === 'left' ? 'border-border border-r' : 'border-border border-l'),
-          variant === 'floating' && 'border-border m-2 h-[calc(100svh-1rem)] rounded-2xl border shadow-sm',
-          variant === 'inset' && 'm-2 h-[calc(100svh-1rem)] rounded-2xl',
+          variant === 'floating' && 'border-border m-2 h-[calc(100svh-1rem)] rounded-[12px] border shadow-sm',
+          variant === 'inset' && 'm-2 h-[calc(100svh-1rem)] rounded-[12px]',
           panelClassName
         )}
       >
@@ -548,7 +548,7 @@ export const AnimatedSidebarTrigger = forwardRef<HTMLButtonElement, AnimatedSide
           if (!event.defaultPrevented) context.toggleSidebar()
         }}
         className={cn(
-          'inline-flex size-10 shrink-0 items-center justify-center rounded-xl outline-none',
+          'inline-flex size-10 shrink-0 items-center justify-center rounded-[12px] outline-none',
           'focus-visible:ring-ring focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2',
           className
         )}
@@ -576,7 +576,7 @@ export const AnimatedSidebarClose = forwardRef<HTMLButtonElement, AnimatedSideba
           else context.setOpen(false)
         }}
         className={cn(
-          'inline-flex size-10 shrink-0 items-center justify-center rounded-xl outline-none',
+          'inline-flex size-10 shrink-0 items-center justify-center rounded-[12px] outline-none',
           'focus-visible:ring-ring focus-visible:ring-2',
           className
         )}
@@ -630,7 +630,7 @@ export const AnimatedSidebarInset = forwardRef<HTMLElement, AnimatedSidebarInset
       data-slot='sidebar-inset'
       className={cn(
         'bg-background relative flex min-h-svh min-w-0 flex-1 flex-col',
-        'md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-2xl md:peer-data-[variant=inset]:shadow-sm',
+        'md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-[12px] md:peer-data-[variant=inset]:shadow-sm',
         className
       )}
     />
@@ -738,7 +738,7 @@ export const AnimatedSidebarMenu = forwardRef<HTMLUListElement, HTMLAttributes<H
         ref={forwardedRef as React.Ref<HTMLElement>}
         as='ul'
         inset={0}
-        pillClassName='rounded-xl bg-muted/70'
+        pillClassName='rounded-[12px] bg-muted/70'
         pillContainerClassName='inset-y-auto top-0 h-9'
         data-slot='sidebar-menu'
         className={cn('flex w-full min-w-0 list-none flex-col gap-0.5', className)}
@@ -850,14 +850,14 @@ export function AnimatedSidebarMenuSubButton({
   const content = (
     <>
       <span aria-hidden='true' className='grid size-4 shrink-0 place-items-center'>
-        {icon ?? <span className='size-1 rounded-full bg-current' />}
+        {icon ?? <span className='size-1 rounded-[12px] bg-current' />}
       </span>
       <span className='min-w-0 flex-1 truncate'>{children}</span>
     </>
   )
 
   const interactiveClassName = cn(
-    'flex min-h-8 w-full min-w-0 items-center gap-2 rounded-lg px-2 text-left text-xs outline-none',
+    'flex min-h-8 w-full min-w-0 items-center gap-2 rounded-[12px] px-2 text-left text-xs outline-none',
     'text-muted-foreground transition-colors hover:bg-muted/60 hover:text-foreground',
     'focus-visible:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring',
     isActive && 'bg-muted/70 text-foreground',
@@ -953,7 +953,7 @@ export function AnimatedSidebarMenuButton({
         <motion.span
           layoutId={context.layoutId}
           transition={context.reduce ? { duration: 0 } : SPRING_LAYOUT}
-          className='bg-muted absolute inset-0 rounded-xl'
+          className='bg-muted absolute inset-0 rounded-[12px]'
         />
       ) : null}
       {icon ? (
@@ -997,7 +997,7 @@ export function AnimatedSidebarMenuButton({
   )
 
   const interactiveClassName = cn(
-    'relative flex min-h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-xl px-3 text-left text-sm font-medium outline-none',
+    'relative flex min-h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-[12px] px-3 text-left text-sm font-medium outline-none',
     'text-muted-foreground transition-colors hover:text-foreground',
     'focus-visible:bg-muted/70 focus-visible:ring-2 focus-visible:ring-ring',
     isActive && 'text-foreground',

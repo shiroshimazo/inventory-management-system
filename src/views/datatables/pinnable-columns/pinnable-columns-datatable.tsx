@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import type { CSSProperties } from 'react'
 import { useState } from 'react'
@@ -93,7 +93,7 @@ const DataTablePinnableColumns = ({ data }: { data: Product[] }) => {
 
   return (
     <div className='w-full'>
-      <div className='rounded-md'>
+      <div className='rounded-[12px]'>
         <Table className='[&_td]:border-border [&_th]:border-border border-separate border-spacing-0 [&_tfoot_td]:border-t [&_th]:border-b [&_tr]:border-none [&_tr:not(:last-child)_td]:border-b'>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (

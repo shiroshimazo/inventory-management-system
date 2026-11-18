@@ -68,7 +68,7 @@ export default function UsersTable() {
         header: 'Role',
         enableSorting: false,
         cell: ({ row }) => (
-          <Badge variant='outline' className='rounded-(--radius-chip)'>
+          <Badge variant='outline' className='rounded-[12px]'>
             {row.original.role}
           </Badge>
         )
@@ -82,8 +82,8 @@ export default function UsersTable() {
             variant='secondary'
             className={
               row.original.status === 'Active'
-                ? 'rounded-(--radius-chip) border-(--up-border) bg-(--up-bg) text-(--up-text)'
-                : 'bg-muted text-muted-foreground rounded-(--radius-chip)'
+                ? 'rounded-[12px] border-(--up-border) bg-(--up-bg) text-(--up-text)'
+                : 'bg-muted text-muted-foreground rounded-[12px]'
             }
           >
             {row.original.status}

@@ -39,10 +39,10 @@ export default function PasswordStrengthMeter({ id, password }: { id: string; pa
           className='flex flex-1 gap-1.5'
         >
           {[0, 1, 2, 3].map(index => (
-            <span key={index} className='bg-muted h-1 flex-1 overflow-hidden rounded-full'>
+            <span key={index} className='bg-muted h-1 flex-1 overflow-hidden rounded-[12px]'>
               <span
                 className={cn(
-                  'bg-primary block h-full rounded-full transition-[width] duration-200 ease-out motion-reduce:transition-none',
+                  'bg-primary block h-full rounded-[12px] transition-[width] duration-200 ease-out motion-reduce:transition-none',
                   index < level ? 'w-full' : 'w-0'
                 )}
               />
@@ -64,7 +64,7 @@ export default function PasswordStrengthMeter({ id, password }: { id: string; pa
               {isMet ? (
                 <HugeiconsIcon icon={CheckmarkCircle02Icon} className='size-4 shrink-0' aria-hidden='true' />
               ) : (
-                <span aria-hidden='true' className='border-muted-foreground/50 size-4 shrink-0 rounded-full border' />
+                <span aria-hidden='true' className='border-muted-foreground/50 size-4 shrink-0 rounded-[12px] border' />
               )}
               {check.label}
               <span className='sr-only'>{isMet ? ' (met)' : ' (not met)'}</span>
