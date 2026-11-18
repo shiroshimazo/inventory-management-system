@@ -195,7 +195,7 @@ export default function PurchaseOrdersTable() {
             ))}
           </SelectContent>
         </Select>
-        <Button type='button' variant='ghost' className='h-11' onClick={clearAll}>
+        <Button type='button' className='h-11' onClick={clearAll}>
           Clear all
         </Button>
         <Button

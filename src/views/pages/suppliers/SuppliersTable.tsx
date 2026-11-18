@@ -209,7 +209,7 @@ export default function SuppliersTable() {
             </Button>
           )}
         </div>
-        <Button type='button' variant='ghost' className='h-11' onClick={clearSearch}>
+        <Button type='button' className='h-11' onClick={clearSearch}>
           Reset
         </Button>
         <Dialog open={supplierDialog !== null} onOpenChange={handleSupplierDialogOpenChange}>

@@ -154,7 +154,6 @@ export default function ProductsFilters({
             <div className='flex justify-end gap-2'>
               <Button
                 type='button'
-                variant='ghost'
                 className='h-11'
                 onClick={() => {
                   onApply(columnFilters.filter(filter => filter.id !== 'pricePerKg'))

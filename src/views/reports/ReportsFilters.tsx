@@ -48,7 +48,7 @@ export default function ReportsFilters({
             ))}
           </SelectContent>
         </Select>
-        <Button type='button' variant='ghost' className='h-11' onClick={onResetDatePreset}>
+        <Button type='button' className='h-11' onClick={onResetDatePreset}>
           Reset date
         </Button>
       </div>
@@ -73,7 +73,7 @@ export default function ReportsFilters({
             ))}
           </SelectContent>
         </Select>
-        <Button type='button' variant='ghost' className='h-11' onClick={onResetCategory}>
+        <Button type='button' className='h-11' onClick={onResetCategory}>
           Reset category
         </Button>
       </div>

@@ -199,7 +199,7 @@ export default function SalesTable() {
             </SelectContent>
           </Select>
         </div>
-        <Button type='button' variant='ghost' className='h-11' onClick={resetFilters}>
+        <Button type='button' className='h-11' onClick={resetFilters}>
           Reset
         </Button>
         <Button
@@ -290,7 +290,7 @@ export default function SalesTable() {
                 <TableCell colSpan={columns.length} className='h-32 text-center'>
                   <p>{inventory.sales.length ? 'No sales match your search or filters.' : 'No sales recorded.'}</p>
                   {inventory.sales.length ? (
-                    <Button type='button' variant='link' className='h-11' onClick={resetFilters}>
+                    <Button type='button' className='h-11' onClick={resetFilters}>
                       Clear filters
                     </Button>
                   ) : (

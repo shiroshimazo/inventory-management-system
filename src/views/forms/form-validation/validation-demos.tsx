@@ -103,7 +103,7 @@ const ValidationModesDemo = () => {
                 <Button type='submit' size='sm'>
                   Submit
                 </Button>
-                <Button type='button' variant='outline' size='sm' onClick={() => onChangeForm.reset()}>
+                <Button type='button' size='sm' onClick={() => onChangeForm.reset()}>
                   Reset
                 </Button>
               </div>
@@ -143,7 +143,7 @@ const ValidationModesDemo = () => {
                 <Button type='submit' size='sm'>
                   Submit
                 </Button>
-                <Button type='button' variant='outline' size='sm' onClick={() => onBlurForm.reset()}>
+                <Button type='button' size='sm' onClick={() => onBlurForm.reset()}>
                   Reset
                 </Button>
               </div>
@@ -183,7 +183,7 @@ const ValidationModesDemo = () => {
                 <Button type='submit' size='sm'>
                   Submit
                 </Button>
-                <Button type='button' variant='outline' size='sm' onClick={() => onSubmitForm.reset()}>
+                <Button type='button' size='sm' onClick={() => onSubmitForm.reset()}>
                   Reset
                 </Button>
               </div>
@@ -223,7 +223,7 @@ const ValidationModesDemo = () => {
                 <Button type='submit' size='sm'>
                   Submit
                 </Button>
-                <Button type='button' variant='outline' size='sm' onClick={() => onTouchedForm.reset()}>
+                <Button type='button' size='sm' onClick={() => onTouchedForm.reset()}>
                   Reset
                 </Button>
               </div>

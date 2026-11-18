@@ -197,7 +197,7 @@ export default function CategoriesTable() {
             </Button>
           )}
         </div>
-        <Button type='button' variant='ghost' className='h-11' onClick={clearSearch}>
+        <Button type='button' className='h-11' onClick={clearSearch}>
           Reset
         </Button>
         <Dialog open={categoryDialog !== null} onOpenChange={handleCategoryDialogOpenChange}>

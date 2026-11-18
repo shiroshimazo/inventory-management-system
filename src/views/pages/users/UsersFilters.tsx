@@ -55,7 +55,7 @@ export default function UsersFilters({
         </Select>
       ))}
       {(search || role !== 'all' || status !== 'all') && (
-        <Button variant='ghost' className='h-11' onClick={onClear}>
+        <Button className='h-11' onClick={onClear}>
           Clear filters
         </Button>
       )}

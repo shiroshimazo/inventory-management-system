@@ -30,7 +30,6 @@ export default function ReportsState({
       {state === 'empty' ? (
         <Button
           type='button'
-          variant='link'
           className='h-auto min-h-11 shrink-0 whitespace-normal'
           onClick={onClearFilters}
         >

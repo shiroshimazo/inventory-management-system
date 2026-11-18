@@ -246,7 +246,7 @@ export default function ProductsTable() {
           )}
         </div>
         <ProductsFilters columnFilters={columnFilters} onApply={setColumnFilters} />
-        <Button type='button' variant='ghost' className='h-11' onClick={resetFilters}>
+        <Button type='button' className='h-11' onClick={resetFilters}>
           Reset
         </Button>
         <Dialog open={productDialog !== null} onOpenChange={handleProductDialogOpenChange}>
@@ -324,7 +324,7 @@ export default function ProductsTable() {
               <TableRow>
                 <TableCell colSpan={table.getAllColumns().length} className='h-32 text-center'>
                   <p>No fruits match your search or filters.</p>
-                  <Button type='button' variant='link' size='sm' className='h-11' onClick={resetFilters}>
+                  <Button type='button' size='sm' className='h-11' onClick={resetFilters}>
                     Clear all
                   </Button>
                 </TableCell>
