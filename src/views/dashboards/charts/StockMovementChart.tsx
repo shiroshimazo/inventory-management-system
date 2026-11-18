@@ -57,25 +57,27 @@ export default function StockMovementChart({ movements, dates }: { movements: St
                 <Bar dataKey='stockOut' fill='var(--color-stockOut)' radius={[4, 4, 0, 0]} isAnimationActive={false} />
               </BarChart>
             </ChartContainer>
-            <table className='sr-only'>
-              <caption>Daily stock movement in units</caption>
-              <thead>
-                <tr>
-                  <th scope='col'>Date</th>
-                  <th scope='col'>Stock-in</th>
-                  <th scope='col'>Stock-out</th>
-                </tr>
-              </thead>
-              <tbody>
-                {chartData.map(day => (
-                  <tr key={day.date}>
-                    <th scope='row'>{formatDate(day.date)}</th>
-                    <td>{day.stockIn}</td>
-                    <td>{day.stockOut}</td>
+            <div className='sr-only'>
+              <table>
+                <caption>Daily stock movement in units</caption>
+                <thead>
+                  <tr>
+                    <th scope='col'>Date</th>
+                    <th scope='col'>Stock-in</th>
+                    <th scope='col'>Stock-out</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {chartData.map(day => (
+                    <tr key={day.date}>
+                      <th scope='row'>{formatDate(day.date)}</th>
+                      <td>{day.stockIn}</td>
+                      <td>{day.stockOut}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </>
         )}
       </CardContent>
