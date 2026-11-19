@@ -30,7 +30,7 @@ The visual direction is a restrained inventory list using existing tokens, table
 
 The toolbar Reset button clears search and all filters, preserves sorting, and focuses search. Product status badges use 6px corners, green for In stock, orange for Low stock, and the existing destructive style for Out of stock. Text labels retain the status meaning in both themes.
 
-Three Borderline cards above the filters show fruit product count, total stock units, and product counts by stock status. The cards summarize the full Products catalogue and update when products are added, edited, or removed.
+Borderline cards above the filters show fruit product count, total stock units, and separate counts for In stock, Low stock, and Out of stock. The cards summarize the full Products catalogue and update when products are added, edited, or removed.
 
 
 Add Products opens a responsive three-step dialog (Details, Stock & price, Review) using the existing theme and components. React Hook Form and Zod validate required fields and case-insensitive SKU uniqueness. Text fields use a borderless resting style with visible focus and error borders. Numeric fields filter input: price accepts digits only, weight accepts up to two decimals, and quantity and reorder level accept whole numbers. Products and drafts stay in memory: closing resets the draft, successful additions update the filtered/sorted table and show a toast, and refresh restores the 12 mock rows. Active filters can hide a new product. A real backend must revalidate every field and enforce SKU uniqueness.

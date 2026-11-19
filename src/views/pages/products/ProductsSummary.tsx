@@ -1,5 +1,13 @@
+import { PackageIcon, PackageOutOfStockIcon } from '@hugeicons/core-free-icons'
+import type { IconSvgElement } from '@hugeicons/react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { getStockStatus, type FruitProduct } from './FruitProductsData'
+
+const lowStockIcon: IconSvgElement = [
+  PackageOutOfStockIcon[0],
+  ['path', { d: 'M10 4H14', stroke: 'currentColor', strokeLinecap: 'round', key: 'low-stock' }]
+]
 
 export default function ProductsSummary({ products }: { products: FruitProduct[] }) {
   const statusCounts = { 'In stock': 0, 'Low stock': 0, 'Out of stock': 0 }
@@ -9,36 +17,27 @@ export default function ProductsSummary({ products }: { products: FruitProduct[]
     statusCounts[getStockStatus(product)] += 1
   }
 
-  const totals = [
+  const summary = [
     { label: 'Fruit products', value: products.length },
-    { label: 'Total stock units', value: totalStock }
+    { label: 'Total stock units', value: totalStock },
+    { label: 'In stock', value: statusCounts['In stock'], icon: PackageIcon },
+    { label: 'Low stock', value: statusCounts['Low stock'], icon: lowStockIcon },
+    { label: 'Out of stock', value: statusCounts['Out of stock'], icon: PackageOutOfStockIcon }
   ]
 
   return (
-    <section aria-label='Inventory summary' className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>
-      {totals.map(({ label, value }) => (
+    <section aria-label='Inventory summary' className='grid gap-4 sm:grid-cols-2 xl:grid-cols-5'>
+      {summary.map(({ label, value, icon }) => (
         <Card key={label} size='sm' className='borderline borderline-surface'>
           <CardHeader className='border-b border-(--divider)'>
-            <h2 className='font-medium'>{label}</h2>
+            <h2 className='flex items-center gap-2 font-medium'>
+              {icon && <HugeiconsIcon icon={icon} className='size-4 shrink-0' aria-hidden='true' />}
+              {label}
+            </h2>
           </CardHeader>
           <CardContent className='text-2xl font-semibold tabular-nums'>{value.toLocaleString()}</CardContent>
         </Card>
       ))}
-      <Card size='sm' className='borderline borderline-surface sm:col-span-2 xl:col-span-1'>
-        <CardHeader className='border-b border-(--divider)'>
-          <h2 className='font-medium'>Stock status</h2>
-        </CardHeader>
-        <CardContent>
-          <dl className='grid grid-cols-3 gap-2'>
-            {Object.entries(statusCounts).map(([status, count]) => (
-              <div key={status} className='flex flex-col-reverse gap-1'>
-                <dt className='text-muted-foreground text-xs'>{status}</dt>
-                <dd className='text-2xl font-semibold tabular-nums'>{count.toLocaleString()}</dd>
-              </div>
-            ))}
-          </dl>
-        </CardContent>
-      </Card>
     </section>
   )
 }
