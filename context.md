@@ -41,6 +41,8 @@ Add Products opens a responsive three-step dialog (Details, Stock & price, Revie
 
 The Status column displays Active or Inactive badges using the existing Users status style. Add and edit forms include a status choice. Existing and new categories start Active, and edits preserve the selected status. Status stays in component memory and resets on reload.
 
+Four Borderline cards above search show total categories, Active categories, Inactive categories, and total products, with Hugeicons matching the Products summary. They summarize all current categories and update after add, edit, or removal. Total products sums the table's existing per-category product counts, including inactive categories. Search does not change the summary.
+
 ## Sales preview
 
 `/sales` shows six seed sales, SO-2026-111 through SO-2026-116. Search matches reference, product, SKU, and recorded-by name. Date and total sort; All dates, Today, Last 7 days, and Last 30 days use Asia/Manila dates. A two-step form records immutable sales with name, SKU, and price snapshots. Totals derive from lines. `SalesSchema.ts` validates quantities and re-checks stock before deducting from a local product copy. Seed history is not replayed against stock. Products and dashboard data remain separate.

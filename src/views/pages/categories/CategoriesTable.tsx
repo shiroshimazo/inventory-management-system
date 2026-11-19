@@ -34,6 +34,7 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import CategoryDialog from './CategoryDialog'
+import CategoriesSummary from './CategoriesSummary'
 type CategoryDialogState = { mode: 'add' } | { mode: 'edit'; category: Category }
 
 const filterCategories: FilterFn<Category> = (row, _columnId, filterValue) => {
@@ -180,6 +181,7 @@ export default function CategoriesTable() {
 
   return (
     <div className='min-w-0 space-y-4'>
+      <CategoriesSummary categories={categories} />
       <div className='flex flex-wrap items-center gap-2'>
         <div className='relative w-full min-w-0 sm:max-w-xs'>
           <label htmlFor='category-search' className='sr-only'>
