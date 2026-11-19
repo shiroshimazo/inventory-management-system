@@ -1,5 +1,5 @@
 import type { RefObject } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AlertCircleIcon } from '@hugeicons/core-free-icons'
 import { toast } from 'sonner'
@@ -8,8 +8,9 @@ import { DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/c
 import { Field, FieldLabel, FieldError } from '@/components/ui/field'
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Input } from '@/components/ui/input'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { MAX_CATEGORY_DESCRIPTION_LENGTH, type Category } from './CategoriesData'
+import { CATEGORY_STATUSES, MAX_CATEGORY_DESCRIPTION_LENGTH, type Category } from './CategoriesData'
 import {
   createCategorySchema,
   categoryFieldLabels,
@@ -33,7 +34,11 @@ export default function CategoryDialog({
   const form = useForm<CategoryDraft>({
     resolver: zodResolver(createCategorySchema(categories.filter(item => item.id !== category?.id))),
     mode: 'onTouched',
-    defaultValues: { name: category?.name ?? '', description: category?.description ?? '' }
+    defaultValues: {
+      name: category?.name ?? '',
+      description: category?.description ?? '',
+      status: category?.status ?? 'Active'
+    }
   })
   const { errors } = form.formState
   const saveCategory = form.handleSubmit(
@@ -77,6 +82,40 @@ export default function CategoryDialog({
             </Field>
           )
         })}
+        <Controller
+          name='status'
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={!!fieldState.error}>
+              <FieldLabel htmlFor='category-status'>Status</FieldLabel>
+              <Select value={field.value} onValueChange={value => field.onChange(value ?? '')}>
+                <SelectTrigger
+                  id='category-status'
+                  ref={field.ref}
+                  onBlur={field.onBlur}
+                  aria-invalid={!!fieldState.error}
+                  aria-describedby={fieldState.error ? 'category-status-error' : undefined}
+                  className='focus-visible:border-foreground w-full shadow-none focus-visible:ring-0 aria-invalid:ring-0 data-[size=default]:h-11'
+                >
+                  <SelectValue placeholder='Choose status' />
+                </SelectTrigger>
+                <SelectContent className='animate-none shadow-none'>
+                  {CATEGORY_STATUSES.map(status => (
+                    <SelectItem key={status} value={status} className='min-h-11'>
+                      {status}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {fieldState.error && (
+                <FieldError id='category-status-error' className='flex items-start gap-1'>
+                  <HugeiconsIcon icon={AlertCircleIcon} className='size-4 shrink-0' aria-hidden='true' />
+                  {fieldState.error.message}
+                </FieldError>
+              )}
+            </Field>
+          )}
+        />
         <div className='flex flex-col-reverse gap-2 sm:flex-row sm:justify-end'>
           <Button type='button' variant='outline' className='h-11' onClick={onClose}>
             Cancel

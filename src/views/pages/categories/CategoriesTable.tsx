@@ -19,6 +19,7 @@ import {
 } from '@hugeicons/core-free-icons'
 import { toast } from 'sonner'
 import { HugeiconsIcon } from '@/components/ui/hugeicons'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -74,6 +75,24 @@ export default function CategoriesTable() {
         header: 'Products',
         enableGlobalFilter: false,
         cell: ({ getValue }) => <span className='tabular-nums'>{getValue<number>()}</span>
+      },
+      {
+        accessorKey: 'status',
+        header: 'Status',
+        enableSorting: false,
+        enableGlobalFilter: false,
+        cell: ({ row }) => (
+          <Badge
+            variant='secondary'
+            className={
+              row.original.status === 'Active'
+                ? 'rounded-[12px] border-(--up-border) bg-(--up-bg) text-(--up-text)'
+                : 'bg-muted text-muted-foreground rounded-[12px]'
+            }
+          >
+            {row.original.status}
+          </Badge>
+        )
       },
       {
         id: 'actions',
@@ -265,9 +284,7 @@ export default function CategoriesTable() {
               table.getRowModel().rows.map(row => (
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map(cell => (
-                    <TableCell key={cell.id}>
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
+                    <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                   ))}
                 </TableRow>
               ))

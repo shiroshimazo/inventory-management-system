@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import {
+  CATEGORY_STATUSES,
   MIN_CATEGORY_NAME_LENGTH,
   MAX_CATEGORY_NAME_LENGTH,
   MAX_CATEGORY_DESCRIPTION_LENGTH,
@@ -23,7 +24,8 @@ export function createCategorySchema(categories: Category[]) {
         name => !categories.some(category => category.name.trim().toLowerCase() === name.toLowerCase()),
         'This category name is already used.'
       ),
-    description: z.string().trim().max(MAX_CATEGORY_DESCRIPTION_LENGTH, 'Use 120 characters or fewer.')
+    description: z.string().trim().max(MAX_CATEGORY_DESCRIPTION_LENGTH, 'Use 120 characters or fewer.'),
+    status: z.enum(CATEGORY_STATUSES, { error: 'Choose Active or Inactive.' })
   })
 }
 export type CategoryDraft = z.infer<ReturnType<typeof createCategorySchema>>

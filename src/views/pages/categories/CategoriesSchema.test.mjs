@@ -2,8 +2,12 @@ import assert from 'node:assert/strict'
 import { createCategorySchema } from './CategoriesSchema.ts'
 import { categoriesSeed, getProductCount } from './CategoriesData.ts'
 const schema = createCategorySchema(categoriesSeed)
-const valid = { name: 'Fresh & dried', description: '' }
+const valid = { name: 'Fresh & dried', description: '', status: 'Active' }
 assert.equal(schema.safeParse(valid).success, true)
+assert.equal(schema.parse({ ...valid, status: 'Inactive' }).status, 'Inactive')
+for (const status of ['', '   ', 'active', 'Archived', '1', null, undefined]) {
+  assert.equal(schema.safeParse({ ...valid, status }).success, false, String(status))
+}
 for (const name of ['', '   ', 'a', 'a'.repeat(41), '1', '<script>alert(1)</script>', ' berries ']) {
   assert.equal(schema.safeParse({ ...valid, name }).success, false, name)
 }
@@ -12,9 +16,17 @@ assert.equal(
   createCategorySchema(categoriesSeed.filter(row => row.id !== 'c1')).safeParse(categoriesSeed[0]).success,
   true
 )
-assert.deepEqual(schema.parse({ name: ' Fresh fruit ', description: ' Notes ' }), {
+assert.equal(
+  createCategorySchema(categoriesSeed.filter(row => row.id !== 'c1')).parse({
+    ...categoriesSeed[0],
+    status: 'Inactive'
+  }).status,
+  'Inactive'
+)
+assert.deepEqual(schema.parse({ name: ' Fresh fruit ', description: ' Notes ', status: 'Active' }), {
   name: 'Fresh fruit',
-  description: 'Notes'
+  description: 'Notes',
+  status: 'Active'
 })
 for (const name of ["Été's fruit", '水果 2', 'a'.repeat(40)])
   assert.equal(schema.safeParse({ ...valid, name }).success, true)
