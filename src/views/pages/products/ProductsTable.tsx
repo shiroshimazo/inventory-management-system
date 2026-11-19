@@ -40,6 +40,7 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import AddProductDialog from './AddProductDialog'
+import ProductsSummary from './ProductsSummary'
 const statusVariants = { 'Out of stock': 'destructive', 'Low stock': 'secondary', 'In stock': 'outline' } as const
 
 const statusClasses = {
@@ -209,6 +210,7 @@ export default function ProductsTable() {
 
   return (
     <div className='min-w-0 space-y-4'>
+      <ProductsSummary products={products} />
       <div className='flex flex-wrap items-center gap-2'>
         <div className='relative w-full min-w-0 sm:max-w-xs'>
           <label htmlFor='product-search' className='sr-only'>
