@@ -37,6 +37,7 @@ import {
 import { recordSale, type SaleDraft } from './SalesSchema'
 import RecordSaleDialog from './RecordSaleDialog'
 import SaleDetailDialog from './SaleDetailDialog'
+import SalesSummary from './SalesSummary'
 
 const datePresets: { value: SaleDatePreset; label: string }[] = [
   { value: 'all', label: 'All dates' },
@@ -140,7 +141,8 @@ export default function SalesTable() {
 
   return (
     <div className='min-w-0 space-y-4'>
-      <div className='flex flex-wrap items-end gap-2'>
+      <SalesSummary sales={inventory.sales} />
+      <div className='flex flex-wrap items-center gap-2'>
         <div className='relative w-full min-w-0 sm:max-w-xs'>
           <label htmlFor='sale-search' className='sr-only'>
             Search sales
@@ -176,29 +178,24 @@ export default function SalesTable() {
             </Button>
           )}
         </div>
-        <div className='space-y-2'>
-          <label htmlFor='sale-date' className='block text-sm'>
-            Date
-          </label>
-          <Select
-            value={datePreset}
-            onValueChange={value => {
-              if (value) setDatePreset(value as SaleDatePreset)
-            }}
-            items={datePresets}
-          >
-            <SelectTrigger id='sale-date' className='min-w-36 data-[size=default]:h-11'>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {datePresets.map(preset => (
-                <SelectItem key={preset.value} value={preset.value} className='min-h-11'>
-                  {preset.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Select
+          value={datePreset}
+          onValueChange={value => {
+            if (value) setDatePreset(value as SaleDatePreset)
+          }}
+          items={datePresets}
+        >
+          <SelectTrigger aria-label='Filter sales by date' className='min-w-36 data-[size=default]:h-11'>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent align='start' alignItemWithTrigger={false}>
+            {datePresets.map(preset => (
+              <SelectItem key={preset.value} value={preset.value} className='min-h-11'>
+                {preset.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <Button type='button' className='h-11' onClick={resetFilters}>
           Reset
         </Button>
