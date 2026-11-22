@@ -39,6 +39,7 @@ import {
 } from './PurchaseOrdersData'
 import type { PurchaseOrderDraft } from './PurchaseOrdersSchema'
 import PurchaseOrderDialog from './PurchaseOrderDialog'
+import PurchaseOrdersSummary from './PurchaseOrdersSummary'
 
 const defaultSorting: SortingState = [{ id: 'orderDate', desc: true }]
 const statusOptions = [
@@ -162,6 +163,7 @@ export default function PurchaseOrdersTable() {
   }
   return (
     <div className='min-w-0 space-y-4'>
+      <PurchaseOrdersSummary orders={orders} />
       <div className='flex flex-wrap items-center gap-2'>
         <div className='relative w-full sm:max-w-xs'>
           <label htmlFor='purchase-order-search' className='sr-only'>
