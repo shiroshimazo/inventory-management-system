@@ -57,6 +57,8 @@ Design direction: calm inventory administration, energy 1 / rhythm 1 / motion 1.
 
 The page follows the restrained Categories layout with existing tokens and border-only input focus. Workflow rules take precedence: the page heading uses `text-3xl`, and unsupported typed or pasted characters are rejected with field feedback. Server validation and Admin-manages/Staff-views permissions remain future work.
 
+Separate Borderline cards above search show total suppliers, unique phone numbers by digits, and unique emails ignoring case. Cards summarize all current supplier records, including those hidden by search.
+
 ## Purchase orders preview
 
 `/purchase-orders` uses four seed orders with Draft, Ordered, Received, and Cancelled statuses. Search matches reference and supplier; all data columns sort. Clear all resets search, status, and the default newest-order-date sorting. All matching rows render without pagination.

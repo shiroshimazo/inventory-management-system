@@ -33,6 +33,7 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import SupplierDialog from './SupplierDialog'
+import SuppliersSummary from './SuppliersSummary'
 type SupplierDialogState = { mode: 'add' } | { mode: 'edit'; supplier: Supplier }
 
 const filterSuppliers: FilterFn<Supplier> = (row, _columnId, filterValue) => {
@@ -173,6 +174,7 @@ export default function SuppliersTable() {
 
   return (
     <div className='min-w-0 space-y-4'>
+      <SuppliersSummary suppliers={suppliers} />
       <div className='flex flex-wrap items-center gap-2'>
         <div className='relative w-full min-w-0 sm:max-w-xs'>
           <label htmlFor='supplier-search' className='sr-only'>
