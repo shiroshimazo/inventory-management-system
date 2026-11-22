@@ -284,6 +284,16 @@ input[type='number']::-webkit-outer-spin-button {
     @apply font-sans;
   }
 }
+
+/* The data-open/data-closed animation utilities have higher specificity than a
+   motion-reduce utility, so disable them here for select popups only. */
+@media (prefers-reduced-motion: reduce) {
+  [data-slot='select-content'][data-open],
+  [data-slot='select-content'][data-closed] {
+    animation: none;
+  }
+}
+
 :root {
   --font-geist-sans: "Geist", sans-serif;
   --font-geist-mono: "Geist Mono", monospace;

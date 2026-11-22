@@ -42,7 +42,7 @@ export default function UsersFilters({
           <SelectTrigger aria-label={filter.label} className='min-w-36 shadow-none data-[size=default]:h-11'>
             <SelectValue>{filter.value === 'all' ? filter.all : filter.value}</SelectValue>
           </SelectTrigger>
-          <SelectContent className='animate-none shadow-none'>
+          <SelectContent className='shadow-none'>
             <SelectItem value='all' className='min-h-11'>
               {filter.all}
             </SelectItem>
