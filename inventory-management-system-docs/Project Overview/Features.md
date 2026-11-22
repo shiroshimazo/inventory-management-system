@@ -37,9 +37,7 @@
 
 ### User Settings (`/pages/user-settings`)
 
-- General: personal info, email and password, social URLs, connected accounts, danger zone
-- Workspace settings
-- Tab state kept in the `setting` search parameter so browser back/forward works
+- Personal Information opens first, followed by Email & Password and Danger Zone.
 
 ### Sales / Stock-Out (`/sales`)
 

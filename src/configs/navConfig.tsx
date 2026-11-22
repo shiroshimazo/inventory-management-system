@@ -85,20 +85,7 @@ export const navItems: NavItem[] = [
   {
     groupLabel: 'Account',
     items: [
-      {
-        icon: 'userSettings',
-        label: 'User Settings',
-        childItems: [
-          {
-            label: 'General',
-            href: '/pages/user-settings?setting=general'
-          },
-          {
-            label: 'Workspace',
-            href: '/pages/user-settings?setting=workspace'
-          }
-        ]
-      },
+      { icon: 'userSettings', label: 'User Settings', href: '/pages/user-settings' },
       { icon: 'userManagement', label: 'Users', href: '/users' }
     ]
   }

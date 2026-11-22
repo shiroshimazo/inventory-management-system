@@ -57,7 +57,7 @@ const ProfileDropdown = () => {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem render={<Link to='/pages/user-settings' search={{ setting: 'general' }} />}>
+          <DropdownMenuItem render={<Link to='/pages/user-settings' />}>
             <HugeiconsIcon icon={UserIcon} />
             <span>My Account</span>
           </DropdownMenuItem>

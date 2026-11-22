@@ -1,7 +1,5 @@
 'use client'
 
-import { useNavigate, useSearch } from '@tanstack/react-router'
-
 // Component Imports
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import UserGeneral from '@/views/pages/user-settings/general'
@@ -21,17 +19,9 @@ const tabs = [
 ]
 
 const UserSettingsTabs = () => {
-  const { setting = 'general' } = useSearch({ from: '/_pages/pages/user-settings' })
-  const navigate = useNavigate({ from: '/pages/user-settings' })
-
   return (
     <div className='w-full'>
-      <Tabs
-        value={setting}
-        onValueChange={value => {
-          void navigate({ search: { setting: value === 'workspace' ? 'workspace' : 'general' } })
-        }}
-      >
+      <Tabs defaultValue='general'>
         <div className='overflow-x-auto sm:overflow-visible'>
           <TabsList
             variant='line'

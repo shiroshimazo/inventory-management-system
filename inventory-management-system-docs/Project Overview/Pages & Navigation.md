@@ -10,8 +10,7 @@
 | `/forms/form-layouts/vertical`           | Admin shell | Vertical form layout                                |
 | `/forms/form-layouts/horizontal`         | Admin shell | Horizontal form layout                              |
 | `/forms/form-validation`                 | Admin shell | Form validation demos                               |
-| `/pages/user-settings?setting=general`   | Admin shell | User settings — general                             |
-| `/pages/user-settings?setting=workspace` | Admin shell | User settings — workspace                           |
+| `/pages/user-settings`                   | Admin shell | User settings                                       |
 | `/login`                                 | Blank       | Username login UI preview                           |
 | `/forgot-password`                       | Blank       | Three-step password recovery UI preview             |
 | `*` (unknown)                            | Root        | 404 page (no sidebar, no breadcrumb)                |
@@ -49,9 +48,7 @@ The data table and form demo routes remain available by URL but are not shown in
 
 ### Account
 
-- User Settings
-  - General → `/pages/user-settings?setting=general`
-  - Workspace → `/pages/user-settings?setting=workspace`
+- User Settings → `/pages/user-settings`
 - User Management (planned)
 
 ## Header
