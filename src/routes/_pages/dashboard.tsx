@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import { Alert02Icon, ClipboardIcon, PackageIcon, PackageRemoveIcon } from '@hugeicons/core-free-icons'
-import StatisticsCard from '@/views/dashboards/statistics/statistics-card-01'
+import { withMockStatisticsHistory } from '@/views/dashboards/statistics/StatisticsData'
+import StatisticsGrid from '@/views/dashboards/statistics/StatisticsGrid'
 import LowStockAlerts from '@/views/dashboards/widgets/LowStockAlerts'
 import StockMovementChart from '@/views/dashboards/charts/StockMovementChart'
 import RecentStockMovements from '@/views/dashboards/RecentStockMovements'
@@ -14,12 +14,12 @@ import {
 } from '@/views/dashboards/InventoryMockData'
 
 const summary = getInventorySummary(inventoryProducts, purchaseOrders)
-const statistics = [
-  { icon: PackageIcon, title: 'Total Products', value: summary.totalProducts },
-  { icon: Alert02Icon, title: 'Low Stock Items', value: summary.lowStockItems },
-  { icon: PackageRemoveIcon, title: 'Out of Stock', value: summary.outOfStock },
-  { icon: ClipboardIcon, title: 'Pending Purchase Orders', value: summary.pendingPurchaseOrders }
-]
+const statistics = withMockStatisticsHistory([
+  { icon: PackageIcon, label: 'Total Products', value: summary.totalProducts },
+  { icon: Alert02Icon, label: 'Low Stock Items', value: summary.lowStockItems, trend: 'down' },
+  { icon: PackageRemoveIcon, label: 'Out of Stock', value: summary.outOfStock, trend: 'down' },
+  { icon: ClipboardIcon, label: 'Pending Purchase Orders', value: summary.pendingPurchaseOrders }
+])
 
 function InventoryDashboard() {
   return (
@@ -30,17 +30,7 @@ function InventoryDashboard() {
         </h1>
         <p className='text-muted-foreground text-sm'>Mock data · Snapshot 10 Nov 2026</p>
       </header>
-      <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4'>
-        {statistics.map(statistic => (
-          <StatisticsCard
-            key={statistic.title}
-            icon={<HugeiconsIcon icon={statistic.icon} className='size-4' />}
-            title={statistic.title}
-            value={String(statistic.value)}
-            className='borderline-surface'
-          />
-        ))}
-      </div>
+      <StatisticsGrid label='Inventory statistics' statistics={statistics} className='sm:grid-cols-2 xl:grid-cols-4' />
       <div className='grid items-stretch gap-6 xl:grid-cols-3'>
         <LowStockAlerts products={inventoryProducts} />
         <div className='min-w-0 xl:col-span-2'>

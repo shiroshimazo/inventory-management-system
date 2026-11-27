@@ -5,8 +5,8 @@ import {
   FileEditIcon,
   Invoice01Icon
 } from '@hugeicons/core-free-icons'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { HugeiconsIcon } from '@/components/ui/hugeicons'
+import { withMockStatisticsHistory } from '@/views/dashboards/statistics/StatisticsData'
+import StatisticsGrid from '@/views/dashboards/statistics/StatisticsGrid'
 import { purchaseOrderStatuses, type PurchaseOrder } from './PurchaseOrdersData'
 
 const statusIcons = {
@@ -17,28 +17,16 @@ const statusIcons = {
 }
 
 export default function PurchaseOrdersSummary({ orders }: { orders: PurchaseOrder[] }) {
-  const summary = [
+  const summary = withMockStatisticsHistory([
     { label: 'Total orders', value: orders.length, icon: Invoice01Icon },
     ...purchaseOrderStatuses.map(status => ({
       label: status,
       value: orders.filter(order => order.status === status).length,
       icon: statusIcons[status]
     }))
-  ]
+  ])
 
   return (
-    <section aria-label='Purchase order summary' className='grid gap-4 sm:grid-cols-2 xl:grid-cols-5'>
-      {summary.map(({ label, value, icon }) => (
-        <Card key={label} size='sm' className='borderline borderline-surface'>
-          <CardHeader className='border-b border-(--divider)'>
-            <h2 className='flex items-center gap-2 font-medium'>
-              <HugeiconsIcon icon={icon} className='size-4 shrink-0' aria-hidden='true' />
-              {label}
-            </h2>
-          </CardHeader>
-          <CardContent className='text-2xl font-semibold tabular-nums'>{value.toLocaleString()}</CardContent>
-        </Card>
-      ))}
-    </section>
+    <StatisticsGrid label='Purchase order summary' statistics={summary} className='sm:grid-cols-2 xl:grid-cols-5' />
   )
 }

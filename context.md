@@ -22,6 +22,8 @@ Validation runs on blur and submit, then updates touched fields as users type. P
 
 Visible tables across the admin panels and demos use the rounded surface, double border, plain headers, and compact rows from Recent stock movements. Wide data tables scroll within their panel.
 
+KPI cards use the same Borderline surfaces and trend colors on Dashboard, Reports, Products, Categories, Sales, Purchase Orders, and Suppliers. Counts and rates use lines, and currency totals use gradient areas. Each sparkline has 24 mock points anchored to the current summary value. The badge shows change across the series. Hover or keyboard scrubbing moves a gradient crosshair with a quick spring and updates cards in the same visible row. Leaving the chart restores the latest value.
+
 ## Products preview
 
 `/products` displays 12 static fruit products inside the admin shell. Search matches names and categories, ignoring case and surrounding spaces. Fruit, category, price, and stock headers sort the table; fruit starts ascending. Stock badges derive from quantity and reorder level. Clearing search keeps filters and sorting and focuses the search field. Separate Category and Status dropdowns beside search apply immediately. The Price button opens inclusive price-per-kg limits; applying or resetting price preserves category and status. Invalid price ranges show an error. Reset price preserves search; Clear all in the empty state resets both. The Actions column after Status edits or removes products in memory. No backend, persistence, or pagination is included.

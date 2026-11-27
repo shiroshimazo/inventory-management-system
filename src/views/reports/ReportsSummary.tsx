@@ -2,7 +2,6 @@ import type { InventorySummary, SalesSummary } from '@/views/reports/ReportsData
 import { formatCentavos, formatCount } from '@/views/reports/ReportsFormat'
 import ReportsState from '@/views/reports/ReportsStates'
 import type { SectionState } from '@/views/reports/ReportsStates'
-import { HugeiconsIcon } from '@/components/ui/hugeicons'
 import {
   Alert02Icon,
   ClipboardIcon,
@@ -10,7 +9,8 @@ import {
   PackageRemoveIcon,
   ShoppingCart01Icon
 } from '@hugeicons/core-free-icons'
-import StatisticsCard from '@/views/dashboards/statistics/statistics-card-01'
+import { withMockStatisticsHistory } from '@/views/dashboards/statistics/StatisticsData'
+import StatisticsGrid from '@/views/dashboards/statistics/StatisticsGrid'
 
 export default function ReportsSummary({
   sales,
@@ -26,33 +26,43 @@ export default function ReportsSummary({
   state: SectionState
 }) {
   if (state !== 'ready') {
-    return (
-      <ReportsState state={state} onClearFilters={onClearFilters} />
-    )
+    return <ReportsState state={state} onClearFilters={onClearFilters} />
   }
 
-  const statistics = [
-    { icon: ShoppingCart01Icon, title: 'Sales', value: formatCentavos(sales.revenueCentavos) },
-    { icon: ClipboardIcon, title: 'Orders', value: formatCount(sales.orderCount) },
-    { icon: ShoppingCart01Icon, title: 'Avg order', value: formatCentavos(sales.averageOrderCentavos) },
-    { icon: PackageIcon, title: 'Stock value', value: formatCentavos(inventory.inventoryValueCentavos) },
-    { icon: PackageIcon, title: 'Units', value: formatCount(inventory.totalUnits) },
-    { icon: Alert02Icon, title: 'Low stock', value: formatCount(inventory.lowStockCount) },
-    { icon: PackageRemoveIcon, title: 'Out of stock', value: formatCount(inventory.outOfStockCount) },
-    { icon: ClipboardIcon, title: 'PO spend', value: formatCentavos(poSpendCentavos) }
-  ]
+  const statistics = withMockStatisticsHistory([
+    {
+      icon: ShoppingCart01Icon,
+      label: 'Sales',
+      value: sales.revenueCentavos,
+      kind: 'area',
+      formatValue: formatCentavos
+    },
+    { icon: ClipboardIcon, label: 'Orders', value: sales.orderCount, formatValue: formatCount },
+    {
+      icon: ShoppingCart01Icon,
+      label: 'Avg order',
+      value: sales.averageOrderCentavos,
+      kind: 'line',
+      formatValue: formatCentavos
+    },
+    {
+      icon: PackageIcon,
+      label: 'Stock value',
+      value: inventory.inventoryValueCentavos,
+      kind: 'area',
+      formatValue: formatCentavos
+    },
+    { icon: PackageIcon, label: 'Units', value: inventory.totalUnits, formatValue: formatCount },
+    { icon: Alert02Icon, label: 'Low stock', value: inventory.lowStockCount, formatValue: formatCount, trend: 'down' },
+    {
+      icon: PackageRemoveIcon,
+      label: 'Out of stock',
+      value: inventory.outOfStockCount,
+      formatValue: formatCount,
+      trend: 'down'
+    },
+    { icon: ClipboardIcon, label: 'PO spend', value: poSpendCentavos, kind: 'area', formatValue: formatCentavos }
+  ])
 
-  return (
-    <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-4'>
-      {statistics.map(statistic => (
-        <StatisticsCard
-          key={statistic.title}
-          icon={<HugeiconsIcon icon={statistic.icon} className='size-4' />}
-          title={statistic.title}
-          value={statistic.value}
-          className='borderline-surface'
-        />
-      ))}
-    </div>
-  )
+  return <StatisticsGrid label='Report statistics' statistics={statistics} className='sm:grid-cols-2 xl:grid-cols-4' />
 }

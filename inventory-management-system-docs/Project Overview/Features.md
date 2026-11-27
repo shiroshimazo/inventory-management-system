@@ -15,7 +15,7 @@
 - Low stock alerts, including out-of-stock items; products at the reorder level are not flagged
 - Daily stock-in vs stock-out chart (Recharts), derived from the same movement records as the table
 - Recent stock movements with product, SKU, quantity, reference, time, and recorder
-- Clearly labeled mock snapshot for 4–10 November 2026; no backend or invented comparison trends
+- Clearly labeled mock snapshot for 4–10 November 2026 and 24-point mock KPI trends anchored to the current totals
 
 ### Data Tables (`/datatable`)
 
